@@ -17,7 +17,8 @@ checks = {
     "missing_token_random": 'os.getenv("ACCESS_TOKEN", secrets.token_urlsafe(32))' in api,
     "token_prefix_logged": "config.ACCESS_TOKEN[:8]" in api,
     "missing_admin_allows": "if not ADMIN_PASSWORD:\n        return True" in admin,
-    "inflight_node_reset": "provider_manager.reset_all_nodes()\n            tried_nodes.clear()" in api,
+    "inflight_node_reset": "provider_manager.reset_all_nodes()\n            tried_nodes.clear()"
+    in api,
     "auth_failure_fallback": "elif is_auth_error:" in api and "switching node" in api,
     "unknown_provider": 'provider_used = "unknown"' in api,
     "prompt_logging": "request.prompt[:50]" in api,

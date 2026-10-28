@@ -1,547 +1,202 @@
-<div align="center">
-  
-# easyResearchAssistant
+# OSS Inference Gateway
 
-**High-Availability AI Inference Gateway**
+A self-hosted, headless-first FastAPI gateway for explicitly registered Cloudflare
+Workers AI and Ollama text-generation endpoints. This is a single-process source
+preview, with bounded routing and truthful JSON/SSE errors. No provider, model,
+credential, paid call, web search or dashboard is enabled by installation.
 
-*A production-ready, fault-tolerant AI assistant with distributed inference and local fallback capabilities*
+**Release decisions and measured limitations:** [verification](docs/release/verification.md).
+Source readiness and image security approval are independent. No availability SLA.
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-green.svg)](https://fastapi.tiangolo.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Local installation
 
-</div>
+Python 3.12 or 3.13 recommended; the release image targets Linux amd64/Python 3.13.
+Dependencies are version locked with hashes; `uv.lock` is authoritative.
 
----
-
-## Overview
-
-**easyResearchAssistant** is a lightweight, high-availability AI inference gateway designed for families who want reliable access to AI assistants without single points of failure. The system intelligently routes requests across multiple distributed inference providers and automatically falls back to local GPU inference when cloud services are unavailable.
-
-### Key Features
-
-| Feature | Description |
-|---------|-------------|
-| **Distributed Inference** | Load balancing across multiple cloud inference nodes |
-| **Automatic Failover** | Intelligent retry with exponential backoff on errors |
-| **Local Fallback** | Seamless switch to local Ollama when cloud is exhausted |
-| **Research Mode (RAG)** | Real-time web search with DuckDuckGo for up-to-date information |
-| **Monitoring Dashboard** | Real-time observability with node status, metrics, and live logs |
-| **Streaming Responses** | Real-time chat experience with SSE |
-| **Access Control** | Token-based authentication |
-
----
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        Client Applications                          │
-│                  (Streamlit UI / API Consumers)                     │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                       API Gateway (FastAPI)                         │
-│  ┌─────────────┐  ┌─────────────────┐  ┌─────────────────────────┐  │
-│  │   Auth      │  │  Request Router │  │  Streaming Handler      │  │
-│  │   Layer     │  │  & Retry Logic  │  │  (SSE)                  │  │
-│  └─────────────┘  └─────────────────┘  └─────────────────────────┘  │
-│                           │                                         │
-│                           ▼                                         │
-│              ┌─────────────────────────┐                            │
-│              │  RAG Search Tool        │ ◄── Research Mode          │
-│              │  (DuckDuckGo)           │                            │
-│              └─────────────────────────┘                            │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                      Provider Manager                               │
-│  ┌──────────────────────────────────────────────────────────────┐   │
-│  │  Selection Strategies: Round Robin │ Random │ Least Used     │   │
-│  └──────────────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────────────┐   │
-│  │  Health Monitoring │ Cooldown Management │ Auto-Recovery     │   │
-│  └──────────────────────────────────────────────────────────────┘   │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-           ┌───────────────────┼───────────────────┐
-           │                   │                   │
-           ▼                   ▼                   ▼
-┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│  Inference      │  │  Inference      │  │  Inference      │
-│  Node Alpha     │  │  Node Beta      │  │  Node Gamma     │
-│  (Cloudflare)   │  │  (Cloudflare)   │  │  (Cloudflare)   │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
-           │
-           │ (All cloud nodes exhausted)
-           ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    Local Fallback (Ollama)                          │
-│                 RTX 3050 • Llama 3.1 • Low-VRAM Mode                │
-└─────────────────────────────────────────────────────────────────────┘
+```sh
+git clone https://github.com/hzjanuary/ai-gateway-chatbot.git
+cd ai-gateway-chatbot
+uv sync --locked --no-dev
+uv run --no-dev gateway config init --admin
+uv run --no-dev gateway doctor
+uv run --no-dev gateway provider list
+uv run --no-dev gateway provider test-metadata
+uv run --no-dev gateway serve
 ```
 
-### Design Principles
+`config init` explicitly generates separate inference/admin tokens into private
+`inference.token` and `admin.token` files (0600) and hashes into `settings.json`.
+The directory is 0700; nothing prints token values or prefixes. Repeating init
+preserves every existing file. Missing config permits liveness but denies inference
+and administration. `--admin` applies on first initialization only. Interrupted
+initialization fails safely; inspect existing files privately rather than deleting
+or automatically replacing them.
 
-- **Redundancy**: Multiple inference providers ensure no single point of failure
-- **Graceful Degradation**: Automatic fallback to local inference preserves availability
-- **User Privacy**: Local processing option keeps sensitive queries on-premises
-- **Resource Awareness**: Lightweight local inference respects GPU memory constraints
+Default directory: `~/.config/inference-gateway`. Override via
+`gateway --config-dir /private/path ...` or `GATEWAY_CONFIG_DIR`. There is no automatic
+`.env` loading. Existing prototype secrets/logs are never migrated or removed.
+See [migration and operations](docs/operations.md).
 
----
+`/health` means the process is alive; `/ready` reports configuration/circuit
+readiness only. Neither calls a provider or proves credentials/model access.
 
-## Quick Start
+## Register a provider explicitly
 
-### Prerequisites
+Privately edit the initialized `settings.json`, preserving the two hashes.
+The registry is static per process; restart after edits. `authorized: false` is the
+default. No public API accepts endpoints, upstream headers, accounts or models.
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) (optional, for local fallback)
-- Cloudflare Workers AI API access
+Ollama example (merge the `providers` array from
+[examples/ollama-settings.json](examples/ollama-settings.json), choose an already
+installed model and set `authorized: true` only when ready):
 
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/hzjanuary/easyResearchAssistant.git
-cd easyResearchAssistant
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or: .\venv\Scripts\activate  # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure environment
-cp .env.template .env
-# Edit .env with your credentials
-```
-
-### Configuration
-
-1. **Generate Access Token**:
-   ```bash
-   python -c "import secrets; print(secrets.token_urlsafe(32))"
-   ```
-
-2. **Configure `.env`**:
-   ```env
-   # Security
-   ACCESS_TOKEN=your_generated_token_here
-   ADMIN_PASSWORD=your_admin_password_here
-   
-   # Add your Cloudflare credentials
-   CLOUDFLARE_ACCOUNT_1_ID=your_account_id
-   CLOUDFLARE_ACCOUNT_1_TOKEN=your_api_token
-   CLOUDFLARE_ACCOUNT_1_NAME=Provider-Alpha
-   CLOUDFLARE_MODEL=@cf/meta/llama-3.1-8b-instruct
-   
-   # Enable local fallback (optional)
-   OLLAMA_ENABLED=true
-   OLLAMA_MODEL=llama3.1
-   
-   # For Docker: automatically configured via docker-compose.yml
-   # BACKEND_URL=http://backend:8000
-   # LOG_FILE=/app/logs/system.log
-   ```
-
-3. **Start Local Fallback** (optional):
-   ```bash
-   ollama pull llama3.1
-   ollama serve
-   ```
-
-### Running the Applications
-
-The system consists of three components:
-
-| Component | Purpose | Default Port |
-|-----------|---------|--------------|
-| API Gateway | FastAPI backend | 8000 |
-| Chat UI | User-facing chat interface | 8501 |
-| Admin Dashboard | System monitoring & health | 8502 |
-
-#### Option 1: Docker (Recommended)
-
-```bash
-# Build and start all services
-docker-compose up --build
-
-# Or run in background
-docker-compose up -d --build
-```
-
-Access:
-- Chat UI: `http://localhost:8501`
-- Admin Dashboard: `http://localhost:8502`
-- API Gateway: `http://localhost:8000`
-
-> **Note for Windows/Mac**: Ollama running on host is accessible via `host.docker.internal:11434`
-
-#### Docker Volume for Logs
-
-The `docker-compose.yml` creates a shared volume `app_logs` for centralized logging:
-- Backend writes logs to `/app/logs/system.log`
-- Admin UI reads logs from the same volume (read-only)
-
-To view logs from Docker:
-```bash
-docker-compose logs -f backend
-```
-
-#### Option 2: Local Development
-
-**Start the API Gateway:**
-```bash
-python api_gateway.py
-```
-
-**Start the Chat UI (Port 8501):**
-```bash
-streamlit run streamlit_app.py
-```
-
-**Start the Admin Dashboard (Port 8502):**
-```bash
-streamlit run admin_app.py --server.port 8502
-```
-
-**Run Both Apps Simultaneously (PowerShell):**
-```powershell
-Start-Process -NoNewWindow powershell -ArgumentList "streamlit run streamlit_app.py"
-Start-Process -NoNewWindow powershell -ArgumentList "streamlit run admin_app.py --server.port 8502"
-```
-
-**Run Both Apps Simultaneously (Bash):**
-```bash
-streamlit run streamlit_app.py &
-streamlit run admin_app.py --server.port 8502 &
-```
-
-Access:
-- Chat UI: `http://localhost:8501`
-- Admin Dashboard: `http://localhost:8502`
-
----
-
-## API Reference
-
-### Authentication
-
-All endpoints (except `/health`) require Bearer token authentication:
-
-```bash
-curl -H "Authorization: Bearer YOUR_TOKEN" http://localhost:8000/v1/status
-```
-
-### Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/` | Service info (public) |
-| `GET` | `/health` | Health check with provider status (public) |
-| `POST` | `/v1/inference` | Main inference endpoint |
-| `GET` | `/v1/status` | Detailed gateway status |
-| `POST` | `/v1/providers/strategy/{strategy}` | Change selection strategy |
-| `POST` | `/v1/providers/reset` | Reset all providers |
-| `GET` | `/v1/monitoring/stats` | Comprehensive monitoring statistics |
-| `GET` | `/v1/monitoring/logs` | Recent log entries |
-| `GET` | `/v1/monitoring/health` | Lightweight health for polling (public) |
-
-### Inference Request
-
-```bash
-curl -X POST http://localhost:8000/v1/inference \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "prompt": "Explain quantum entanglement",
-    "research_mode": true,
-    "stream": true,
-    "max_tokens": 2048,
-    "temperature": 0.7
-  }'
-```
-
-### Response Formats
-
-**Streaming (SSE)**:
-```
-data: {"response": "Quantum "}
-data: {"response": "entanglement "}
-data: {"response": "is..."}
-data: [DONE]
-```
-
-**Non-Streaming**:
 ```json
-{
-  "response": "Quantum entanglement is...",
-  "provider": "Provider-Alpha"
-}
+{"id":"local-ollama","type":"ollama","model":"llama3.1",
+ "endpoint":"http://127.0.0.1:11434","allow_private":true,
+ "authorized":true,"billing":"local","policy_group":"on-premise",
+ "call_limit":20,"token_limit":10240,"max_concurrent":1}
 ```
 
----
+Ollama requires an IP literal and explicit private-network approval. Public IPs
+require HTTPS. Link-local, metadata, unspecified and multicast addresses are denied;
+DNS names, redirects and ambient proxy variables are disabled. In Docker,
+`127.0.0.1` is the container: register the explicitly trusted host/private IP and
+firewall Ollama so other hosts cannot reach it. No automatic model pull or GPU tuning.
 
-## Research Mode (RAG)
+Cloudflare provider fields: `id`, `type: "cloudflare"`, a real `@cf/...` text model,
+32-hex `account_id`, private `api_token`, `authorized: true`, `billing: "approved"`,
+and an operator-chosen `policy_group`. Endpoint is fixed to
+`https://api.cloudflare.com`; use a scoped Workers AI token and verify the plan,
+model license, billing and privacy before authorization. Doctor validates syntax
+only. Duplicate Cloudflare accounts/upstream Ollama endpoints are rejected.
 
-Research Mode enables **Retrieval-Augmented Generation (RAG)** - the system performs real-time web searches before generating responses, ensuring up-to-date information.
+## Request and streaming
 
-### How It Works
+The CLI reads prompts from stdin or a file and tokens from private files, keeping
+credentials out of shell history/process arguments:
 
-```
-┌─────────────┐    ┌──────────────────┐    ┌─────────────────┐    ┌─────────────┐
-│ User Query  │───▶│ DuckDuckGo Search│───▶│ Augmented Prompt│───▶│ LLM Response│
-└─────────────┘    └──────────────────┘    └─────────────────┘    └─────────────┘
-                          │                        │
-                          ▼                        ▼
-                   [Search Results]    [System Prompt + Results + Query]
-```
-
-### Features
-
-- **Real-Time Web Search**: Queries DuckDuckGo for current information
-- **Source Citations**: Results include titles, snippets, and URLs
-- **Intelligent Augmentation**: Search results are injected into the system prompt
-- **Graceful Fallback**: If search fails, uses base LLM knowledge
-
-### Example
-
-Query: *"Who is the current President of Vietnam?"*
-
-1. System searches DuckDuckGo for latest information
-2. Search results are formatted and added to the prompt
-3. LLM generates response using real-time data (2026)
-
-### Enable via API:
-```json
-{"prompt": "Who won the 2026 World Cup?", "research_mode": true}
+```sh
+printf '%s' 'Explain inference gateways' | uv run --no-dev gateway request \
+  --provider local-ollama --max-tokens 128
+printf '%s' 'Explain inference gateways' | uv run --no-dev gateway request \
+  --provider local-ollama --max-tokens 128 --stream
+uv run --no-dev gateway metrics
+uv run --no-dev gateway reset --confirm
 ```
 
-### Enable via UI:
-Toggle "Enable Research Mode" in the Streamlit sidebar. A 🔍 badge will appear indicating RAG is active.
+Only `request` generates content. Doctor, list and test-metadata perform **zero
+network calls**. Metrics/reset call the local gateway with the admin token.
+`reset` clears circuits only; spent call/token reservations remain spent.
 
-### Configuration
+`POST /v1/inference` (or deprecated `/ask`) requires an inference Bearer token.
+JSON contains prompt, optional system_prompt/provider, max_tokens, temperature,
+stream, allow_fallback, max_attempts and web_enrichment. Unknown fields are rejected.
+Nonstream reports actual provider ID/type, model, attempts, nullable measured usage
+and request ID. The API is not an OpenAI-compatible endpoint.
 
-```env
-# .env
-RAG_MAX_RESULTS=3  # Number of search results to fetch
+SSE uses `start`, `delta`, `usage`, `end` events. A failure before first output is
+non-2xx JSON; a failure after `start` emits `error` and closes without `end`.
+Consumers **must require end** to accept completion. No provider switching after
+start, no content stitching. See [full contract](docs/api/contract.md) and
+[OpenAPI schema](docs/api/openapi.json).
+
+Fallback requires `allow_fallback: true` **and** `max_attempts > 1`, stays within
+the same explicit billing/privacy policy group and can occur only before output.
+401/403, billing, policy, bad model/schema and 429 never cause fallback. 429 enters
+cooldown and stops the request. 5xx/network/attempt-timeout may use another distinct
+node within a shared deadline and output reservation budget. This is availability
+handling for legitimately authorized endpoints, never account rotation to evade
+provider limits. An upstream failure can consume provider quota even with no output.
+
+## Limits, privacy and optional features
+
+Default limits: 64 KiB HTTP body, 32000 prompt characters, 4000 system characters,
+4096 max output tokens, four active gateway requests, three maximum distinct
+attempts, 4096 reserved output tokens per request, 20 seconds per attempt and
+60 seconds total. Each node also has session call/token and concurrency caps.
+No refund on failed/cancelled attempts. Unknown usage remains null; reservations
+are conservative ceilings, not a tokenizer or a currency/billing guarantee.
+Provider misbehavior is bounded by response/frame limits and terminated explicitly.
+
+Prompts/completions are not stored or logged by default. Admin-only diagnostics
+contain safe codes, generated request IDs and registered IDs; no raw provider
+errors, credentials, headers or input-validation values. Counters/circuits/reserved
+quotas are **ephemeral**, resetting on restart; run one worker/replica. Provider
+account limits remain authoritative. This gateway cannot guarantee a free plan,
+cost-free inference, durable quota or high availability.
+
+Cloudflare receives complete request content and follows its own
+[data usage policy](https://developers.cloudflare.com/workers-ai/platform/data-usage/)
+and [usage limits](https://developers.cloudflare.com/workers-ai/platform/limits/).
+Local Ollama keeps inference on the registered machine; an external Ollama IP
+sends content there. Model licenses and runtime telemetry remain operator concerns.
+
+Web enrichment is disabled globally and per request. Enable
+`web_enrichment_enabled: true` and send `web_enrichment: true` to make at most one
+external search request (three snippets, real URLs and retrieval times). The query
+is disclosed to DuckDuckGo. Result pages are never fetched. Search data is untrusted
+user context, never privileged system instructions or a guarantee of correctness.
+This is not persistent document RAG. Offline tests substitute a local HTTP search
+response and do not perform internet searches.
+
+Optional Streamlit UI:
+
+```sh
+uv sync --locked --extra ui
+uv run gateway ui chat
+uv run gateway ui admin
 ```
 
----
+Both bind loopback. Chat asks for the inference token; admin requires a configured
+hash plus the actual admin token and revalidates against the API on every rerun.
+No token is prefilled from server configuration. Do not share browser sessions or
+expose Streamlit directly to the internet. Disable UI telemetry (CLI does this).
 
-## Monitoring Dashboard
+## Docker / Compose
 
-The Admin Dashboard (`admin_app.py`) provides real-time observability into your inference gateway, separate from the chat interface to avoid disrupting the user experience.
-
-### Features
-
-- **Node Status**: Visual indicators showing Active (green), Cooldown (yellow), Offline (red)
-- **Request Metrics**: Total requests, success rates, and rate limit counts
-- **Request Distribution**: Bar chart showing load distribution across providers
-- **Live Logs**: Real-time streaming of gateway events (provider switching, errors, recoveries)
-- **Live System Logs (File)**: Persistent log viewer reading from `system.log` file
-- **Auto-refresh**: Dashboard updates every 10 seconds (only in admin app)
-- **Strategy Control**: Change load balancing strategy on-the-fly
-
-### Security
-
-The Admin Dashboard requires two-factor authentication:
-
-1. **ACCESS_TOKEN**: Same API token used for the chat app
-2. **ADMIN_PASSWORD**: Additional password configured in `.env`
-
-```env
-ADMIN_PASSWORD=your_secure_admin_password
+```sh
+uv run gateway --config-dir .local/private config init --admin
+# Match the private file owner; do not run the services as root.
+export GATEWAY_UID="$(id -u)" GATEWAY_GID="$(id -g)"
+export SOURCE_REVISION="$(git rev-parse HEAD)"
+docker compose build backend
+docker compose up -d backend
 ```
 
-If `ADMIN_PASSWORD` is not set, only the ACCESS_TOKEN is required.
+Default exposure is `127.0.0.1:8000`; container listens on its internal interface
+for Compose networking. No source code mount, no provider by default. Private
+config is a read-only bind mount, runtime filesystem is read-only, capabilities are
+dropped, privileges cannot increase, and resources are capped. Missing bind source
+aborts rather than silently creating insecure files. Native `gateway serve` and
+standalone image default to loopback. Production image is non-root UID 10001.
 
-### Accessing the Dashboard
+Optional `--profile ui` starts chat. For `--profile admin`, create a separate 0700
+`.local/admin-ui` directory and 0600 settings.json containing **only** the same
+admin_hash (no raw tokens/provider credentials). Then start that profile. See
+[operations](docs/operations.md) for the safe export command. UI images use a
+separate dependency set and need their own scan/approval.
 
-1. Start the admin app: `streamlit run admin_app.py --server.port 8502`
-2. Open `http://localhost:8502`
-3. Enter your Access Token and Admin Password
-4. Click Login
+For any remote exposure, terminate TLS at a trusted proxy, cap request/body/idle
+limits, preserve streaming with proxy buffering disabled, firewall direct ports
+and add network egress policy. Proxy headers and wildcard CORS are disabled.
+See [security model](docs/security-model.md).
 
-### Monitoring API
+## Development and release verification
 
-```bash
-# Get comprehensive stats
-curl -H "Authorization: Bearer TOKEN" http://localhost:8000/v1/monitoring/stats
-
-# Get recent logs
-curl -H "Authorization: Bearer TOKEN" http://localhost:8000/v1/monitoring/logs?count=10
-
-# Lightweight health check (for polling)
-curl http://localhost:8000/v1/monitoring/health
+```sh
+uv sync --locked --extra ui
+mkdir -p .local/verification
+./scripts/quality.sh
+python scripts/release_smoke.py --image inference-gateway:local
+uv run python scripts/security_gates.py --image inference-gateway:local
 ```
 
-### Cooldown Configuration
+Tests exercise actual HTTP transports with loopback servers; no real provider
+calls. Source/history patterns, hash exports, pytest/Ruff/Black/MyPy, clean source
+archive, image/CLI restart, actual image licenses/SBOM and Python/OS vulnerability
+reports are separate gates. High/critical image findings and any Python advisory
+fail; scanner errors also fail. Reports stay raw under `.local/verification`.
+No gate suppressions or automatic publication. Follow [release checklist](docs/release/checklist.md).
 
-When a provider returns HTTP 429 (rate limited), it enters cooldown:
-
-```env
-COOLDOWN_MINUTES=30  # Default: 30 minutes
-```
-
-Nodes automatically recover after the cooldown period expires.
-
----
-
-## Provider Configuration
-
-### Environment Variables (Recommended)
-
-```env
-# Cloud providers
-CLOUDFLARE_ACCOUNT_1_ID=abc123...
-CLOUDFLARE_ACCOUNT_1_TOKEN=xyz789...
-CLOUDFLARE_ACCOUNT_1_NAME=Provider-Alpha
-CLOUDFLARE_MODEL=@cf/meta/llama-3.1-8b-instruct
-
-# Networking (Docker sets these automatically)
-BACKEND_URL=http://backend:8000  # Service name in Docker
-LOG_FILE=/app/logs/system.log    # Shared volume path
-
-# Local fallback
-OLLAMA_ENDPOINT=http://host.docker.internal:11434  # Docker on Windows/Mac
-```
-
-### JSON Configuration (Alternative)
-
-Create `providers.json` from the template:
-```bash
-cp providers.example.json providers.json
-# Edit with your credentials
-```
-
----
-
-## Local Fallback Setup
-
-For high availability, configure Ollama as a local fallback:
-
-### Installing Ollama
-
-```bash
-# Linux
-curl -fsSL https://ollama.ai/install.sh | sh
-
-# Pull Llama 3.1 (recommended for better accuracy)
-ollama pull llama3.1
-```
-
-### Lightweight Configuration
-
-The gateway automatically configures Ollama for constrained environments:
-
-- **Token Limit**: 1024 (configurable via `OLLAMA_MAX_TOKENS`)
-- **Single Concurrent Request**: Prevents VRAM exhaustion
-- **CPU Thread Limit**: Preserves system responsiveness
-
----
-
-## Hardware Recommendations
-
-| Component | Minimum | Recommended |
-|-----------|---------|-------------|
-| CPU | 4 cores | 6+ cores |
-| RAM | 8 GB | 16 GB |
-| GPU (for fallback) | 4GB VRAM | 8GB+ VRAM |
-| Network | Stable broadband | Low-latency connection |
-
-**Tested On**: Acer Aspire 7 with RTX 3050 (4GB VRAM), Pop!_OS
-
----
-
-## Security Considerations
-
-1. **Never commit credentials**: `.env` and `providers.json` are gitignored
-2. **Rotate tokens regularly**: Generate new access tokens periodically
-3. **Use HTTPS in production**: Deploy behind a reverse proxy (nginx/Caddy)
-4. **Limit network exposure**: Bind to localhost unless needed externally
-
----
-
-## Troubleshooting
-
-### Common Issues
-
-**"No available providers"**
-- Check your Cloudflare API tokens are valid
-- Verify account IDs are correct
-- Run `/v1/providers/reset` to clear cooldowns
-
-**"Local fallback failed"**
-- Ensure Ollama is running: `ollama serve`
-- Check the model is pulled: `ollama list`
-- Verify endpoint: `curl http://localhost:11434/api/tags`
-
-**"Connection refused"**
-- Start the API gateway: `python api_gateway.py`
-- Check the port isn't in use: `lsof -i :8000`
-
-### Logs
-
-The system uses centralized logging with both file and console output:
-
-**Log File Location:**
-- Local: `./system.log`
-- Docker: `/app/logs/system.log` (shared volume between backend and admin-ui)
-
-**Log Format:**
-```
-2026-03-11 14:30:00 | INFO | api_gateway | Attempt 1: Using Provider-Alpha
-2026-03-11 14:30:01 | WARNING | provider_manager | Node Provider-Alpha rate limited (429), cooldown: 30min
-2026-03-11 14:30:01 | INFO | api_gateway | Attempt 2: Using Provider-Beta
-2026-03-11 14:30:05 | INFO | provider_manager | Falling back to local Ollama
-```
-
-**View Logs:**
-- Admin Dashboard: Expand "📋 Live System Logs (File)" section
-- Docker: `docker-compose logs -f backend`
-- Local: `tail -f system.log`
-
----
-
-## Development
-
-### Project Structure
-
-```
-easyResearchAssistant/
-├── api_gateway.py         # FastAPI backend (port 8000)
-├── provider_manager.py    # Distributed provider orchestration
-├── search_tool.py         # RAG web search utility (DuckDuckGo)
-├── streamlit_app.py       # Chat UI (port 8501)
-├── admin_app.py           # Admin monitoring dashboard (port 8502)
-├── docker-compose.yml     # Docker multi-service configuration
-├── Dockerfile             # Container image definition
-├── requirements.txt       # Python dependencies
-├── .env.template          # Configuration template
-├── providers.example.json # Provider config template (alternative)
-├── system.log             # Centralized log file (auto-generated)
-└── README.md              # This file
-```
-
-### Running Tests
-
-```bash
-pytest tests/ -v
-```
-
-### Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
----
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
+MIT licensed; see [LICENSE](LICENSE), [NOTICE](NOTICE), [CONTRIBUTING](CONTRIBUTING.md)
+and [private security disclosure](SECURITY.md).

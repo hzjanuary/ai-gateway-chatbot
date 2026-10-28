@@ -1,0 +1,12 @@
+OSS Inference Gateway
+Copyright (c) 2026 hzjanuary and contributors
+Distributed under the MIT License; see LICENSE.
+
+Cloudflare Workers AI and Ollama are separate services; this distribution contains
+no model weights, upstream credentials, accounts or inference provider substitutes.
+Provider service terms and model licenses must be reviewed by the operator.
+
+Third-party Python/OS software remains under its respective licenses. Release
+verification generates an actual-image package/license inventory and CycloneDX
+SBOM. See docs/release/verification.md and scripts/security_gates.py. Optional
+Streamlit dependencies are not included in the default headless image.

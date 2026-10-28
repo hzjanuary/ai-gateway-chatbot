@@ -110,3 +110,9 @@ temp/
 *.bin
 *.safetensors
 models/
+
+# Private operator state and raw local release evidence
+.local/
+.mypy_cache/
+.ruff_cache/
+*.token

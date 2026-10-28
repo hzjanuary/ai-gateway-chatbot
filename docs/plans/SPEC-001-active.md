@@ -18,9 +18,9 @@ web searches; public port bindings and production source mount.
 ## Work packages
 
 - [x] G0: baseline audit, feature branch, initial contracts and negative evidence.
-- [ ] G1: private explicit initialization, role separation, safe configuration/network.
-- [ ] G2: strict typed transports, bounded routing, correct SSE/cancel/accounting.
-- [ ] G3: CLI, optional UI/web enrichment, truthful observability and restart behavior.
+- [x] G1: private explicit initialization, role separation, safe configuration/network.
+- [x] G2: strict typed transports, bounded routing, correct SSE/cancel/accounting.
+- [x] G3: CLI, optional UI/web enrichment, truthful observability and restart behavior.
 - [ ] G4: locked dependencies, CI/security/license gates, docs and release artifacts.
 - [ ] G5: clean archive/image/runtime verification, GW-01..24 evidence and local commits.
 - [ ] External: separately authorized bounded live inference (GW-20).

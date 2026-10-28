@@ -1,0 +1,9 @@
+{
+  "prompt": "Explain what an inference gateway does.",
+  "provider": "local-ollama",
+  "max_tokens": 128,
+  "stream": false,
+  "allow_fallback": false,
+  "max_attempts": 1,
+  "web_enrichment": false
+}
