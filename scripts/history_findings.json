@@ -1,0 +1,32 @@
+[
+  {
+    "fingerprint": "d8021bd9e88460511e0471308050d55c9bbe44f6:config.py:generic-api-key:23",
+    "commit": "d8021bd9e88460511e0471308050d55c9bbe44f6",
+    "file": "config.py",
+    "start_line": 23,
+    "end_line": 23,
+    "source_span_sha256": "2471bc2ef217596b1545c1ca6d81d61a63f8b2e89e8d68b2fff7e2c35c972e30",
+    "disposition": "reviewed_public_example_or_retired_default",
+    "reason": "Historical public prototype default of 18 characters; rejected by current minimum-32 token policy, removed from runtime. Never reuse it."
+  },
+  {
+    "fingerprint": "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2:README.md:curl-auth-header:164",
+    "commit": "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+    "file": "README.md",
+    "start_line": 164,
+    "end_line": 164,
+    "source_span_sha256": "68ed3a85fe59bbf13158b513543e95e380bcf8254b0cf2763e496382675c3aea",
+    "disposition": "reviewed_public_example_or_retired_default",
+    "reason": "Historical localhost curl documentation with a YOUR_TOKEN placeholder; no provider credential."
+  },
+  {
+    "fingerprint": "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2:README.md:curl-auth-header:181",
+    "commit": "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+    "file": "README.md",
+    "start_line": 181,
+    "end_line": 182,
+    "source_span_sha256": "430b748a907c74d12c008e8ebaa4ce6c21bd9f3900ae58243bf3c8668937af0c",
+    "disposition": "reviewed_public_example_or_retired_default",
+    "reason": "Historical localhost curl documentation with a YOUR_TOKEN placeholder; no provider credential."
+  }
+]

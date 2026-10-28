@@ -7,9 +7,11 @@ OS license inventory is retained for operator redistribution review.
 """
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
+import tarfile
 from pathlib import Path
 
 TRIVY = "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c"
@@ -60,6 +62,8 @@ def main() -> None:
     for label, extra in (("source", []), ("history", ["--history"])):
         if run(label, [sys.executable, "scripts/source_gate.py", *extra]).returncode:
             failures.append(label)
+    if run("gitleaks", [sys.executable, "scripts/secret_gate.py", "--output", str(out)]).returncode:
+        failures.append("gitleaks-unreviewed")
     archive = out / "image.tar"
     saved = subprocess.run(
         ["docker", "image", "save", args.image, "--output", str(archive)],
@@ -70,6 +74,32 @@ def main() -> None:
     if saved.returncode:
         failures.append("image-save")
     else:
+        with tarfile.open(archive) as tar:
+            docker_manifest = json.load(tar.extractfile("manifest.json"))[0]
+            config_data = tar.extractfile(docker_manifest["Config"]).read()
+            config_digest = "sha256:" + hashlib.sha256(config_data).hexdigest()
+            descriptor = json.load(tar.extractfile("index.json"))["manifests"][0]
+            index_digest = descriptor["digest"]
+            while True:
+                data = tar.extractfile("blobs/sha256/" + descriptor["digest"].split(":")[1]).read()
+                assert "sha256:" + hashlib.sha256(data).hexdigest() == descriptor["digest"]
+                manifest = json.loads(data)
+                if "config" in manifest:
+                    assert manifest["config"]["digest"] == config_digest
+                    break
+                descriptor = next(
+                    d
+                    for d in manifest["manifests"]
+                    if d.get("platform", {}).get("architecture") == "amd64"
+                    and d.get("platform", {}).get("os") == "linux"
+                )
+            provenance = {
+                "oci_index_digest": index_digest,
+                "platform_manifest_digest": descriptor["digest"],
+                "image_config_digest": config_digest,
+            }
+            (out / "image-digests.json").write_text(json.dumps(provenance, indent=2) + "\n")
+            status["digests"] = provenance
         cache = out / "trivy-cache"
         cache.mkdir(exist_ok=True)
         result = run(
@@ -152,7 +182,7 @@ def main() -> None:
     else:
         for package in json.loads(result.stdout):
             evidence = str(
-                package["license_expression"] or package["license"] or package["classifiers"]
+                [package["license_expression"], package["license"], package["classifiers"]]
             )
             if not package["license_files"] or not any(
                 word in evidence.lower()
@@ -164,6 +194,7 @@ def main() -> None:
                     "mpl",
                     "mozilla",
                     "python software foundation",
+                    "psf-2.0",
                 )
             ):
                 failures.append("license-review:" + package["name"])
@@ -185,7 +216,7 @@ def main() -> None:
         ],
     )
     status["failures"] = failures
-    status["image_security_approved"] = not failures
+    status["image_security_gate_passed"] = not failures
     (out / "security-summary.json").write_text(json.dumps(status, indent=2) + "\n")
     print(json.dumps({"failures": failures, "reports": str(args.output)}, indent=2))
     raise SystemExit(bool(failures))

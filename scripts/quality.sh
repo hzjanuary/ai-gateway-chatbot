@@ -17,4 +17,5 @@ uv run --locked mypy
 uv run --locked --extra ui pytest -q --junitxml=.local/verification/pytest.xml
 uv run --locked python scripts/source_gate.py
 uv run --locked python scripts/source_gate.py --history
-uv build --locked
+uv run --locked python scripts/secret_gate.py
+uv run --locked python -m build --no-isolation

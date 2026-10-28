@@ -109,7 +109,10 @@ def main():
                             "--junitxml=.local/verification/pytest.xml",
                         ],
                     ),
-                    ("package", ["uv", "build", "--locked"]),
+                    (
+                        "package",
+                        ["uv", "run", "--locked", "python", "-m", "build", "--no-isolation"],
+                    ),
                 ]:
                     completed = subprocess.run(
                         command, cwd=source, capture_output=True, check=False
@@ -141,7 +144,8 @@ def main():
             image = json.loads(run(["docker", "image", "inspect", args.image]))[0]
             assert image["Config"]["User"] == "10001:10001"
             assert image["Config"]["Labels"]["org.opencontainers.image.revision"] == sha
-            result["image_config_digest"] = image["Id"]
+            result["docker_image_id"] = image["Id"]
+            result["oci_descriptor"] = image.get("Descriptor")
             result["repo_digests"] = image["RepoDigests"]
             result["base_manifest"] = BASE
             # No registry publish, hence local images need not have a registry RepoDigest.
@@ -233,7 +237,7 @@ def main():
                 ]
             )
 
-            def wait_health(container):
+            def wait_health(container, port=8000, path="/health"):
                 for _ in range(60):
                     probe = subprocess.run(
                         [
@@ -242,7 +246,7 @@ def main():
                             container,
                             "python",
                             "-c",
-                            "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8000/health').status)",
+                            f"import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:{port}{path}').status)",
                         ],
                         capture_output=True,
                         check=False,
@@ -404,6 +408,45 @@ def main():
                 )
                 assert disabled.returncode != 0
                 checks["image_admin_ui_missing_secret_aborts"] = True
+                ui_private = scratch / "ui-private"
+                ui_private.mkdir(mode=0o700)
+                hash_file = ui_private / "settings.json"
+                hash_file.write_text(json.dumps({"admin_hash": cfg["admin_hash"]}))
+                hash_file.chmod(0o600)
+                for role, port in [("chat", 8501), ("admin", 8502)]:
+                    name = prefix + "-ui-" + role
+                    names.append(name)
+                    run(
+                        [
+                            "docker",
+                            "run",
+                            "-d",
+                            "--name",
+                            name,
+                            "--network",
+                            "none",
+                            "--user",
+                            f"{uid}:{gid}",
+                            "--read-only",
+                            "--cap-drop",
+                            "ALL",
+                            "--security-opt",
+                            "no-new-privileges:true",
+                            "--tmpfs",
+                            "/tmp",
+                            "--mount",
+                            f"type=bind,source={ui_private},target=/state,readonly",
+                            "--env",
+                            "GATEWAY_CONFIG_DIR=/state",
+                            args.image,
+                            "ui",
+                            role,
+                            "--host",
+                            "0.0.0.0",
+                        ]
+                    )
+                    wait_health(name, port, "/_stcore/health")
+                checks["actual_image_chat_and_admin_ui_startup"] = True
             result["status"] = "PASS"
     except Exception as exc:
         result["status"] = "FAIL"

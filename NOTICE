@@ -10,3 +10,9 @@ Third-party Python/OS software remains under its respective licenses. Release
 verification generates an actual-image package/license inventory and CycloneDX
 SBOM. See docs/release/verification.md and scripts/security_gates.py. Optional
 Streamlit dependencies are not included in the default headless image.
+
+The Streamlit 1.66.1 wheel omits its license file. Its Apache-2.0 license is
+supplemented verbatim from the official release tag under third-party-licenses
+in the image (gateway/third_party_licenses in the wheel). licenses/manifest.json
+records the source URL and checksum. This text is included in the actual-image
+license inventory; no missing-license finding is waived.

@@ -43,3 +43,21 @@ Use a real loopback HTTP server for both provider formats and failure/cancel tes
 Preserve raw dependency/OS scans and exact image/source identity. Live generation,
 web search, push, publish, tag, deploy, credential/log deletion remain unauthorized.
 An unavailable external gate remains BLOCKED, never inferred PASS.
+
+## Release gate observations
+
+- Local backend gates: 106 tests PASS, Ruff/Black/MyPy PASS; archive first build
+  caught uv 0.6.5 lacking `uv build --locked`. Fixed with a locked Hatchling dev
+  dependency and no-isolation build; repeat the clean package gate.
+- First UI actual-image JSON/SSE/CLI/restart smoke PASS (d986c4c). Python advisory
+  scan: 17 headless / 44 UI dependencies, zero findings. Trivy 0.76.1 image scan:
+  164 OS findings, 44 HIGH; image-security gate FAIL, no suppressions.
+- Gitleaks raw history scan finds three historical public examples/retired defaults.
+  Immutable fingerprints and source-span hashes are reviewed explicitly; scanner
+  reports and exit 1 are retained. Any new finding fails. Scan coverage must equal
+  actual Git commit count (scanner exit 0 with zero commits is rejected).
+- Streamlit published wheel lacks license text. Supplement official tag license
+  with checksum; inventory must prove the actual image contains it. License
+  classifier parsing was corrected for dual BSD/Apache and PSF-2.0 metadata.
+- Remaining: final clean source/image evidence, complete security reports, release
+  matrix; real provider authorization, remote CI and image OS gate remain open.

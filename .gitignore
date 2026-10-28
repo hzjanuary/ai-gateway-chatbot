@@ -116,3 +116,6 @@ models/
 .mypy_cache/
 .ruff_cache/
 *.token
+
+# Public scanner implementation; no secret values.
+!scripts/secret_gate.py

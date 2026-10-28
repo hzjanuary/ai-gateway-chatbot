@@ -21,6 +21,7 @@ ENV PYTHONPATH=/opt/packages:/app PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
 COPY --from=dependencies /opt/packages /opt/packages
 COPY gateway /app/gateway
 COPY LICENSE NOTICE /app/
+COPY licenses /app/third-party-licenses
 COPY --chmod=755 scripts/gateway /usr/local/bin/gateway
 USER 10001:10001
 EXPOSE 8000

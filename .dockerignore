@@ -10,3 +10,6 @@
 !scripts/gateway
 !LICENSE
 !NOTICE
+!licenses/
+!licenses/*.LICENSE
+!licenses/manifest.json
