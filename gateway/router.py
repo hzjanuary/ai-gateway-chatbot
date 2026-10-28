@@ -135,8 +135,13 @@ class Router:
             n
             for n in pool
             if n is not first
-            and n.config.policy_group == first.config.policy_group
-            and n.config.billing == first.config.billing
+            and (
+                (
+                    n.config.policy_group == first.config.policy_group
+                    and n.config.billing == first.config.billing
+                )
+                or (request.allow_policy_fallback and n.config.id in first.config.fallback_to)
+            )
         ]
         return [first, *same_policy] if request.allow_fallback else [first]
 

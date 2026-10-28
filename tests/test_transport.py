@@ -247,3 +247,36 @@ def test_ollama_model_mismatch_not_success(upstream, auth):
     with client_for([local(upstream.url)]) as client:
         result = client.post("/v1/inference", headers=auth, json={"prompt": "x"})
     assert result.status_code == 502
+
+
+@pytest.mark.parametrize(
+    "operator_consent,request_consent,expected",
+    [(False, True, 503), (True, False, 503), (True, True, 200)],
+)
+@pytest.mark.parametrize("stream", [False, True])
+def test_cross_provider_fallback_requires_operator_and_request_consent(
+    upstream, auth, operator_consent, request_consent, expected, stream
+):
+    first = cloud(fallback_to=["local"] if operator_consent else [])
+    upstream.replies.extend([Reply(status=503), ollama("local fallback")])
+    with client_for([first, local(upstream.url)]) as client:
+        result = client.post(
+            "/v1/inference",
+            headers=auth,
+            json={
+                "prompt": "x",
+                "provider": "cf-1",
+                "max_tokens": 16,
+                "allow_fallback": True,
+                "allow_policy_fallback": request_consent,
+                "stream": stream,
+                "max_attempts": 2,
+            },
+        )
+    assert result.status_code == expected
+    assert len(upstream.calls) == (2 if expected == 200 else 1)
+    if expected == 200:
+        if stream:
+            assert "event: end" in result.text and '"provider": "local"' in result.text
+        else:
+            assert result.json()["provider"] == "local" and result.json()["model"] == "test-model"

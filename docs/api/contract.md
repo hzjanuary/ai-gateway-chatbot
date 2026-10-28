@@ -17,7 +17,8 @@ rejects active requests and never resets quota reservations.
 
 Inference JSON: prompt (1..32000 characters), optional system_prompt (<=4000),
 max_tokens (1..4096, default 512), temperature (0..2), stream (default false),
-optional provider (registered ID), allow_fallback (default false), max_attempts
+optional provider (registered ID), allow_fallback (default false),
+allow_policy_fallback (default false), max_attempts
 (1..3, default 1), web_enrichment (default false). Global input body cap: 64 KiB.
 Global deadline, attempt count, concurrent requests and conservative output token
 reservations apply across all attempts; max_tokens is reserved for each attempt.
@@ -39,8 +40,11 @@ Post-start failure emits `error` and closes without `end`. Client disconnect can
 and closes upstream. A missing upstream terminator is a schema failure. There is
 no `[DONE]` downstream; clients must require `end`, and never treat `error` as success.
 
-Fallback is limited to explicitly consented same-policy registered nodes, only
-before output and only for 5xx/network/timeouts within the shared deadline. 429
+Fallback is limited to explicitly consented registered nodes, only before output
+and only for 5xx/network/timeouts within the shared deadline. Same-policy/billing
+is required unless the operator lists the target in the source node fallback_to
+and the request also sets allow_policy_fallback:true. This permits deliberately
+authorized Cloudflare-to-Ollama fallback without changing privacy/cost by default. 429
 opens cooldown and stops this request (no account rotation). 401/403, billing,
 schema/model/request/policy/refusal never fallback. No default remote or paid node.
 

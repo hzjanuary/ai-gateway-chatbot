@@ -192,3 +192,12 @@ def test_node_concurrency_separate_from_gateway_cap(upstream, auth):
         thread.join()
         assert responses[0].status_code == 200
     assert len(upstream.calls) == 1
+
+
+def test_cr_only_sse_frames_and_utf8_bom(upstream, auth):
+    raw = '\ufeffdata: {"response":"first"}\r\rdata: [DONE]\r\r'.encode()
+    upstream.replies.append(sse(*[raw[i : i + 1] for i in range(len(raw))]))
+    with client_for([cloud()]) as client:
+        response = client.post("/v1/inference", headers=auth, json={"prompt": "x", "stream": True})
+    assert response.status_code == 200
+    assert [name for name, _ in events(response)] == ["start", "delta", "usage", "end"]

@@ -4,6 +4,7 @@
   "max_tokens": 128,
   "stream": false,
   "allow_fallback": false,
+  "allow_policy_fallback": false,
   "max_attempts": 1,
   "web_enrichment": false
 }

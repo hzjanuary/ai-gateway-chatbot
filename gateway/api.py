@@ -72,7 +72,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         configured = settings or load_settings()
         # No proxy env, redirects, retries or auto network probes.
         async with httpx.AsyncClient(
-            timeout=httpx.Timeout(20),
+            timeout=httpx.Timeout(configured.attempt_seconds),
             trust_env=False,
             follow_redirects=False,
             limits=httpx.Limits(max_connections=64),

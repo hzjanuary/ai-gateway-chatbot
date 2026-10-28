@@ -239,3 +239,9 @@ def test_openapi_and_settings_schema_match_checked_in_contract():
     assert Settings.model_json_schema() == json.loads(
         Path("docs/api/settings.schema.json").read_text()
     )
+
+
+def test_operator_fallback_targets_must_exist_and_not_duplicate():
+    for targets in (["not-registered"], ["cf-1"], ["cf-2", "cf-2"]):
+        with pytest.raises(ValidationError):
+            Settings(providers=[cloud(fallback_to=targets), cloud(2)])

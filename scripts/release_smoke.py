@@ -449,6 +449,12 @@ def main():
                 checks["actual_image_chat_and_admin_ui_startup"] = True
             result["status"] = "PASS"
     except Exception as exc:
+        for container in names:
+            captured = subprocess.run(
+                ["docker", "logs", container], capture_output=True, check=False
+            )
+            (out / (container + ".stdout.txt")).write_bytes(captured.stdout)
+            (out / (container + ".stderr.txt")).write_bytes(captured.stderr)
         result["status"] = "FAIL"
         result["error_type"] = type(exc).__name__
         raise

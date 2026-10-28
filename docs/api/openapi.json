@@ -1589,6 +1589,11 @@
             "title": "Allow Fallback",
             "default": false
           },
+          "allow_policy_fallback": {
+            "type": "boolean",
+            "title": "Allow Policy Fallback",
+            "default": false
+          },
           "max_attempts": {
             "type": "integer",
             "maximum": 3.0,

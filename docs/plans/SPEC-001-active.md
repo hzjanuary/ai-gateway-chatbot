@@ -61,3 +61,10 @@ An unavailable external gate remains BLOCKED, never inferred PASS.
   classifier parsing was corrected for dual BSD/Apache and PSF-2.0 metadata.
 - Remaining: final clean source/image evidence, complete security reports, release
   matrix; real provider authorization, remote CI and image OS gate remain open.
+
+- Contract audit added cross-provider Cloudflare→Ollama fallback gated by an
+  operator target plus separate request policy consent; default boundaries remain
+  closed. SSE now supports CR-only and UTF-8 BOM as well as fragmented LF/CRLF.
+- Actual UI startup revealed Streamlit auto-detecting development mode under pip
+  --target. CLI now explicitly selects production mode and disables file watching;
+  repeat actual-image UI health tests. Failure logs remain preserved.

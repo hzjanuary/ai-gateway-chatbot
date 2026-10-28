@@ -14,6 +14,7 @@ class InferenceRequest(BaseModel):
     stream: bool = False
     provider: str | None = Field(default=None, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
     allow_fallback: bool = False
+    allow_policy_fallback: bool = False
     max_attempts: int = Field(default=1, ge=1, le=3)
     web_enrichment: bool = False
 

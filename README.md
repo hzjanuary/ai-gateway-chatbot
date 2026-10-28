@@ -90,7 +90,7 @@ network calls**. Metrics/reset call the local gateway with the admin token.
 
 `POST /v1/inference` (or deprecated `/ask`) requires an inference Bearer token.
 JSON contains prompt, optional system_prompt/provider, max_tokens, temperature,
-stream, allow_fallback, max_attempts and web_enrichment. Unknown fields are rejected.
+stream, allow_fallback, allow_policy_fallback, max_attempts and web_enrichment. Unknown fields are rejected.
 Nonstream reports actual provider ID/type, model, attempts, nullable measured usage
 and request ID. The API is not an OpenAI-compatible endpoint.
 
@@ -101,7 +101,12 @@ start, no content stitching. See [full contract](docs/api/contract.md) and
 [OpenAPI schema](docs/api/openapi.json).
 
 Fallback requires `allow_fallback: true` **and** `max_attempts > 1`, stays within
-the same explicit billing/privacy policy group and can occur only before output.
+the same explicit billing/privacy policy group by default and can occur only before
+output. A cross-policy/provider target (for example Cloudflare → local Ollama) must
+be listed in the source registration `fallback_to` and separately consented with
+`allow_policy_fallback: true` / CLI `--allow-policy-fallback`. Both ordinary fallback
+consent and the attempt/token caps still apply. No paid or policy-changing fallback
+is enabled by default.
 401/403, billing, policy, bad model/schema and 429 never cause fallback. 429 enters
 cooldown and stops the request. 5xx/network/attempt-timeout may use another distinct
 node within a shared deadline and output reservation budget. This is availability

@@ -44,7 +44,7 @@ The private mount is read-only; runtime never modifies operator configuration.
 CLI commands: `config init [--admin]`, `doctor`, `provider list`, `provider
  test-metadata`, `serve`, `ui chat|admin`, `request`, `metrics`, `reset --confirm`.
 `request` can add `--stream`, `--provider`, `--max-tokens`, `--max-attempts`,
-`--allow-fallback`, `--web-enrichment`, `--prompt-file`, `--token-file`, `--url`.
+`--allow-fallback`, `--allow-policy-fallback`, `--web-enrichment`, `--prompt-file`, `--token-file`, `--url`.
 Do not point --url or BACKEND_URL at an untrusted server: it receives the role token.
 Use HTTPS for remote URLs. Metadata commands are offline and cannot prove upstream
 credentials, billing or model compatibility. Only a separately authorized live
@@ -81,3 +81,9 @@ Provider API contracts verified against official documentation:
 [Ollama generate](https://docs.ollama.com/api/generate).
 Supported scope is text response + usage. Structured/tool/multimodal output is not
 accepted or silently stringified; add a separate adapter contract before supporting it.
+
+For an explicitly authorized local fallback, set the Cloudflare registration
+`fallback_to: ["local-ollama"]` with that ID present in the registry. A caller must
+also send allow_fallback:true, allow_policy_fallback:true and max_attempts:2 (with
+sufficient shared token budget). This is a deliberate change of provider/privacy
+policy, never a default. Auth/billing/policy/429 failures still cannot fallback.

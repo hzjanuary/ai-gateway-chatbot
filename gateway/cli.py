@@ -39,6 +39,7 @@ def parser() -> argparse.ArgumentParser:
             action.add_argument("--max-tokens", type=int, default=512)
             action.add_argument("--stream", action="store_true")
             action.add_argument("--allow-fallback", action="store_true")
+            action.add_argument("--allow-policy-fallback", action="store_true")
             action.add_argument("--max-attempts", type=int, default=1)
             action.add_argument("--web-enrichment", action="store_true")
         elif command == "reset":
@@ -108,6 +109,10 @@ def run(args: argparse.Namespace) -> int:
             str(args.port or (8502 if args.role == "admin" else 8501)),
             "--server.headless",
             "true",
+            "--global.developmentMode",
+            "false",
+            "--server.fileWatcherType",
+            "none",
             "--browser.gatherUsageStats",
             "false",
         ]
@@ -131,6 +136,7 @@ def run(args: argparse.Namespace) -> int:
                 "max_tokens": args.max_tokens,
                 "stream": args.stream,
                 "allow_fallback": args.allow_fallback,
+                "allow_policy_fallback": args.allow_policy_fallback,
                 "max_attempts": args.max_attempts,
                 "web_enrichment": args.web_enrichment,
             }
@@ -166,7 +172,7 @@ def main(argv: list[str] | None = None) -> None:
     logging.getLogger("httpcore").setLevel(logging.WARNING)
     try:
         status = run(parser().parse_args(argv))
-    except (ConfigError, OSError, httpx.HTTPError, ValueError):
+    except (ConfigError, OSError, httpx.HTTPError, ValueError, RuntimeError):
         # Never echo an exception: it may contain credential/config/provider text.
         print(
             "Gateway command failed; check private configuration and local connectivity.",

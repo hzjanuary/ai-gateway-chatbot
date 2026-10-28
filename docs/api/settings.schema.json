@@ -44,6 +44,14 @@
           "title": "Billing",
           "type": "string"
         },
+        "fallback_to": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 31,
+          "title": "Fallback To",
+          "type": "array"
+        },
         "account_id": {
           "anyOf": [
             {

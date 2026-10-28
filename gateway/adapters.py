@@ -58,23 +58,31 @@ def reject_error(data: dict[str, Any]) -> None:
 
 
 async def lines(response: httpx.Response) -> AsyncIterator[str]:
-    """Bound memory before line decoding; HTTP chunk and UTF-8 boundaries are unrelated."""
+    """Incremental UTF-8 lines: LF, CRLF and CR, including split CRLF boundaries."""
     buffer = b""
     async for block in response.aiter_bytes():
         buffer += block
-        if len(buffer) > MAX_FRAME and b"\n" not in buffer[: MAX_FRAME + 1]:
-            raise GatewayError("upstream_frame_limit")
-        while b"\n" in buffer:
-            raw, buffer = buffer.split(b"\n", 1)
-            if len(raw) > MAX_FRAME:
+        while True:
+            positions = [p for p in (buffer.find(b"\n"), buffer.find(b"\r")) if p >= 0]
+            if not positions:
+                if len(buffer) > MAX_FRAME:
+                    raise GatewayError("upstream_frame_limit")
+                break
+            at = min(positions)
+            if at > MAX_FRAME:
                 raise GatewayError("upstream_frame_limit")
+            if buffer[at:] == b"\r":
+                # Hold one byte until next block to distinguish CR from CRLF.
+                break
+            skip = 2 if buffer[at : at + 2] == b"\r\n" else 1
+            raw, buffer = buffer[:at], buffer[at + skip :]
             try:
-                yield raw.rstrip(b"\r").decode("utf-8")
+                yield raw.decode("utf-8")
             except UnicodeError as exc:
                 raise GatewayError("upstream_schema") from exc
     if buffer:
         try:
-            yield buffer.rstrip(b"\r").decode("utf-8")
+            yield buffer.removesuffix(b"\r").decode("utf-8")
         except UnicodeError as exc:
             raise GatewayError("upstream_schema") from exc
 
@@ -82,7 +90,11 @@ async def lines(response: httpx.Response) -> AsyncIterator[str]:
 async def sse_data(response: httpx.Response) -> AsyncIterator[str]:
     data: list[str] = []
     size = 0
+    first = True
     async for line in lines(response):
+        if first:
+            line = line.removeprefix("\ufeff")
+            first = False
         if not line:
             if data:
                 yield "\n".join(data)

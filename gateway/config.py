@@ -41,6 +41,7 @@ class Provider(StrictModel):
     authorized: bool = False
     policy_group: str = Field(default="local", pattern=r"^[a-zA-Z0-9_-]{1,64}$")
     billing: Literal["local", "unverified", "approved"] = "unverified"
+    fallback_to: list[str] = Field(default_factory=list, max_length=31)
     account_id: str | None = Field(default=None, pattern=r"^[a-fA-F0-9]{32}$")
     api_token: SecretStr | None = Field(default=None, repr=False)
     endpoint: str = "https://api.cloudflare.com"
@@ -126,6 +127,12 @@ class Settings(StrictModel):
         ]
         if len(ids) != len(set(ids)) or len(identities) != len(set(identities)):
             raise ValueError("duplicate providers or upstream quota identity")
+        for provider in self.providers:
+            targets = provider.fallback_to
+            if len(targets) != len(set(targets)) or any(
+                target not in ids or target == provider.id for target in targets
+            ):
+                raise ValueError("fallback targets must be distinct registered provider IDs")
         if self.admin_hash and self.admin_hash == self.inference_hash:
             raise ValueError("role tokens must differ")
         if any(h == token_hash("") for h in (self.admin_hash, self.inference_hash)):

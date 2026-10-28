@@ -43,7 +43,9 @@ can probe; success closes, failure reopens. Auth/model/schema/policy failures di
 the node until operator reset/restart; reset does not test credentials. 429 stops
 without fallback; Retry-After is honored up to seven days (larger/unbounded values
 use seven days; operators should disable the node if provider restrictions last
-longer). There are no automatic background probes or account provisioning.
+longer). Cross-policy fallback requires both an operator fallback_to target and per-request
+allow_policy_fallback consent in addition to ordinary fallback consent. There are
+no automatic background probes or account provisioning.
 
 A shared request deadline includes enrichment and provider attempts. First event
 is validated before sending 200. After downstream start, provider is fixed and an
