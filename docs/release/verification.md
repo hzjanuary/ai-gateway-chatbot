@@ -121,7 +121,7 @@ Commands Q/H/U/SH/SU are the exact invocations above.
 | GW-17 | PASS | Q/H, S=44/UIt=6: canaries excluded from errors/logs/metrics/UI; H/U actual image logs lack synthetic prompt/completion/tokens; SH/SU image secrets=0. |
 | GW-18 | PASS | Q/H, F=17: bounded cooldown/Retry-After and one half-open probe; H/U real restart resets counters truthfully; ephemeral single-instance limits documented. |
 | GW-19 | PASS | H/U: actual image init/doctor/provider list/test-metadata prove zero generation; CLI request/stream/metrics/reset exercise isolated real HTTP Ollama-format fixture. No real Ollama model or remote generation claimed. |
-| GW-20 | BLOCKED | **0 live calls**. Separate owner provider/plan/privacy authorization absent. Review [one-call plan](live-smoke-plan.md); offline fixtures cannot prove live inference. |
+| GW-20 | BLOCKED | **0 live calls**. One bounded 8-output-token request is now authorized, but non-generative preflight found no configured real provider or running local Ollama; Cloudflare Free plan/hard quota unconfirmed. Stopped before inference. See [sanitized preflight](evidence/live-smoke-preflight.json) and [one-call plan](live-smoke-plan.md). |
 | GW-21 | BLOCKED | Workflow pins actions and runs source/ops/history/license/image/Python/OS/SBOM gates; Q/H/U locally pass, SH/SU correctly fail OS. **0 remote CI runs**: no authorized push. Remote CI execution cannot be inferred from local evidence. |
 | GW-22 | PASS | Q plus manual review: README/API/OpenAPI/settings schema, architecture/state diagram, adapter guide, privacy/limits, operations/migration/troubleshooting, SECURITY/CONTRIBUTING/LICENSE/NOTICE/examples and actual-image license inventory. |
 | GW-23 | PASS | H/U: clean committed archive, locked install/build, actual non-root image CLI, network-none missing-config health/not-ready, isolated registered HTTP provider, restart, no seeded artifacts, optional UI startup. |
@@ -170,7 +170,24 @@ claimed**: build timestamps/attestations and advisory database updates may diffe
 No signatures, registry publication, live availability or remote CI success implied.
 
 Next owner actions: review the source preview and private disclosure channel;
-separately authorize an explicitly bounded live smoke; authorize push only if
+make an eligible real provider available privately, then resume the already authorized
+one-request smoke after preflight; authorize push only if
 remote CI/publication is desired; wait for a reviewed stable base fixing the OS
 findings and rebuild/rescan both images before Docker security approval. Never
 work around quota errors by account rotation or repeated circuit reset.
+
+## Authorized live-smoke preflight update
+
+At `1fbca20fae2c048961340e4751232fefbfca8434`, the owner authorized one real request,
+maximum eight output tokens, no retries/fallback/research/hidden calls/billing change.
+The environment had no registered provider or gateway configuration. Local Ollama
+was absent/inactive and its non-generative version endpoint refused connection.
+No qualifying Cloudflare account/Free plan/hard quota was confirmed. Therefore
+**0 generation requests**, no generation HTTP status/output/usage, completion
+**NOT_EXECUTED**. Provider-side enforcement could not be verified, so the request
+was not sent. The allowance remains unused. No eight-total-token guarantee is made.
+
+[Preflight evidence](evidence/live-smoke-preflight.json) preserves sanitized counts,
+conditions and commit/Python provenance. This was a native Python preflight, not
+an execution of either release image against a live model. GW-20 remains BLOCKED;
+22/24 acceptance PASS and the independent image/CI decisions are unchanged.

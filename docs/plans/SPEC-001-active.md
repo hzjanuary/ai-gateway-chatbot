@@ -23,7 +23,8 @@ web searches; public port bindings and production source mount.
 - [x] G3: CLI, optional UI/web enrichment, truthful observability and restart behavior.
 - [x] G4: locked dependencies, CI/security/license gates, docs and release artifacts.
 - [x] G5: clean archive/image/runtime verification, GW-01..24 evidence and local commits.
-- [ ] External: separately authorized bounded live inference (GW-20).
+- [x] External authorization received: exactly one request / eight output tokens.
+- [ ] External: eligible configured real provider and successful bounded inference (GW-20).
 - [ ] External: remote CI/publication only with separate authorization.
 
 ## Decisions and risks
@@ -80,3 +81,15 @@ scans and image license/secret gates PASS. Both OS gates FAIL: 164 findings,
 readiness. All authorized implementation/evidence work is complete; this plan
 remains ACTIVE for live consent, remote CI authorization and a fixed stable base.
 See docs/release/verification.md for commands/digests/counts and independent decisions.
+
+## Authorized live preflight (2026-10-28)
+
+One generation / eight output tokens has been expressly authorized. Preflight at
+1fbca20 found no gateway provider configuration, no Ollama binary/service, refused
+local version connection, and no confirmed Cloudflare Free plan/hard quota. Stopped
+before inference as instructed: zero generation requests, allowance unused. No
+installation/start/model download or other provider was attempted. GW-20 remains
+BLOCKED by provider availability/conditions, not lack of smoke authorization.
+Only non-secret provider ID/model/endpoint references are needed to resume after
+private operator configuration; never request keys in chat. See sanitized live
+preflight evidence. Runtime code and the 114-test offline evidence remain unchanged.

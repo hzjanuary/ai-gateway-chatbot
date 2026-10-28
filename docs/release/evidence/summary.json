@@ -3,7 +3,7 @@
   "source_archive_sha256": "210c8578461542b12b9f71c1fdfefe34484f00d272699cd18eca4e8d4fdc5d13",
   "source_preview_offline_gates": "PASS",
   "docker_image_security": "FAIL",
-  "live_provider": "BLOCKED",
+  "live_provider": "BLOCKED: one bounded request authorized; no eligible configured real provider found during preflight",
   "remote_ci": "BLOCKED",
   "acceptance": {
     "PASS": 22,
@@ -117,5 +117,12 @@
     "accepted-ui-security/image-licenses.json": "5c61897be5f7403f6e242574dbde9577c4a3ba75f17b25a1426580bd358e923a",
     "accepted-headless-security/gitleaks-history.json": "97e4ca739415717118ae5c63d82eeb7bacabddf9e98afe98e4af2d9866da66eb",
     "accepted-headless-security/gitleaks-summary.json": "8700067579c539684facf56959b3dc06ef5fcd78eaeef1ef31d76098e38762e1"
+  },
+  "authorized_live_smoke": {
+    "status": "BLOCKED_PREFLIGHT_NO_ELIGIBLE_PROVIDER",
+    "generation_requests": 0,
+    "remaining_request_allowance": 1,
+    "max_output_tokens": 8,
+    "evidence": "live-smoke-preflight.json"
   }
 }
