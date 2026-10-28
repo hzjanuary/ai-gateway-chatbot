@@ -1,0 +1,121 @@
+{
+  "verified_source_commit": "46744d5aed5a797701c0bea00705664f0f229a13",
+  "source_archive_sha256": "210c8578461542b12b9f71c1fdfefe34484f00d272699cd18eca4e8d4fdc5d13",
+  "source_preview_offline_gates": "PASS",
+  "docker_image_security": "FAIL",
+  "live_provider": "BLOCKED",
+  "remote_ci": "BLOCKED",
+  "acceptance": {
+    "PASS": 22,
+    "BLOCKED": 2,
+    "FAIL": 0,
+    "NOT_RUN": 0
+  },
+  "tests": {
+    "tests.test_enrichment_ui": 6,
+    "tests.test_packaging": 3,
+    "tests.test_security": 44,
+    "tests.test_streams": 17,
+    "tests.test_transport": 44
+  },
+  "total_tests": 114,
+  "python_advisories": {
+    "python-headless": {
+      "dependencies": 17,
+      "findings": 0
+    },
+    "python-ui": {
+      "dependencies": 44,
+      "findings": 0
+    },
+    "python-development": {
+      "dependencies": 99,
+      "findings": 0
+    }
+  },
+  "variants": {
+    "headless": {
+      "image": "inference-gateway:spec001-46744d5",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_locked_install_quality_package": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true
+      },
+      "digests": {
+        "oci_index_digest": "sha256:0167c5222313949bbd66e2b4e993116d74d039f95f673c5890f11352cf2209dc",
+        "platform_manifest_digest": "sha256:f015520040be66f1ef8ac076d48852426d88ad1a47403daa2619f6240dd04e43",
+        "image_config_digest": "sha256:ed7e7191828e1c3002059f655d6e7ee33fe61cbc0b7054836f9d05a61bf7e8de"
+      },
+      "image_findings": {
+        "all_severities": 164,
+        "high_critical": 44,
+        "secrets": 0
+      },
+      "failed_security_gates": [
+        "image-security"
+      ],
+      "python_license_packages": 17,
+      "sbom_components": 105
+    },
+    "ui": {
+      "image": "inference-gateway:spec001-ui-46744d5",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true,
+        "image_admin_ui_missing_secret_aborts": true,
+        "actual_image_chat_and_admin_ui_startup": true
+      },
+      "digests": {
+        "oci_index_digest": "sha256:020ba8a61c58c38074ef046dc8902f2a2fe95cc9035e6cb30c914a23c5c6d4b1",
+        "platform_manifest_digest": "sha256:eee583d31ef3ddf7ef79b6bf6578a7d2292f3fd389f8a22231802ddf370189fa",
+        "image_config_digest": "sha256:e1825102068e68219a456734aa1dce59a3b83bfd23fc732f616e5dbae4f72e67"
+      },
+      "image_findings": {
+        "all_severities": 164,
+        "high_critical": 44,
+        "secrets": 0
+      },
+      "failed_security_gates": [
+        "image-security"
+      ],
+      "python_license_packages": 44,
+      "sbom_components": 132
+    }
+  },
+  "evidence_sha256": {
+    "quality-accepted.stdout.txt": "089109684e3d2242a392ef9c177134a41e0c13f2e047cc093df24bf873b8ab07",
+    "quality-accepted.stderr.txt": "1a8e93604989079af805cdc1669141164a05826721879a1610d3391b3d6aa019",
+    "accepted-headless/clean-pytest.xml": "19d27dc6a318e1750569950084263d51d53e1bb3afababd95af69fc607731a44",
+    "accepted-headless/clean-package.stdout.txt": "e760015706a8b8b76b520bd6114b7a4b25e5b501e6b6c3114dd2d68fda3e573d",
+    "accepted-headless/release-smoke.json": "e800e8a616f232bf356324badb5257bc04539889988d298c6b1e2590f2a58f53",
+    "accepted-ui/release-smoke.json": "e2bde1fdc37afa94df1cd786b817f1c1a721f8329b57094e78a42a038472e595",
+    "accepted-headless-security/security-summary.json": "7d75842227f2dc1497b84e1fde52ee532c26a433a0225ff7820c9c5e399f74b2",
+    "accepted-ui-security/security-summary.json": "947b04e05aec3350201cc634916747b4bfcaba31bef1fd74ed005502c4b5be7c",
+    "accepted-headless-security/image-scan.json": "16cb6b3f0b9e4d0bf1f563487ef47f60ee213800a561bafb01df6c6104c4f2e8",
+    "accepted-ui-security/image-scan.json": "61381c2551754bd40a5b6e1ddf333f0dd721898047a12f5db7dc78943467dc64",
+    "accepted-headless-security/image-sbom.json": "e23cc8aafc00eeebd3bf35683a572de571eb2ac2dec3339699238969baaccb3d",
+    "accepted-ui-security/image-sbom.json": "62b0aed26257d843dbc4883517baf19ce07531b1d00336adfca50b102153c295",
+    "accepted-headless-security/image-licenses.json": "d7574207b57f154aef05b3b1c28936624ecd55ce15cc52b0404d9400b8aca683",
+    "accepted-ui-security/image-licenses.json": "5c61897be5f7403f6e242574dbde9577c4a3ba75f17b25a1426580bd358e923a",
+    "accepted-headless-security/gitleaks-history.json": "97e4ca739415717118ae5c63d82eeb7bacabddf9e98afe98e4af2d9866da66eb",
+    "accepted-headless-security/gitleaks-summary.json": "8700067579c539684facf56959b3dc06ef5fcd78eaeef1ef31d76098e38762e1"
+  }
+}

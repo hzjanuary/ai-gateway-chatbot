@@ -21,8 +21,8 @@ web searches; public port bindings and production source mount.
 - [x] G1: private explicit initialization, role separation, safe configuration/network.
 - [x] G2: strict typed transports, bounded routing, correct SSE/cancel/accounting.
 - [x] G3: CLI, optional UI/web enrichment, truthful observability and restart behavior.
-- [ ] G4: locked dependencies, CI/security/license gates, docs and release artifacts.
-- [ ] G5: clean archive/image/runtime verification, GW-01..24 evidence and local commits.
+- [x] G4: locked dependencies, CI/security/license gates, docs and release artifacts.
+- [x] G5: clean archive/image/runtime verification, GW-01..24 evidence and local commits.
 - [ ] External: separately authorized bounded live inference (GW-20).
 - [ ] External: remote CI/publication only with separate authorization.
 
@@ -68,3 +68,15 @@ An unavailable external gate remains BLOCKED, never inferred PASS.
 - Actual UI startup revealed Streamlit auto-detecting development mode under pip
   --target. CLI now explicitly selects production mode and disables file watching;
   repeat actual-image UI health tests. Failure logs remain preserved.
+
+## Current decision
+
+Verified implementation R=46744d5aed5a797701c0bea00705664f0f229a13: full local gates
+and 114 tests PASS both in workspace and clean archive; headless/UI image checks
+PASS, including actual UI startup after production-mode fix. 22/24 acceptance
+criteria PASS; GW-20 live and GW-21 remote CI BLOCKED. Python 17/44/99 package
+scans and image license/secret gates PASS. Both OS gates FAIL: 164 findings,
+44 HIGH (eight CVEs), zero CRITICAL. Do not approve images or claim production
+readiness. All authorized implementation/evidence work is complete; this plan
+remains ACTIVE for live consent, remote CI authorization and a fixed stable base.
+See docs/release/verification.md for commands/digests/counts and independent decisions.
