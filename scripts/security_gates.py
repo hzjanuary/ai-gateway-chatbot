@@ -36,9 +36,27 @@ def main() -> None:
         return result
 
     failures = []
+    dev_export = run(
+        "dev-lock-export",
+        [
+            "uv",
+            "export",
+            "--quiet",
+            "--locked",
+            "--all-extras",
+            "--no-emit-project",
+            "--format",
+            "requirements-txt",
+            "--output-file",
+            str(out / "requirements-dev.txt"),
+        ],
+    )
+    if dev_export.returncode:
+        failures.append("dev-lock-export")
     for label, requirements in (
         ("python-headless", "requirements.txt"),
         ("python-ui", "requirements-ui.txt"),
+        ("python-development", str(out / "requirements-dev.txt")),
     ):
         result = run(
             label,
