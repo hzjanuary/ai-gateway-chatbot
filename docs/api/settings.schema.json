@@ -1,0 +1,211 @@
+{
+  "$defs": {
+    "Provider": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "cloudflare",
+            "ollama"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 160,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_@./:-]+$",
+          "title": "Model",
+          "type": "string"
+        },
+        "authorized": {
+          "default": false,
+          "title": "Authorized",
+          "type": "boolean"
+        },
+        "policy_group": {
+          "default": "local",
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Policy Group",
+          "type": "string"
+        },
+        "billing": {
+          "default": "unverified",
+          "enum": [
+            "local",
+            "unverified",
+            "approved"
+          ],
+          "title": "Billing",
+          "type": "string"
+        },
+        "account_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-fA-F0-9]{32}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Account Id"
+        },
+        "api_token": {
+          "anyOf": [
+            {
+              "format": "password",
+              "type": "string",
+              "writeOnly": true
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Api Token"
+        },
+        "endpoint": {
+          "default": "https://api.cloudflare.com",
+          "title": "Endpoint",
+          "type": "string"
+        },
+        "allow_private": {
+          "default": false,
+          "title": "Allow Private",
+          "type": "boolean"
+        },
+        "max_concurrent": {
+          "default": 1,
+          "maximum": 32,
+          "minimum": 1,
+          "title": "Max Concurrent",
+          "type": "integer"
+        },
+        "call_limit": {
+          "default": 100,
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Call Limit",
+          "type": "integer"
+        },
+        "token_limit": {
+          "default": 100000,
+          "maximum": 100000000,
+          "minimum": 1,
+          "title": "Token Limit",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "model"
+      ],
+      "title": "Provider",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "inference_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inference Hash"
+    },
+    "admin_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Admin Hash"
+    },
+    "providers": {
+      "items": {
+        "$ref": "#/$defs/Provider"
+      },
+      "maxItems": 32,
+      "title": "Providers",
+      "type": "array"
+    },
+    "strategy": {
+      "default": "round_robin",
+      "enum": [
+        "round_robin",
+        "least_used",
+        "random"
+      ],
+      "title": "Strategy",
+      "type": "string"
+    },
+    "max_concurrent": {
+      "default": 4,
+      "maximum": 128,
+      "minimum": 1,
+      "title": "Max Concurrent",
+      "type": "integer"
+    },
+    "deadline_seconds": {
+      "default": 60.0,
+      "maximum": 300,
+      "minimum": 0.05,
+      "title": "Deadline Seconds",
+      "type": "number"
+    },
+    "attempt_seconds": {
+      "default": 20.0,
+      "maximum": 120,
+      "minimum": 0.02,
+      "title": "Attempt Seconds",
+      "type": "number"
+    },
+    "cooldown_seconds": {
+      "default": 30.0,
+      "maximum": 86400,
+      "minimum": 0.01,
+      "title": "Cooldown Seconds",
+      "type": "number"
+    },
+    "max_attempts": {
+      "default": 3,
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Max Attempts",
+      "type": "integer"
+    },
+    "request_token_budget": {
+      "default": 4096,
+      "maximum": 12288,
+      "minimum": 1,
+      "title": "Request Token Budget",
+      "type": "integer"
+    },
+    "web_enrichment_enabled": {
+      "default": false,
+      "title": "Web Enrichment Enabled",
+      "type": "boolean"
+    }
+  },
+  "title": "Settings",
+  "type": "object"
+}
