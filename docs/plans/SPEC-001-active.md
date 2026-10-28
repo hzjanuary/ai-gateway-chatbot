@@ -25,7 +25,8 @@ web searches; public port bindings and production source mount.
 - [x] G5: clean archive/image/runtime verification, GW-01..24 evidence and local commits.
 - [x] External authorization received: exactly one request / eight output tokens.
 - [ ] External: eligible configured real provider and successful bounded inference (GW-20).
-- [ ] External: remote CI/publication only with separate authorization.
+- [x] Authorization received: normal feature-branch push, PR to main, remote CI.
+- [ ] Execute and inspect remote Actions on the exact pushed SHA; no merge/release/deploy.
 
 ## Decisions and risks
 
@@ -93,3 +94,11 @@ BLOCKED by provider availability/conditions, not lack of smoke authorization.
 Only non-secret provider ID/model/endpoint references are needed to resume after
 private operator configuration; never request keys in chat. See sanitized live
 preflight evidence. Runtime code and the 114-test offline evidence remain unchanged.
+
+## Remote CI authorization received
+
+The owner authorized only the current reviewed feature-branch push, a PR targeting
+main and actual Actions verification. Pre-push source/history/private-path/archive/
+license checks must pass; no additional inference is authorized. Known OS findings
+remain unsuppressed FAIL. A new unexpected defect requires stop/report, not an
+automatic code/gate change. Execution and exact run provenance are pending.

@@ -3,8 +3,9 @@
 Observed **2026-10-28**, branch `feat/spec-001-oss-inference-gateway`.
 **22 PASS / 2 BLOCKED / 0 FAIL / 0 NOT_RUN** in the acceptance matrix. This is an
 engineering score, not production approval: the independent **Docker image security
-gate is FAIL** (44 HIGH OS findings). No publication, push, tag, merge or deployment
-has been performed. No real provider generation or external search was executed.
+gate is FAIL** (44 HIGH OS findings). The owner has now authorized normal push of
+this feature branch, a PR to main and genuine remote Actions verification. No
+release/tag, image publication, merge or deployment is authorized. No real provider generation or external search was executed.
 
 Verified implementation/source commit **R**:
 `46744d5aed5a797701c0bea00705664f0f229a13`.
@@ -122,7 +123,7 @@ Commands Q/H/U/SH/SU are the exact invocations above.
 | GW-18 | PASS | Q/H, F=17: bounded cooldown/Retry-After and one half-open probe; H/U real restart resets counters truthfully; ephemeral single-instance limits documented. |
 | GW-19 | PASS | H/U: actual image init/doctor/provider list/test-metadata prove zero generation; CLI request/stream/metrics/reset exercise isolated real HTTP Ollama-format fixture. No real Ollama model or remote generation claimed. |
 | GW-20 | BLOCKED | **0 live calls**. One bounded 8-output-token request is now authorized, but non-generative preflight found no configured real provider or running local Ollama; Cloudflare Free plan/hard quota unconfirmed. Stopped before inference. See [sanitized preflight](evidence/live-smoke-preflight.json) and [one-call plan](live-smoke-plan.md). |
-| GW-21 | BLOCKED | Workflow pins actions and runs source/ops/history/license/image/Python/OS/SBOM gates; Q/H/U locally pass, SH/SU correctly fail OS. **0 remote CI runs**: no authorized push. Remote CI execution cannot be inferred from local evidence. |
+| GW-21 | BLOCKED | Workflow pins actions and runs source/ops/history/license/image/Python/OS/SBOM gates; Q/H/U locally pass, SH/SU correctly fail OS. **0 remote CI runs at pre-push review**: feature-branch push/PR/Actions are now authorized and pending execution. Remote CI success is not inferred from local evidence. |
 | GW-22 | PASS | Q plus manual review: README/API/OpenAPI/settings schema, architecture/state diagram, adapter guide, privacy/limits, operations/migration/troubleshooting, SECURITY/CONTRIBUTING/LICENSE/NOTICE/examples and actual-image license inventory. |
 | GW-23 | PASS | H/U: clean committed archive, locked install/build, actual non-root image CLI, network-none missing-config health/not-ready, isolated registered HTTP provider, restart, no seeded artifacts, optional UI startup. |
 | GW-24 | PASS | Independent decisions recorded below: source offline preview PASS; image security FAIL; live acceptance and remote CI BLOCKED. No fake green release or production/SLA claim. |
@@ -152,7 +153,9 @@ pattern scans: zero findings; raw results and limitations retained.
 Source preview offline engineering readiness: **PASS, owner publication review
 still required**. Docker image security approval: **FAIL**. Production/live provider
 acceptance: **BLOCKED**. Remote CI: **BLOCKED**. Public release/deployment remains
-**NOT AUTHORIZED**. The active plan stays open for these external gates.
+**NOT AUTHORIZED** for release artifacts, image publication, tags, merging and deployment.
+Feature-branch push/PR and Actions verification are now authorized. The active plan
+stays open for the actual remote results and live-provider availability.
 
 ## Evidence and reproducibility limits
 
@@ -171,8 +174,7 @@ No signatures, registry publication, live availability or remote CI success impl
 
 Next owner actions: review the source preview and private disclosure channel;
 make an eligible real provider available privately, then resume the already authorized
-one-request smoke after preflight; authorize push only if
-remote CI/publication is desired; wait for a reviewed stable base fixing the OS
+one-request smoke after preflight; inspect the now-authorized remote CI evidence; wait for a reviewed stable base fixing the OS
 findings and rebuild/rescan both images before Docker security approval. Never
 work around quota errors by account rotation or repeated circuit reset.
 
@@ -191,3 +193,22 @@ was not sent. The allowance remains unused. No eight-total-token guarantee is ma
 conditions and commit/Python provenance. This was a native Python preflight, not
 an execution of either release image against a live model. GW-20 remains BLOCKED;
 22/24 acceptance PASS and the independent image/CI decisions are unchanged.
+
+## Feature-branch publication and remote CI authorization
+
+Owner authorization permits a normal non-force push of only
+`feat/spec-001-oss-inference-gateway` to origin, opening a PR targeting main, and
+executing/inspecting genuine Actions checks on the exact pushed commit. It does
+not permit merge, release/tag, registry image publication, deployment, history
+rewrite, weakened gates or additional inference.
+
+Pre-push audited HEAD: `9158a36a5aee7596c5ca5464bb750f773c4e8674` (clean worktree).
+Origin is the intended hzjanuary/ai-gateway-chatbot repository; main remains the
+observed baseline and no matching remote feature branch/PR existed at preflight.
+Tracked-file Gitleaks, all-history Gitleaks review, private-path checks, committed
+source archive and license checks are rerun before push. Raw reports remain
+local under `.local/verification/remote-ci-prepush/`; no operator state or private
+evidence is staged or uploaded. Remote run URLs/outcomes will be added only after
+GitHub supplies actual run/job records. Known OS findings retain raw reports and
+FAIL status. Any unexpected new functional/security/secret/integrity defect stops
+this run without changing gates or silently repairing it.
