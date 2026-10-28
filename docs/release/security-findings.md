@@ -54,3 +54,34 @@ private-disclosure availability require owner review before any public image.
 
 **Source-preview offline engineering gates: PASS. Docker image security approval:
 FAIL. Production/live acceptance: BLOCKED. Public release/push/deploy: NOT AUTHORIZED.**
+
+## Remote CI follow-up and fixed-version availability
+
+Push workflow [40703768224](https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703768224)
+and PR workflow [40703883376](https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703883376)
+retain the same 164 OS findings / 44 HIGH / zero CRITICAL in all four images.
+Every HIGH entry has no FixedVersion value in the scanned trixie report. Primary
+Debian tracker review on 2026-10-28 confirms stable trixie remains affected; the
+fixed source versions below belong to unstable/forky, not an approved stable fix.
+
+| CVE | Scanned stable source version | Stable FixedVersion in Trivy | Debian unstable fixed source version |
+| --- | --- | --- | --- |
+| [CVE-2025-69720](https://security-tracker.debian.org/tracker/CVE-2025-69720) | ncurses 6.5+20250216-2 | none | 6.6+20251231-1 |
+| [CVE-2026-16742](https://security-tracker.debian.org/tracker/CVE-2026-16742) | systemd 257.13-1~deb13u1 | none | 261.2-1 |
+| [CVE-2026-54369](https://security-tracker.debian.org/tracker/CVE-2026-54369) | acl 2.3.2-2+b1 | none | 2.4.0-1 |
+| [CVE-2026-76642](https://security-tracker.debian.org/tracker/CVE-2026-76642) | util-linux 2.41.5-0+deb13u1 | none | 2.42.3-1 |
+| [CVE-2026-78408](https://security-tracker.debian.org/tracker/CVE-2026-78408) | util-linux 2.41.5-0+deb13u1 | none | 2.42.4-1 |
+| [CVE-2026-78409](https://security-tracker.debian.org/tracker/CVE-2026-78409) | util-linux 2.41.5-0+deb13u1 | none | 2.42.3-1 |
+| [CVE-2026-78410](https://security-tracker.debian.org/tracker/CVE-2026-78410) | util-linux 2.41.5-0+deb13u1 | none | 2.42.3-1 |
+| [CVE-2026-9538](https://security-tracker.debian.org/tracker/CVE-2026-9538) | perl 5.40.1-6+deb13u1 | none | 5.42.3-1 |
+
+Exact binary package versions, repeated package/CVE rows, raw scan hashes and
+artifact digests are retained in [remote evidence](evidence/remote-ci-4761d6a.json).
+Raw findings and FAIL status are unchanged; no downgrades or suppressions.
+
+Remote evidence also invalidates a broad source-ready conclusion: Python 3.13
+fails the exact OpenAPI contract, and PR scan coverage reports 17 expected versus
+16 scanned commits. No new secret finding was detected. The owner required stop
+on new defects, so code/workflows/gates are unchanged and no rerun is attempted.
+Current source publication readiness is FAIL pending owner defect review; image
+security approval remains independently FAIL for OS findings.

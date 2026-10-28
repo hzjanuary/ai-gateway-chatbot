@@ -4,11 +4,11 @@
   "source_preview_offline_gates": "PASS",
   "docker_image_security": "FAIL",
   "live_provider": "BLOCKED: one bounded request authorized; no eligible configured real provider found during preflight",
-  "remote_ci": "BLOCKED",
+  "remote_ci": "EXECUTED_FAIL: OpenAPI Python 3.13 contract drift and PR Gitleaks coverage mismatch",
   "acceptance": {
-    "PASS": 22,
-    "BLOCKED": 2,
-    "FAIL": 0,
+    "PASS": 21,
+    "BLOCKED": 1,
+    "FAIL": 2,
     "NOT_RUN": 0
   },
   "tests": {
@@ -124,5 +124,7 @@
     "remaining_request_allowance": 1,
     "max_output_tokens": 8,
     "evidence": "live-smoke-preflight.json"
-  }
+  },
+  "source_publication_readiness": "FAIL_PENDING_NEW_DEFECT_REVIEW",
+  "remote_ci_evidence": "remote-ci-4761d6a.json"
 }

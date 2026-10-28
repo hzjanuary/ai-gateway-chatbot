@@ -26,7 +26,8 @@ web searches; public port bindings and production source mount.
 - [x] External authorization received: exactly one request / eight output tokens.
 - [ ] External: eligible configured real provider and successful bounded inference (GW-20).
 - [x] Authorization received: normal feature-branch push, PR to main, remote CI.
-- [ ] Execute and inspect remote Actions on the exact pushed SHA; no merge/release/deploy.
+- [x] Normal push and draft PR #2; genuine push/PR Actions executed and inspected.
+- [ ] Owner review of new OpenAPI contract and PR scan-coverage failures before any fixes/reruns.
 
 ## Decisions and risks
 
@@ -102,3 +103,22 @@ main and actual Actions verification. Pre-push source/history/private-path/archi
 license checks must pass; no additional inference is authorized. Known OS findings
 remain unsuppressed FAIL. A new unexpected defect requires stop/report, not an
 automatic code/gate change. Execution and exact run provenance are pending.
+
+## Remote CI executed — STOPPED on unexpected defects
+
+Pushed only feature HEAD 4761d6a0e18277d8632927e35a9219ca61ede56e with a normal
+non-force push, no tags. Draft PR #2 targets unchanged main. Push workflow
+40703768224 and PR workflow 40703883376 both completed FAIL. Push tests prove
+114 PASS on Python 3.12 but 113 PASS / 1 FAIL on 3.13 (OpenAPI 413/422 description
+drift). PR additionally fails Gitleaks coverage (17 expected / 16 scanned; no new
+secret). PR tests/images use synthetic merge ref ffab9b6, not direct feature HEAD.
+Four image smoke/builds PASS; all four OS gates retain 164 findings / 44 HIGH and
+no fixed versions reported for HIGH entries. Python/license/secret subgates pass.
+
+The owner required stop/report on unexpected defects. No code/gate changes, reruns
+or further pushes are made. All eight artifacts were checksum-verified and retained
+locally. The final results are a local-only documentation commit and PR metadata
+update; they do not advance the tested remote HEAD. Current acceptance is 21 PASS,
+2 FAIL (GW-21/GW-22), 1 BLOCKED (GW-20). Source release readiness is on hold for
+contract/coverage review; image approval separately FAILS OS. No inference/merge/
+release/tag/image publication/deployment/history rewrite occurred.
