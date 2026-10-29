@@ -1,4 +1,4 @@
-# Architecture and adapter development
+# AI Gateway Multi-Node architecture and adapter development
 
 CLI owns explicit bootstrap/metadata; API owns authorization, request limits and
 response framing. Router owns session reservations, circuit state and explicit

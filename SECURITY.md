@@ -1,4 +1,9 @@
-# Security policy
+# Security policy — AI Gateway Multi-Node
+
+Canonical repository: https://github.com/hzjanuary/ai-gateway-multi-node.
+Use its [Security page](https://github.com/hzjanuary/ai-gateway-multi-node/security)
+to find the reporting facilities described below. The rename does not change
+provider privacy/billing boundaries, release evidence or security approval.
 
 ## v0.1.0 source-preview limitations
 

@@ -8,8 +8,9 @@ RUN if [ "$INSTALL_UI" = true ]; then req=requirements-ui.txt; else req=requirem
 
 FROM python:3.13-slim-trixie@sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490 AS runtime
 ARG SOURCE_REVISION=uncommitted
-LABEL org.opencontainers.image.title="OSS Inference Gateway" \
-      org.opencontainers.image.source="https://github.com/hzjanuary/ai-gateway-chatbot" \
+LABEL org.opencontainers.image.title="AI Gateway Multi-Node" \
+      org.opencontainers.image.source="https://github.com/hzjanuary/ai-gateway-multi-node" \
+      org.opencontainers.image.description="Self-hosted FastAPI inference routing with bounded Cloudflare Workers AI and Ollama fallback" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.revision=$SOURCE_REVISION
 RUN python -m pip uninstall -y pip && \
