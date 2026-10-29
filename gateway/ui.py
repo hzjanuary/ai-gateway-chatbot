@@ -12,8 +12,10 @@ def main(role: str | None = None) -> None:
     import streamlit as st
 
     role = role or os.environ.get("GATEWAY_UI_ROLE", "chat")
-    st.set_page_config(page_title=f"Inference gateway · {role}")
-    st.title("Gateway administration" if role == "admin" else "Inference gateway")
+    st.set_page_config(page_title=f"AI Gateway Multi-Node · {role}")
+    st.title(
+        "AI Gateway Multi-Node · Administration" if role == "admin" else "AI Gateway Multi-Node"
+    )
     expected = None
     if role == "admin":
         try:

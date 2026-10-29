@@ -12,7 +12,10 @@ from gateway.config import ConfigError, config_dir, initialize, load_settings, p
 
 
 def parser() -> argparse.ArgumentParser:
-    root = argparse.ArgumentParser(prog="gateway")
+    root = argparse.ArgumentParser(
+        prog="gateway",
+        description="AI Gateway Multi-Node — Route smarter. Fail over safely. Run anywhere.",
+    )
     root.add_argument("--config-dir", type=Path)
     sub = root.add_subparsers(dest="command", required=True)
     config = sub.add_parser("config").add_subparsers(dest="config_command", required=True)

@@ -1,8 +1,8 @@
-name: Verify source and image independently
+name: AI Gateway Multi-Node — verify source and image independently
 on:
   pull_request:
   push:
-    branches: [main, feat/spec-001-oss-inference-gateway]
+    branches: [main, feat/spec-001-oss-inference-gateway, chore/rebrand-ai-gateway-multi-node]
 permissions:
   contents: read
 concurrency:

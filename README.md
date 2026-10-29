@@ -1,9 +1,18 @@
-# OSS Inference Gateway
+# AI Gateway Multi-Node
 
-A self-hosted, headless-first FastAPI gateway for explicitly registered Cloudflare
-Workers AI and Ollama text-generation endpoints. This is a single-process source
-preview, with bounded routing and truthful JSON/SSE errors. No provider, model,
+A self-hosted, headless-first FastAPI AI gateway for explicitly registered
+Cloudflare Workers AI and Ollama text-generation nodes. Multi-node provider
+routing and controlled fallback respect explicit privacy/billing boundaries,
+with truthful JSON/SSE responses and separate inference/admin authentication.
+This is a single-process source preview. No provider, model,
 credential, paid call, web search or dashboard is enabled by installation.
+
+*Route smarter. Fail over safely. Run anywhere.*
+
+[Repository](https://github.com/hzjanuary/ai-gateway-multi-node) ·
+[v0.1.0 source preview](https://github.com/hzjanuary/ai-gateway-multi-node/releases/tag/v0.1.0) ·
+[Documentation](docs/architecture.md) · [Contributing](CONTRIBUTING.md) ·
+[Issues](https://github.com/hzjanuary/ai-gateway-multi-node/issues) · [Security](SECURITY.md)
 
 ## Security Notice — Review Before Self-Hosting
 
@@ -35,9 +44,14 @@ Source readiness and image security approval are independent. No availability SL
 Python 3.12 or 3.13 recommended; the release image targets Linux amd64/Python 3.13.
 Dependencies are version locked with hashes; `uv.lock` is authoritative.
 
+The distribution name `oss-inference-gateway`, Python module `gateway`, CLI command
+and existing configuration/Compose identifiers remain compatible. The public
+project name changed; no configuration migration is needed. See
+[repository identity and retained historical references](docs/repository-rebranding.md).
+
 ```sh
-git clone https://github.com/hzjanuary/ai-gateway-chatbot.git
-cd ai-gateway-chatbot
+git clone https://github.com/hzjanuary/ai-gateway-multi-node.git
+cd ai-gateway-multi-node
 uv sync --locked --no-dev
 uv run --no-dev gateway config init --admin
 uv run --no-dev gateway doctor

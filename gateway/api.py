@@ -81,7 +81,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             yield
 
     app = FastAPI(
-        title="OSS Inference Gateway",
+        title="AI Gateway Multi-Node",
         version=__version__,
         lifespan=lifespan,
         docs_url=None,

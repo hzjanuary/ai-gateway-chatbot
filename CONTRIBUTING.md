@@ -1,4 +1,11 @@
-# Contributing
+# Contributing to AI Gateway Multi-Node
+
+Use the canonical repository: https://github.com/hzjanuary/ai-gateway-multi-node.
+Clone it with `git clone https://github.com/hzjanuary/ai-gateway-multi-node.git`.
+Open focused pull requests against main; report ordinary bugs through
+[Issues](https://github.com/hzjanuary/ai-gateway-multi-node/issues), and follow
+[SECURITY.md](SECURITY.md) for private security reports. See
+[repository branding and compatibility](docs/repository-rebranding.md).
 
 Use Python 3.12/3.13 and `uv sync --locked --extra ui`, then scripts/quality.sh.
 All provider tests run real HTTP transports against loopback servers, with external
