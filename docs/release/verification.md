@@ -1,4 +1,46 @@
-# SPEC-001 verification — remote CI FAIL; stopped for owner review
+# SPEC-001 verification — bounded CI corrections under verification
+
+Update 2026-10-29: the owner authorized correction of the two remote regressions,
+normal push to the existing branch/PR and new real CI. Local reporting commit
+`b576c769411f157a2574f2c9659fd01d69858505` is preserved as an ancestor. No reset,
+rebase, history rewrite or inference is part of this correction. The historical
+results below remain intact; they are not results for the corrected candidate.
+
+Both failures were reproduced before edits. Python 3.13.2 failed the original
+schema equality test. On the exact 17-commit PR graph, pinned Gitleaks 8.30.1
+scanned 16 commits with `--all`, and 17 with
+`--all --full-history --diff-merges=separate`. Missing identity:
+`ffab9b6edd364259a588aa1b94f4a9df348f396a`, parents
+`d2d859a8b59a5a396c62478a315f533d27007934` and
+`4761d6a0e18277d8632927e35a9219ca61ede56e`.
+
+FastAPI's locked OpenAPI generator otherwise falls back to
+`http.client.responses`. All eight documented error responses now specify the
+existing contract descriptions explicitly. The OpenAPI golden JSON, schemas,
+HTTP codes, validation/auth/roles/streaming and dependency lock are unchanged.
+One new test alters the stdlib phrases and still requires exact golden equality.
+
+Gitleaks now requests separate diffs against **every merge parent**, while
+retaining all reachable history (`--all --full-history`), all rules and the exact
+three historical reviews. It records every expected SHA/parent edge and rejects
+shallow history. Its original count equality/nonzero checks remain mandatory;
+commits producing no scanner fragments can still cause a conservative FAIL.
+There is no subtraction for merges or first-parent traversal. Regression tests
+use two real temporary five-commit merge repositories: a clean one and one with
+generated, nonfunctional canaries in transient branch content and merge conflict
+resolution. The corrected scanner covers 5/5 and detects both introducing SHAs;
+ordinary merge handling covers only 4/5 and fails. Deliberately omitted history
+covers 2/5 and fails even with zero findings. Multiple raw rule/parent findings
+are retained. Synthetic repositories/canaries are never published.
+
+Python 3.12.9 and 3.13.2 each pass the complete source quality suite and all
+**117 tests** (114 original plus three regression cases). Ruff, Black, MyPy,
+locked dependency/hash exports, source/history scans and package builds pass.
+Local actual history: 17/17 scanned, three raw/reviewed findings, zero new.
+The source Python matrix now has `fail-fast: false` solely to collect both job
+outcomes. All quality, dependency, secret, artifact, license, image and OS gates
+remain enabled. New remote results and corrected image provenance are pending;
+GW-20 stays BLOCKED and prior OS image FAIL evidence is preserved.
 
 Observed **2026-10-28**, branch `feat/spec-001-oss-inference-gateway`.
 **21 PASS / 1 BLOCKED / 2 FAIL / 0 NOT_RUN** in the acceptance matrix after remote CI.

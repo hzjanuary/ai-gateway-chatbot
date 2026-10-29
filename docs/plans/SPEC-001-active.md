@@ -1,5 +1,16 @@
 # SPEC-001 active implementation plan
 
+2026-10-29: owner authorized two narrow CI corrections and genuine push/PR
+verification. Preserve b576c76 and all prior raw evidence. Explicit OpenAPI error
+descriptions preserve the golden contract across Python versions; separate
+per-parent merge diffs preserve complete Gitleaks coverage. Three added cases
+exercise stdlib phrase drift and real clean/secret-bearing merge repositories.
+Local Python 3.12.9/3.13.2 source suites pass 117 tests each. Source matrix
+fail-fast is disabled for evidence completeness; every gate remains enforced.
+Rebuild changed runtime images, then normally push the existing feature branch,
+inspect both new event runs and checksum artifacts. Stop on any new unexpected
+defect. No inference, merge, release/tag, image publication or deployment.
+
 Baseline: `d2d859a8b59a5a396c62478a315f533d27007934`. Branch:
 `feat/spec-001-oss-inference-gateway`. Original specification remains authoritative.
 

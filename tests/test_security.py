@@ -241,6 +241,36 @@ def test_openapi_and_settings_schema_match_checked_in_contract():
     )
 
 
+def test_openapi_error_descriptions_ignore_python_status_phrases(monkeypatch):
+    import http.client
+    from pathlib import Path
+
+    from gateway.api import create_app
+
+    descriptions = {
+        401: "Unauthorized",
+        403: "Forbidden",
+        413: "Request Entity Too Large",
+        422: "Unprocessable Entity",
+        429: "Too Many Requests",
+        502: "Bad Gateway",
+        503: "Service Unavailable",
+        504: "Gateway Timeout",
+    }
+    for status in descriptions:
+        monkeypatch.setitem(http.client.responses, status, "Version-dependent reason phrase")
+    schema = create_app().openapi()
+    assert schema == json.loads(Path("docs/api/openapi.json").read_text())
+    for path in schema["paths"].values():
+        for operation in path.values():
+            for status, description in descriptions.items():
+                response = operation["responses"][str(status)]
+                assert response["description"] == description
+                assert response["content"]["application/json"]["schema"] == {
+                    "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+
+
 def test_operator_fallback_targets_must_exist_and_not_duplicate():
     for targets in (["not-registered"], ["cf-1"], ["cf-2", "cf-2"]):
         with pytest.raises(ValidationError):

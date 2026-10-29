@@ -87,7 +87,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         docs_url=None,
         redoc_url=None,
         responses={
-            status: {"model": ErrorEnvelope} for status in (401, 403, 413, 422, 429, 502, 503, 504)
+            # Public contract wording must not depend on Python's HTTP reason phrases.
+            status: {"model": ErrorEnvelope, "description": description}
+            for status, description in {
+                401: "Unauthorized",
+                403: "Forbidden",
+                413: "Request Entity Too Large",
+                422: "Unprocessable Entity",
+                429: "Too Many Requests",
+                502: "Bad Gateway",
+                503: "Service Unavailable",
+                504: "Gateway Timeout",
+            }.items()
         },
     )
     app.add_middleware(BodyLimit)

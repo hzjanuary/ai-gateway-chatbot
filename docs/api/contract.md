@@ -7,6 +7,10 @@ which is replaced by explicit `web_enrichment`. Unknown fields are rejected.
 `GET /`, `/health`: public minimal liveness, no node/config/counters.
 `GET /ready`: public boolean configuration/circuit readiness; no generation probe.
 `GET /openapi.json`: public interface schema only. Interactive docs disabled.
+
+Documented error descriptions are explicit and stable across Python 3.12/3.13,
+including 413 "Request Entity Too Large" and 422 "Unprocessable Entity". These
+contract labels do not alter numeric HTTP statuses, validation or ErrorEnvelope.
 `POST /v1/inference`, `/ask`: inference Bearer token only.
 `GET /v1/models`: inference token, registered public provider IDs/models only.
 All `/v1/status`, `/v1/providers`, `/v1/monitoring/*` and strategy/reset routes:
