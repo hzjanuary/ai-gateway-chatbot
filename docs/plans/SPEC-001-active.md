@@ -1,5 +1,16 @@
 # SPEC-001 active implementation plan
 
+Latest authorization/update 2026-10-29: both official registries work on host and
+host-network containers; Docker bridge DNS fails for both. No system configuration
+changed. Explicit official GHCR DB plus opt-in per-scanner host networking restores
+local scanning; CI retains bridge. Fresh schema-2 DB preserves exactly the same
+164 OS rows / 44 HIGH and unchanged license matches. All raw evidence retained;
+security gate remains FAIL only for known OS findings. Source suites pass 117/117
+on Python 3.12/3.13; actual existing-image smoke passes 11/12 checks. Proceed only
+with final source/private/archive/license checks, preserved normal feature push,
+Draft PR #2 update, actual push/PR workflows and checksum-verified artifacts. No
+inference or other publication. Stop on unexpected material findings/CI failures.
+
 **Current stop, 2026-10-29:** local correction bbe76d06 passes 117 tests on both
 Python versions and 18/18 actual-history coverage. Both rebuilt images pass
 functional smoke. Both new Trivy scans fail before scanning because container

@@ -1,4 +1,60 @@
-# SPEC-001 verification — local corrections PASS; stopped before push
+# SPEC-001 verification — DB restored; new remote verification pending
+
+## Current update: bounded infrastructure remediation, 2026-10-29
+
+The owner authorized diagnosis, minimal scanner connectivity correction, controlled
+rescans and normal feature push/new CI. All three previously unpushed commits are
+preserved; the OpenAPI, complete merge-history and matrix corrections are unchanged.
+
+Diagnosis: host DNS and verified HTTPS work for both official registries; HTTPS
+401 is the normal registry authentication challenge. A bridge-network container
+times out at DNS for both names, before routing/TLS/registry authentication can
+complete. The same container with an explicit host network resolves both and
+completes verified HTTPS. Therefore **GHCR selection alone does not fix the local
+bridge DNS failure**. No host resolver, Docker daemon, firewall, VPN or credential
+configuration was modified. No provider endpoint was contacted.
+
+Pinned Trivy 0.76.1 help confirms both official defaults and `--db-repository`.
+Scanner invocations now explicitly select `ghcr.io/aquasecurity/trivy-db:2` and
+accept opt-in `--scanner-network host` for this Linux-local workaround; default
+remains bridge, including CI. Both vuln/secret/license scan and SBOM use the same
+selection. DB metadata/digest are recorded and absent/expired/schema-mismatched DB
+evidence fails closed. No skip-update, stale DB, TLS bypass or suppression is used.
+
+Both existing actual images were rescanned without rebuilding application inputs.
+Their previous OCI index/platform/config digests are unchanged. Fresh schema-2 DB
+was downloaded from official GHCR, UpdatedAt `2026-10-29T01:22:22.544155871Z`,
+NextUpdate `2026-10-30T01:22:22.544155326Z`. Each scan completed with **164 OS
+findings: 0 CRITICAL / 44 HIGH / 58 MEDIUM / 61 LOW / 1 UNKNOWN**, zero image
+secrets and no Python vulnerabilities. Comparing exact CVE/package/version/severity/
+fixed-version tuples against the preserved baseline shows **zero changes** despite
+the newer DB. The security script still exits 1 solely for `image-security`.
+
+Raw Trivy license matches are also unchanged: 684 headless / 1718 UI. These include
+the existing UI CRITICAL license-category match for WTFPL inside PyArrow's bundled
+LICENSE.txt; this is a license classification, not a CRITICAL CVE. It remains in raw
+evidence, with no suppression or image approval. Python distribution license/text
+inventories pass 17/44; SBOM generation succeeds for both images. OS redistribution
+and bundled license disposition remain separate image-release review work.
+
+Revalidation: complete source quality suite on Python 3.12.9 PASS; full Python
+3.13.2 suite PASS; **117/117 tests each**, including unchanged golden schemas and
+actual pinned-scanner merge regressions. Lock/hash exports, Ruff, Black and strict
+MyPy pass. Python advisory scans remain zero across 17/44/99 packages. Existing
+headless/UI image smoke reruns pass 11/11 and 12/12 from exact runtime source
+`bbe76d06cfb8707df0a4ecbba28da52fe14672b7`; scanner-only changes do not relabel or
+rebuild those images. Source archive/license/private-path checks are repeated at
+the final candidate before normal push.
+
+[Sanitized local remediation evidence](evidence/trivy-restore-local.json) records
+connectivity categories, all CVE/package/fix rows, license classifications, DB and
+image identities and raw report hashes. Raw outputs remain ignored under
+`.local/verification/trivy-restore/`; older failed scans and raw baseline are intact.
+New remote outcomes are pending. Until genuine new results exist, acceptance stays
+21 PASS / 2 FAIL / 1 BLOCKED; GW-20 remains BLOCKED. Image approval stays FAIL.
+
+Everything below records earlier snapshots and stop decisions, not new remote
+results or a present restriction on the newly authorized bounded remediation.
 
 **Current result, 2026-10-29: STOPPED on a new infrastructure failure.** Both
 new runtime images passed functional smoke (headless 11/11; UI 12/12), but both

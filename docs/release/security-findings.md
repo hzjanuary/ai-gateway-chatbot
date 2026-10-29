@@ -1,5 +1,15 @@
 # Security findings and independent release decisions
 
+Latest 2026-10-29: official GHCR schema-2 DB download and both existing-image scans
+succeed with explicit local scanner host networking, without host configuration
+changes. DB updated 2026-10-29T01:22:22Z. Exact CVE/package/version/severity/fix rows
+are unchanged from the preserved baseline: 164 OS findings, 44 HIGH, 58 MEDIUM,
+61 LOW, 1 UNKNOWN, 0 CRITICAL. Zero secrets/Python vulnerabilities; gate still FAIL.
+Raw license classifications also match baseline exactly (684/1718), including the
+existing UI WTFPL CRITICAL license-category match in PyArrow's bundled LICENSE.txt.
+No license match is suppressed or treated as image publication approval. Inventory
+text checks pass 17/44 and both SBOMs succeed. See [fresh DB and raw-report hashes](evidence/trivy-restore-local.json).
+
 2026-10-29 correction update: local source bbe76d06 passes both Python quality
 suites (117 tests each) and both new image smoke runs. New image scans each exit
 1 with `image-scanner`: container DNS times out fetching the Trivy DB mirror.

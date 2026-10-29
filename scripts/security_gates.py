@@ -12,19 +12,29 @@ import json
 import subprocess
 import sys
 import tarfile
+from datetime import UTC, datetime
 from pathlib import Path
 
 TRIVY = "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c"
+DB_REPOSITORY = "ghcr.io/aquasecurity/trivy-db:2"
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--image", required=True)
     parser.add_argument("--output", type=Path, default=Path(".local/verification"))
+    parser.add_argument(
+        "--scanner-network",
+        choices=("bridge", "host"),
+        default="bridge",
+        help="Per-container scanner network; host is an explicit Linux DNS workaround only",
+    )
     args = parser.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
     status: dict[str, object] = {"image": args.image, "scanner": TRIVY}
+    status["db_repository"] = DB_REPOSITORY
+    status["scanner_network"] = args.scanner_network
 
     def run(
         name: str, command: list[str], stdin: bytes | None = None
@@ -126,12 +136,16 @@ def main() -> None:
                 "docker",
                 "run",
                 "--rm",
+                "--network",
+                args.scanner_network,
                 "--mount",
                 f"type=bind,source={archive},target=/image.tar,readonly",
                 "--mount",
                 f"type=bind,source={cache},target=/root/.cache/trivy",
                 TRIVY,
                 "image",
+                "--db-repository",
+                DB_REPOSITORY,
                 "--input",
                 "/image.tar",
                 "--format",
@@ -159,18 +173,39 @@ def main() -> None:
             }
             if high or secrets:
                 failures.append("image-security")
+        metadata_path = cache / "db" / "metadata.json"
+        if metadata_path.exists():
+            metadata = json.loads(metadata_path.read_text())
+            (out / "trivy-db-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
+            status["db_metadata"] = metadata
+            database = cache / "db" / "trivy.db"
+            if database.exists():
+                with database.open("rb") as stream:
+                    status["db_digest"] = hashlib.file_digest(stream, "sha256").hexdigest()
+            if (
+                metadata.get("Version") != 2
+                or datetime.fromisoformat(metadata["NextUpdate"]) <= datetime.now(UTC)
+                or not database.exists()
+            ):
+                failures.append("database-freshness")
+        else:
+            failures.append("database-metadata")
         sbom = run(
             "image-sbom",
             [
                 "docker",
                 "run",
                 "--rm",
+                "--network",
+                args.scanner_network,
                 "--mount",
                 f"type=bind,source={archive},target=/image.tar,readonly",
                 "--mount",
                 f"type=bind,source={cache},target=/root/.cache/trivy",
                 TRIVY,
                 "image",
+                "--db-repository",
+                DB_REPOSITORY,
                 "--input",
                 "/image.tar",
                 "--format",
