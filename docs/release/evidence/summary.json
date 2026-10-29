@@ -1,0 +1,235 @@
+{
+  "verified_source_commit": "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+  "source_archive_sha256": "77ab1966642b4a819bdcbea5f50f29479407862d60e7dbe20892b87c10f56a6c",
+  "pr_merge_commit": "47809f39eb357d4265d721052f2cb241df0805e8",
+  "source_functional_verification": "PASS",
+  "source_history_integrity": "PASS",
+  "source_publication_readiness": "PASS_TECHNICAL_SOURCE_ONLY_OWNER_DECISION_RECORDED; final-candidate CI and normal GitHub merge/release prerequisites must still be verified",
+  "docker_image_security": "FAIL_KNOWN_OS_FINDINGS",
+  "live_provider": "BLOCKED; zero real inference requests",
+  "remote_ci": "EXECUTED_FAIL_KNOWN_OS_ONLY; four source jobs PASS, four image jobs FAIL after successful build/smoke/scanning",
+  "acceptance": {
+    "PASS": 23,
+    "FAIL": 0,
+    "BLOCKED": 1,
+    "NOT_RUN": 0
+  },
+  "criteria": {
+    "GW-01": "PASS",
+    "GW-02": "PASS",
+    "GW-03": "PASS",
+    "GW-04": "PASS",
+    "GW-05": "PASS",
+    "GW-06": "PASS",
+    "GW-07": "PASS",
+    "GW-08": "PASS",
+    "GW-09": "PASS",
+    "GW-10": "PASS",
+    "GW-11": "PASS",
+    "GW-12": "PASS",
+    "GW-13": "PASS",
+    "GW-14": "PASS",
+    "GW-15": "PASS",
+    "GW-16": "PASS",
+    "GW-17": "PASS",
+    "GW-18": "PASS",
+    "GW-19": "PASS",
+    "GW-20": "BLOCKED",
+    "GW-21": "PASS",
+    "GW-22": "PASS",
+    "GW-23": "PASS",
+    "GW-24": "PASS"
+  },
+  "tests": {
+    "tests.test_enrichment_ui": 6,
+    "tests.test_packaging": 3,
+    "tests.test_security": 45,
+    "tests.test_streams": 17,
+    "tests.test_transport": 44,
+    "tests.test_history_gate": 2
+  },
+  "total_tests": 117,
+  "local_python_tests": {
+    "3.12.9": 117,
+    "3.13.2": 117
+  },
+  "remote_python_tests": {
+    "3.12.15": 117,
+    "3.13.17": 117
+  },
+  "python_advisories": {
+    "python-headless": {
+      "dependencies": 17,
+      "findings": 0
+    },
+    "python-ui": {
+      "dependencies": 44,
+      "findings": 0
+    },
+    "python-development": {
+      "dependencies": 99,
+      "findings": 0
+    }
+  },
+  "image_os_findings": {
+    "total": 164,
+    "CRITICAL": 0,
+    "HIGH": 44,
+    "MEDIUM": 58,
+    "LOW": 61,
+    "UNKNOWN": 1,
+    "baseline_delta": 0
+  },
+  "image_secrets": 0,
+  "db_repository": "ghcr.io/aquasecurity/trivy-db:2",
+  "db_metadata": {
+    "Version": 2,
+    "NextUpdate": "2026-10-30T01:22:22.544155326Z",
+    "UpdatedAt": "2026-10-29T01:22:22.544155871Z",
+    "DownloadedAt": "2026-10-29T02:48:09.336966004Z"
+  },
+  "db_digest": "ad47d4d7f64fb08225e3d0c9f59118e724ecf82a14d5502fff71c742d6cb24b4",
+  "remote_ci_evidence": "remote-ci-4bde829.json",
+  "local_infrastructure_evidence": "trivy-restore-local.json",
+  "artifacts_verified": 8,
+  "generation_requests": 0,
+  "release_authorized": true,
+  "final_reporting_commit": "0dd8769a96027b680ba133165505b8a6d74606ce preserved for normal feature publication in the owner-authorized release candidate; its recorded CI results refer to 4bde829",
+  "historical_snapshot_note": "Everything inside historical_snapshot is retained previous evidence, not the current result or image provenance.",
+  "historical_snapshot": {
+    "verified_source_commit": "46744d5aed5a797701c0bea00705664f0f229a13",
+    "source_archive_sha256": "210c8578461542b12b9f71c1fdfefe34484f00d272699cd18eca4e8d4fdc5d13",
+    "source_preview_offline_gates": "PASS",
+    "docker_image_security": "FAIL",
+    "live_provider": "BLOCKED: one bounded request authorized; no eligible configured real provider found during preflight",
+    "remote_ci": "NO_NEW_RUN: prior remote FAIL remains; corrected local suites PASS, stopped before push after new image-scanner DNS failure",
+    "acceptance": {
+      "PASS": 21,
+      "BLOCKED": 1,
+      "FAIL": 2,
+      "NOT_RUN": 0
+    },
+    "tests": {
+      "tests.test_enrichment_ui": 6,
+      "tests.test_packaging": 3,
+      "tests.test_security": 44,
+      "tests.test_streams": 17,
+      "tests.test_transport": 44
+    },
+    "total_tests": 114,
+    "python_advisories": {
+      "python-headless": {
+        "dependencies": 17,
+        "findings": 0
+      },
+      "python-ui": {
+        "dependencies": 44,
+        "findings": 0
+      },
+      "python-development": {
+        "dependencies": 99,
+        "findings": 0
+      }
+    },
+    "variants": {
+      "headless": {
+        "image": "inference-gateway:spec001-46744d5",
+        "smoke_status": "PASS",
+        "smoke_checks": {
+          "source_archive_no_operator_state": true,
+          "clean_locked_install_quality_package": true,
+          "clean_archive_image_build": true,
+          "image_cli_private_init": true,
+          "default_image_alive_not_ready_network_none": true,
+          "image_cli_metadata_zero_generation": true,
+          "actual_image_offline_json_and_sse": true,
+          "restart_ephemeral_accounting_truthful": true,
+          "actual_image_logs_no_sensitive_content": true,
+          "image_has_no_test_or_operator_artifacts": true,
+          "compose_all_profiles_loopback": true
+        },
+        "digests": {
+          "oci_index_digest": "sha256:0167c5222313949bbd66e2b4e993116d74d039f95f673c5890f11352cf2209dc",
+          "platform_manifest_digest": "sha256:f015520040be66f1ef8ac076d48852426d88ad1a47403daa2619f6240dd04e43",
+          "image_config_digest": "sha256:ed7e7191828e1c3002059f655d6e7ee33fe61cbc0b7054836f9d05a61bf7e8de"
+        },
+        "image_findings": {
+          "all_severities": 164,
+          "high_critical": 44,
+          "secrets": 0
+        },
+        "failed_security_gates": [
+          "image-security"
+        ],
+        "python_license_packages": 17,
+        "sbom_components": 105
+      },
+      "ui": {
+        "image": "inference-gateway:spec001-ui-46744d5",
+        "smoke_status": "PASS",
+        "smoke_checks": {
+          "source_archive_no_operator_state": true,
+          "clean_archive_image_build": true,
+          "image_cli_private_init": true,
+          "default_image_alive_not_ready_network_none": true,
+          "image_cli_metadata_zero_generation": true,
+          "actual_image_offline_json_and_sse": true,
+          "restart_ephemeral_accounting_truthful": true,
+          "actual_image_logs_no_sensitive_content": true,
+          "image_has_no_test_or_operator_artifacts": true,
+          "compose_all_profiles_loopback": true,
+          "image_admin_ui_missing_secret_aborts": true,
+          "actual_image_chat_and_admin_ui_startup": true
+        },
+        "digests": {
+          "oci_index_digest": "sha256:020ba8a61c58c38074ef046dc8902f2a2fe95cc9035e6cb30c914a23c5c6d4b1",
+          "platform_manifest_digest": "sha256:eee583d31ef3ddf7ef79b6bf6578a7d2292f3fd389f8a22231802ddf370189fa",
+          "image_config_digest": "sha256:e1825102068e68219a456734aa1dce59a3b83bfd23fc732f616e5dbae4f72e67"
+        },
+        "image_findings": {
+          "all_severities": 164,
+          "high_critical": 44,
+          "secrets": 0
+        },
+        "failed_security_gates": [
+          "image-security"
+        ],
+        "python_license_packages": 44,
+        "sbom_components": 132
+      }
+    },
+    "evidence_sha256": {
+      "quality-accepted.stdout.txt": "089109684e3d2242a392ef9c177134a41e0c13f2e047cc093df24bf873b8ab07",
+      "quality-accepted.stderr.txt": "1a8e93604989079af805cdc1669141164a05826721879a1610d3391b3d6aa019",
+      "accepted-headless/clean-pytest.xml": "19d27dc6a318e1750569950084263d51d53e1bb3afababd95af69fc607731a44",
+      "accepted-headless/clean-package.stdout.txt": "e760015706a8b8b76b520bd6114b7a4b25e5b501e6b6c3114dd2d68fda3e573d",
+      "accepted-headless/release-smoke.json": "e800e8a616f232bf356324badb5257bc04539889988d298c6b1e2590f2a58f53",
+      "accepted-ui/release-smoke.json": "e2bde1fdc37afa94df1cd786b817f1c1a721f8329b57094e78a42a038472e595",
+      "accepted-headless-security/security-summary.json": "7d75842227f2dc1497b84e1fde52ee532c26a433a0225ff7820c9c5e399f74b2",
+      "accepted-ui-security/security-summary.json": "947b04e05aec3350201cc634916747b4bfcaba31bef1fd74ed005502c4b5be7c",
+      "accepted-headless-security/image-scan.json": "16cb6b3f0b9e4d0bf1f563487ef47f60ee213800a561bafb01df6c6104c4f2e8",
+      "accepted-ui-security/image-scan.json": "61381c2551754bd40a5b6e1ddf333f0dd721898047a12f5db7dc78943467dc64",
+      "accepted-headless-security/image-sbom.json": "e23cc8aafc00eeebd3bf35683a572de571eb2ac2dec3339699238969baaccb3d",
+      "accepted-ui-security/image-sbom.json": "62b0aed26257d843dbc4883517baf19ce07531b1d00336adfca50b102153c295",
+      "accepted-headless-security/image-licenses.json": "d7574207b57f154aef05b3b1c28936624ecd55ce15cc52b0404d9400b8aca683",
+      "accepted-ui-security/image-licenses.json": "5c61897be5f7403f6e242574dbde9577c4a3ba75f17b25a1426580bd358e923a",
+      "accepted-headless-security/gitleaks-history.json": "97e4ca739415717118ae5c63d82eeb7bacabddf9e98afe98e4af2d9866da66eb",
+      "accepted-headless-security/gitleaks-summary.json": "8700067579c539684facf56959b3dc06ef5fcd78eaeef1ef31d76098e38762e1"
+    },
+    "authorized_live_smoke": {
+      "status": "BLOCKED_PREFLIGHT_NO_ELIGIBLE_PROVIDER",
+      "generation_requests": 0,
+      "remaining_request_allowance": 1,
+      "max_output_tokens": 8,
+      "evidence": "live-smoke-preflight.json"
+    },
+    "source_publication_readiness": "FAIL_PENDING_NEW_DEFECT_REVIEW",
+    "remote_ci_evidence": "remote-ci-4761d6a.json",
+    "correction_local_evidence": "ci-regressions-local-bbe76d0.json",
+    "corrected_local_source_commit": "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+    "correction_status": "STOPPED_BEFORE_PUSH: unexpected Trivy DB DNS timeout"
+  },
+  "release_authorization_scope": "SOURCE_ONLY_v0.1.0_PRE_RELEASE; no image publication, deployment or inference",
+  "source_preview_owner_decision": "../source-preview-decision.md",
+  "maintenance_backlog": "../maintenance-backlog.md"
+}

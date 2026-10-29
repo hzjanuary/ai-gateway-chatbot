@@ -110,3 +110,12 @@ temp/
 *.bin
 *.safetensors
 models/
+
+# Private operator state and raw local release evidence
+.local/
+.mypy_cache/
+.ruff_cache/
+*.token
+
+# Public scanner implementation; no secret values.
+!scripts/secret_gate.py

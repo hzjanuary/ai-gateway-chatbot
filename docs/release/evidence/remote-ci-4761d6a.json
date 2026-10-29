@@ -1,0 +1,2018 @@
+{
+  "pushed_commit": "4761d6a0e18277d8632927e35a9219ca61ede56e",
+  "pull_request": "https://github.com/hzjanuary/ai-gateway-chatbot/pull/2",
+  "base_branch": "main",
+  "base_commit": "d2d859a8b59a5a396c62478a315f533d27007934",
+  "push_was_force": false,
+  "branch": "feat/spec-001-oss-inference-gateway",
+  "pr_synthetic_merge_commit": "ffab9b6edd364259a588aa1b94f4a9df348f396a",
+  "status": "STOPPED_ON_UNEXPECTED_REMOTE_CONTRACT_AND_COVERAGE_FAILURE",
+  "source_publication_readiness": "FAIL_PENDING_NEW_DEFECT_REVIEW",
+  "docker_image_security_approval": "FAIL_OS_HIGH",
+  "additional_inference_calls": 0,
+  "runs": [
+    {
+      "event": "push",
+      "id": 40703768224,
+      "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703768224",
+      "head_sha": "4761d6a0e18277d8632927e35a9219ca61ede56e",
+      "checkout_commit": "4761d6a0e18277d8632927e35a9219ca61ede56e",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 122870260864,
+          "name": "image (ui)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703768224/job/122870260864",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "conclusion": "success"
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "conclusion": "success"
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122870260965,
+          "name": "source (3.12)",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703768224/job/122870260965",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.12'",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "conclusion": "success"
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122870261282,
+          "name": "source (3.13)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703768224/job/122870261282",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.13'",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122870261334,
+          "name": "image (headless)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703768224/job/122870261334",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "conclusion": "success"
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "conclusion": "success"
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "test_results": [
+        {
+          "python": "3.12",
+          "cases": 114,
+          "passed": 114,
+          "failures": [],
+          "junit_sha256": "033fefd7796ea6f0e0611130ab37454a1e3b9e2a2ec160b845b5feeb12b58053",
+          "gitleaks": {
+            "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+            "raw_exit_code": 1,
+            "expected_commits": 16,
+            "scanned_commits": 16,
+            "raw_findings": 3,
+            "reviewed_findings": 3,
+            "unreviewed_findings": [],
+            "reviewed_gate_passed": true,
+            "rules_suppressed": false
+          }
+        },
+        {
+          "python": "3.13",
+          "cases": 114,
+          "passed": 113,
+          "failures": [
+            "test_openapi_and_settings_schema_match_checked_in_contract"
+          ],
+          "junit_sha256": "9d73545d1d16b77ab28d9f5534df69b371f4ffd4203347e2ba393452d97b352f"
+        }
+      ],
+      "images": [
+        {
+          "variant": "headless",
+          "source_commit": "4761d6a0e18277d8632927e35a9219ca61ede56e",
+          "source_archive_sha256": "119d569b703d4c07f62e13e453068a0622244fab93e50509f3ce17a3a3a05b31",
+          "smoke_status": "PASS",
+          "smoke_checks": {
+            "source_archive_no_operator_state": true,
+            "clean_locked_install_quality_package": true,
+            "clean_archive_image_build": true,
+            "image_cli_private_init": true,
+            "default_image_alive_not_ready_network_none": true,
+            "image_cli_metadata_zero_generation": true,
+            "actual_image_offline_json_and_sse": true,
+            "restart_ephemeral_accounting_truthful": true,
+            "actual_image_logs_no_sensitive_content": true,
+            "image_has_no_test_or_operator_artifacts": true,
+            "compose_all_profiles_loopback": true
+          },
+          "security_failures": [
+            "image-security"
+          ],
+          "findings": {
+            "all_severities": 164,
+            "high_critical": 44,
+            "secrets": 0
+          },
+          "root_descriptor_digest": "sha256:933371e8121aedeb9391965a6ae1fe3fa6a08d08c733ab0575a5cca90e16efc2",
+          "platform_manifest_digest": "sha256:933371e8121aedeb9391965a6ae1fe3fa6a08d08c733ab0575a5cca90e16efc2",
+          "image_config_digest": "sha256:362b25ecd4becdc1a18f9a1fc56b1e218b8e23b54a61e130a14deed094557bd9",
+          "root_descriptor_is_single_manifest": true,
+          "high_cves": [
+            {
+              "id": "CVE-2025-69720",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libncursesw6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libtinfo6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-base",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-bin",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2025-69720"
+            },
+            {
+              "id": "CVE-2026-16742",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libsystemd0",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libudev1",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-16742"
+            },
+            {
+              "id": "CVE-2026-54369",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libacl1",
+                  "installed_version": "2.3.2-2+b1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-54369"
+            },
+            {
+              "id": "CVE-2026-76642",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-76642"
+            },
+            {
+              "id": "CVE-2026-78408",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78408"
+            },
+            {
+              "id": "CVE-2026-78409",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78409"
+            },
+            {
+              "id": "CVE-2026-78410",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78410"
+            },
+            {
+              "id": "CVE-2026-9538",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "perl-base",
+                  "installed_version": "5.40.1-6+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-9538"
+            }
+          ],
+          "python_audits": {
+            "python-headless": {
+              "dependencies": 17,
+              "vulnerabilities": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "vulnerabilities": 0
+            },
+            "python-development": {
+              "dependencies": 99,
+              "vulnerabilities": 0
+            }
+          },
+          "python_license_distributions": 17,
+          "sbom_components": 105,
+          "raw_scan_sha256": "388071b3780a585993872f1154c94956a9309d6ff8147f1c1019156fabee8755",
+          "security_summary_sha256": "5c6ff65f88d70174acc5dd4c476931d329299f33467ba406f8510f04b3af8933"
+        },
+        {
+          "variant": "ui",
+          "source_commit": "4761d6a0e18277d8632927e35a9219ca61ede56e",
+          "source_archive_sha256": "119d569b703d4c07f62e13e453068a0622244fab93e50509f3ce17a3a3a05b31",
+          "smoke_status": "PASS",
+          "smoke_checks": {
+            "source_archive_no_operator_state": true,
+            "clean_locked_install_quality_package": true,
+            "clean_archive_image_build": true,
+            "image_cli_private_init": true,
+            "default_image_alive_not_ready_network_none": true,
+            "image_cli_metadata_zero_generation": true,
+            "actual_image_offline_json_and_sse": true,
+            "restart_ephemeral_accounting_truthful": true,
+            "actual_image_logs_no_sensitive_content": true,
+            "image_has_no_test_or_operator_artifacts": true,
+            "compose_all_profiles_loopback": true,
+            "image_admin_ui_missing_secret_aborts": true,
+            "actual_image_chat_and_admin_ui_startup": true
+          },
+          "security_failures": [
+            "image-security"
+          ],
+          "findings": {
+            "all_severities": 164,
+            "high_critical": 44,
+            "secrets": 0
+          },
+          "root_descriptor_digest": "sha256:f0aac22a0479f553f5433f067fd4d51b947ab9556000cc580fa9aff8be89a727",
+          "platform_manifest_digest": "sha256:f0aac22a0479f553f5433f067fd4d51b947ab9556000cc580fa9aff8be89a727",
+          "image_config_digest": "sha256:95401cee5bf4655c2d4f05e213cf7ac103862ca502f7fa894d61ea28c0112836",
+          "root_descriptor_is_single_manifest": true,
+          "high_cves": [
+            {
+              "id": "CVE-2025-69720",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libncursesw6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libtinfo6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-base",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-bin",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2025-69720"
+            },
+            {
+              "id": "CVE-2026-16742",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libsystemd0",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libudev1",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-16742"
+            },
+            {
+              "id": "CVE-2026-54369",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libacl1",
+                  "installed_version": "2.3.2-2+b1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-54369"
+            },
+            {
+              "id": "CVE-2026-76642",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-76642"
+            },
+            {
+              "id": "CVE-2026-78408",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78408"
+            },
+            {
+              "id": "CVE-2026-78409",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78409"
+            },
+            {
+              "id": "CVE-2026-78410",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78410"
+            },
+            {
+              "id": "CVE-2026-9538",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "perl-base",
+                  "installed_version": "5.40.1-6+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-9538"
+            }
+          ],
+          "python_audits": {
+            "python-headless": {
+              "dependencies": 17,
+              "vulnerabilities": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "vulnerabilities": 0
+            },
+            "python-development": {
+              "dependencies": 99,
+              "vulnerabilities": 0
+            }
+          },
+          "python_license_distributions": 44,
+          "sbom_components": 132,
+          "raw_scan_sha256": "43b50f2b66cd681585ee92de072a0da2a66b49c0ae9e31e20dbeb5384bf84503",
+          "security_summary_sha256": "ef1927f85d9d6933a2ee8ddee10aed93f6b894abcfb7f3931c04eb71bb61f863"
+        }
+      ]
+    },
+    {
+      "event": "pull_request",
+      "id": 40703883376,
+      "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703883376",
+      "head_sha": "4761d6a0e18277d8632927e35a9219ca61ede56e",
+      "checkout_commit": "ffab9b6edd364259a588aa1b94f4a9df348f396a",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 122870678633,
+          "name": "source (3.13)",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703883376/job/122870678633",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.13'",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "conclusion": "cancelled"
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122870678860,
+          "name": "image (headless)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703883376/job/122870678860",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "conclusion": "success"
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "conclusion": "success"
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122870678915,
+          "name": "source (3.12)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703883376/job/122870678915",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.12'",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122870679234,
+          "name": "image (ui)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703883376/job/122870679234",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "conclusion": "success"
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "conclusion": "success"
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "test_results": [
+        {
+          "python": "3.12",
+          "cases": 114,
+          "passed": 114,
+          "failures": [],
+          "junit_sha256": "c4d4999d8dbba2314e7bc8f06f8e7e1e80e3d956e9e212f69b8c2c77f2153ee8",
+          "gitleaks": {
+            "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+            "raw_exit_code": 1,
+            "expected_commits": 17,
+            "scanned_commits": 16,
+            "raw_findings": 3,
+            "reviewed_findings": 3,
+            "unreviewed_findings": [],
+            "reviewed_gate_passed": false,
+            "rules_suppressed": false
+          }
+        },
+        {
+          "python": "3.13",
+          "cases": 114,
+          "passed": 113,
+          "failures": [
+            "test_openapi_and_settings_schema_match_checked_in_contract"
+          ],
+          "junit_sha256": "36c1f5ec08c7aa16cd07afc38eb9b213173283e37bb78c62607a6884ae404777"
+        }
+      ],
+      "images": [
+        {
+          "variant": "headless",
+          "source_commit": "ffab9b6edd364259a588aa1b94f4a9df348f396a",
+          "source_archive_sha256": "e7ecf087bd7aeae194aca33ee9522c656bc95d3debe29d2f4c09481dea64277f",
+          "smoke_status": "PASS",
+          "smoke_checks": {
+            "source_archive_no_operator_state": true,
+            "clean_locked_install_quality_package": true,
+            "clean_archive_image_build": true,
+            "image_cli_private_init": true,
+            "default_image_alive_not_ready_network_none": true,
+            "image_cli_metadata_zero_generation": true,
+            "actual_image_offline_json_and_sse": true,
+            "restart_ephemeral_accounting_truthful": true,
+            "actual_image_logs_no_sensitive_content": true,
+            "image_has_no_test_or_operator_artifacts": true,
+            "compose_all_profiles_loopback": true
+          },
+          "security_failures": [
+            "gitleaks-unreviewed",
+            "image-security"
+          ],
+          "findings": {
+            "all_severities": 164,
+            "high_critical": 44,
+            "secrets": 0
+          },
+          "root_descriptor_digest": "sha256:bf241382e80917f2c4d2905103bf6c58a0da7abb53c1a9149376c3ba928d6a55",
+          "platform_manifest_digest": "sha256:bf241382e80917f2c4d2905103bf6c58a0da7abb53c1a9149376c3ba928d6a55",
+          "image_config_digest": "sha256:56ea25c4e6cb90cbc1a754d726d35d2c7c39eb821c9e91f05cfb4226c0470d14",
+          "root_descriptor_is_single_manifest": true,
+          "high_cves": [
+            {
+              "id": "CVE-2025-69720",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libncursesw6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libtinfo6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-base",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-bin",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2025-69720"
+            },
+            {
+              "id": "CVE-2026-16742",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libsystemd0",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libudev1",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-16742"
+            },
+            {
+              "id": "CVE-2026-54369",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libacl1",
+                  "installed_version": "2.3.2-2+b1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-54369"
+            },
+            {
+              "id": "CVE-2026-76642",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-76642"
+            },
+            {
+              "id": "CVE-2026-78408",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78408"
+            },
+            {
+              "id": "CVE-2026-78409",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78409"
+            },
+            {
+              "id": "CVE-2026-78410",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78410"
+            },
+            {
+              "id": "CVE-2026-9538",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "perl-base",
+                  "installed_version": "5.40.1-6+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-9538"
+            }
+          ],
+          "python_audits": {
+            "python-headless": {
+              "dependencies": 17,
+              "vulnerabilities": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "vulnerabilities": 0
+            },
+            "python-development": {
+              "dependencies": 99,
+              "vulnerabilities": 0
+            }
+          },
+          "python_license_distributions": 17,
+          "sbom_components": 105,
+          "raw_scan_sha256": "947c34f47f6da4d9c555f30b23c667ab5a209bf95f5d19051d032cb2d41ef0a1",
+          "security_summary_sha256": "e3b85ba54478a8db7f474e156a40668a0fccbaf36d0f1a38b485b0c95c5ab18d"
+        },
+        {
+          "variant": "ui",
+          "source_commit": "ffab9b6edd364259a588aa1b94f4a9df348f396a",
+          "source_archive_sha256": "e7ecf087bd7aeae194aca33ee9522c656bc95d3debe29d2f4c09481dea64277f",
+          "smoke_status": "PASS",
+          "smoke_checks": {
+            "source_archive_no_operator_state": true,
+            "clean_locked_install_quality_package": true,
+            "clean_archive_image_build": true,
+            "image_cli_private_init": true,
+            "default_image_alive_not_ready_network_none": true,
+            "image_cli_metadata_zero_generation": true,
+            "actual_image_offline_json_and_sse": true,
+            "restart_ephemeral_accounting_truthful": true,
+            "actual_image_logs_no_sensitive_content": true,
+            "image_has_no_test_or_operator_artifacts": true,
+            "compose_all_profiles_loopback": true,
+            "image_admin_ui_missing_secret_aborts": true,
+            "actual_image_chat_and_admin_ui_startup": true
+          },
+          "security_failures": [
+            "gitleaks-unreviewed",
+            "image-security"
+          ],
+          "findings": {
+            "all_severities": 164,
+            "high_critical": 44,
+            "secrets": 0
+          },
+          "root_descriptor_digest": "sha256:a518e97663fd52b17e41625a58106ee5902bdd2c8a911841e9cb50f650fda6c9",
+          "platform_manifest_digest": "sha256:a518e97663fd52b17e41625a58106ee5902bdd2c8a911841e9cb50f650fda6c9",
+          "image_config_digest": "sha256:31d7dbde84d65289a100b286ff6ec989fb66dfc7b6eb46d7aed4b64d1e7cc8da",
+          "root_descriptor_is_single_manifest": true,
+          "high_cves": [
+            {
+              "id": "CVE-2025-69720",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libncursesw6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libtinfo6",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-base",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "ncurses-bin",
+                  "installed_version": "6.5+20250216-2",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2025-69720"
+            },
+            {
+              "id": "CVE-2026-16742",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libsystemd0",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libudev1",
+                  "installed_version": "257.13-1~deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-16742"
+            },
+            {
+              "id": "CVE-2026-54369",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "libacl1",
+                  "installed_version": "2.3.2-2+b1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-54369"
+            },
+            {
+              "id": "CVE-2026-76642",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-76642"
+            },
+            {
+              "id": "CVE-2026-78408",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78408"
+            },
+            {
+              "id": "CVE-2026-78409",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78409"
+            },
+            {
+              "id": "CVE-2026-78410",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "bsdutils",
+                  "installed_version": "1:2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libblkid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "liblastlog2-2",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libmount1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libsmartcols1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "libuuid1",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "login",
+                  "installed_version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "mount",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                },
+                {
+                  "name": "util-linux",
+                  "installed_version": "2.41.5-0+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-78410"
+            },
+            {
+              "id": "CVE-2026-9538",
+              "severity": [
+                "HIGH"
+              ],
+              "packages": [
+                {
+                  "name": "perl-base",
+                  "installed_version": "5.40.1-6+deb13u1",
+                  "fixed_version_in_scanned_distro": null
+                }
+              ],
+              "debian_tracker": "https://security-tracker.debian.org/tracker/CVE-2026-9538"
+            }
+          ],
+          "python_audits": {
+            "python-headless": {
+              "dependencies": 17,
+              "vulnerabilities": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "vulnerabilities": 0
+            },
+            "python-development": {
+              "dependencies": 99,
+              "vulnerabilities": 0
+            }
+          },
+          "python_license_distributions": 44,
+          "sbom_components": 132,
+          "raw_scan_sha256": "ccd4e0ea1fc284481d1b9fdd042347ece28cb7192056352ff828d41e966db5d7",
+          "security_summary_sha256": "fba99300704bd5ad082593a33d8ad6185781f983ff2e2c14977a823e81519b60"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12823865109,
+      "event": "push",
+      "name": "source-evidence-3.13",
+      "digest": "sha256:92828da02cc3627f506fa7cba0f6e3211f3961c1695028bdfb74a264664d4b28",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/push-source-evidence-3.13.zip"
+    },
+    {
+      "id": 12823415773,
+      "event": "push",
+      "name": "image-evidence-ui",
+      "digest": "sha256:2c1d888eee364be34f3877c799cf3019fd5e14af7d41c845c7b9db380e7f39b4",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/push-image-evidence-ui.zip"
+    },
+    {
+      "id": 12823410828,
+      "event": "push",
+      "name": "image-evidence-headless",
+      "digest": "sha256:94663ef4bd58e5bb124b2a4345a4fa3ed9ccba13df9834b55767f8075dc0108e",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/push-image-evidence-headless.zip"
+    },
+    {
+      "id": 12822124404,
+      "event": "push",
+      "name": "source-evidence-3.12",
+      "digest": "sha256:e2f695275f95fb9d9a607567a2638dd1392b6750e59664b0ea6b93052a1c124b",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/push-source-evidence-3.12.zip"
+    },
+    {
+      "id": 12822643567,
+      "event": "pull_request",
+      "name": "image-evidence-ui",
+      "digest": "sha256:578bea0ed339650a275600e9c61e78c364414d545e0a192449f60d7234ed20c7",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/pull_request-image-evidence-ui.zip"
+    },
+    {
+      "id": 12822148714,
+      "event": "pull_request",
+      "name": "source-evidence-3.13",
+      "digest": "sha256:337fd0d3e024e1810bf16ca4ceb7d699b0a5270ed857fe40bc6955540594e3ba",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/pull_request-source-evidence-3.13.zip"
+    },
+    {
+      "id": 12821824276,
+      "event": "pull_request",
+      "name": "image-evidence-headless",
+      "digest": "sha256:3baefd192562e7a8fdd4b4875c6381bef83e2b23b3ea19b56142d0a77a2355f8",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/pull_request-image-evidence-headless.zip"
+    },
+    {
+      "id": 12821804185,
+      "event": "pull_request",
+      "name": "source-evidence-3.12",
+      "digest": "sha256:341e12cb6303c58459e9d2ddd60bee51eca2bbb4dcf825fb417aa496cc7ae760",
+      "exit_code": 0,
+      "local_path": ".local/verification/remote-ci-4761d6a/pull_request-source-evidence-3.12.zip"
+    }
+  ],
+  "unexpected_defects": [
+    {
+      "kind": "api_contract",
+      "job_id": 122870261282,
+      "test": "test_openapi_and_settings_schema_match_checked_in_contract",
+      "actual_diff": {
+        "413": {
+          "committed": "Request Entity Too Large",
+          "python_313_runtime": "Content Too Large"
+        },
+        "422": {
+          "committed": "Unprocessable Entity",
+          "python_313_runtime": "Unprocessable Content"
+        }
+      },
+      "disposition": "STOP; no code/schema/test changes or rerun"
+    },
+    {
+      "kind": "ci_scan_coverage",
+      "job_id": 122870678915,
+      "expected_commits": 17,
+      "scanned_commits": 16,
+      "raw_findings": 3,
+      "unreviewed_findings": 0,
+      "disposition": "STOP; gate failure retained, no coverage relaxation"
+    }
+  ],
+  "raw_logs_sha256": {
+    "job-122870678633.log": "4854c11d1e0f5470e249185355f9dab0524fb89067eaa261cb374e18e87ccde0",
+    "job-122870679234.log": "f7243b8f43d19a88266f90c888965b972656cfa435d31b0c9ce479e600ffc213",
+    "job-122870261334.log": "3b515465de4e8a0647bebe32c9f15bc5caa7cf2f5cc2c652c6b1cf6465eda57a",
+    "job-122870260965.log": "4e3f26b058d80144d0e5df9364458b458e1cdb9444ba7a3e1c7f25e929f9eeca",
+    "pr-source312-job.log": "ad807974b3e233398d5983900c31a798527a690f2b2edcbe993958674d0a541c",
+    "source313-job.log": "61c0e906821a26b29911a05dde6e80cdb23fc5854e3c7c1498940c2cdbb48565",
+    "job-122870260864.log": "2c9ee0f5afa5b60806c547ee1eb42d76cbbbd1f2c96ca97ac3266bf9969565fa",
+    "job-122870678860.log": "8e451cda93ea0505f991fca0a0c2d1471f6487968b09e619fc8491bc71d2928f"
+  }
+}

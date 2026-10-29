@@ -1,0 +1,17 @@
+{
+  "providers": [
+    {
+      "id": "local-ollama",
+      "type": "ollama",
+      "model": "llama3.1",
+      "endpoint": "http://127.0.0.1:11434",
+      "authorized": false,
+      "allow_private": true,
+      "billing": "local",
+      "policy_group": "on-premise",
+      "max_concurrent": 1,
+      "call_limit": 20,
+      "token_limit": 10240
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "observed_utc_date": "2026-10-29",
+  "status": "STOPPED_BEFORE_PUSH: unexpected Trivy DB DNS timeout",
+  "branch": "feat/spec-001-oss-inference-gateway",
+  "preserved_local_evidence_commit": "b576c769411f157a2574f2c9659fd01d69858505",
+  "corrected_local_source_commit": "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+  "remote_feature_commit": "4761d6a0e18277d8632927e35a9219ca61ede56e",
+  "new_remote_runs": [],
+  "inference_requests": 0,
+  "root_causes": {
+    "openapi": "FastAPI falls back to http.client.responses; Python 3.13 changed 413/422 phrases. Original equality test reproduced FAIL on 3.13.2 before editing.",
+    "history": "Pinned Gitleaks executes git log -p -U0. Ordinary merge handling produces no diff for the synthetic PR merge, so it has no scanned fragment.",
+    "missing_commit": "ffab9b6edd364259a588aa1b94f4a9df348f396a",
+    "old_scan": {
+      "expected_commits": 17,
+      "scanned_commits": 16,
+      "raw_findings": 3,
+      "reviewed_findings": 3,
+      "unreviewed_findings": 0
+    },
+    "corrected_exact_old_graph": {
+      "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+      "raw_exit_code": 1,
+      "log_opts": "--all --full-history --diff-merges=separate",
+      "expected_commit_ids": [
+        "ffab9b6edd364259a588aa1b94f4a9df348f396a",
+        "4761d6a0e18277d8632927e35a9219ca61ede56e",
+        "9158a36a5aee7596c5ca5464bb750f773c4e8674",
+        "1fbca20fae2c048961340e4751232fefbfca8434",
+        "46744d5aed5a797701c0bea00705664f0f229a13",
+        "b2a60543df6a90735101b14bbfba70e6503d41bb",
+        "90f36479083edd55fa40381d7e5f911cb13e64d0",
+        "d986c4c4f4583e5edf75e50082784b42621eb0a1",
+        "08f184550c29cf4fe1a93d88928364223c75f374",
+        "2034331d3517934755849cb8219bcb2e0a7bf2f3",
+        "d2d859a8b59a5a396c62478a315f533d27007934",
+        "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+        "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+        "65ef9352871688d97f4f67e1de4b38927ac93511",
+        "0010e661b70a786619d81d79fcb57ce5bf750356",
+        "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+        "d8021bd9e88460511e0471308050d55c9bbe44f6"
+      ],
+      "commit_parent_graph": [
+        "ffab9b6edd364259a588aa1b94f4a9df348f396a d2d859a8b59a5a396c62478a315f533d27007934 4761d6a0e18277d8632927e35a9219ca61ede56e",
+        "4761d6a0e18277d8632927e35a9219ca61ede56e 9158a36a5aee7596c5ca5464bb750f773c4e8674",
+        "9158a36a5aee7596c5ca5464bb750f773c4e8674 1fbca20fae2c048961340e4751232fefbfca8434",
+        "1fbca20fae2c048961340e4751232fefbfca8434 46744d5aed5a797701c0bea00705664f0f229a13",
+        "46744d5aed5a797701c0bea00705664f0f229a13 b2a60543df6a90735101b14bbfba70e6503d41bb",
+        "b2a60543df6a90735101b14bbfba70e6503d41bb 90f36479083edd55fa40381d7e5f911cb13e64d0",
+        "90f36479083edd55fa40381d7e5f911cb13e64d0 d986c4c4f4583e5edf75e50082784b42621eb0a1",
+        "d986c4c4f4583e5edf75e50082784b42621eb0a1 08f184550c29cf4fe1a93d88928364223c75f374",
+        "08f184550c29cf4fe1a93d88928364223c75f374 2034331d3517934755849cb8219bcb2e0a7bf2f3",
+        "2034331d3517934755849cb8219bcb2e0a7bf2f3 d2d859a8b59a5a396c62478a315f533d27007934",
+        "d2d859a8b59a5a396c62478a315f533d27007934 00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+        "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2 a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+        "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7 65ef9352871688d97f4f67e1de4b38927ac93511",
+        "65ef9352871688d97f4f67e1de4b38927ac93511 0010e661b70a786619d81d79fcb57ce5bf750356",
+        "0010e661b70a786619d81d79fcb57ce5bf750356 22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+        "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2 d8021bd9e88460511e0471308050d55c9bbe44f6",
+        "d8021bd9e88460511e0471308050d55c9bbe44f6"
+      ],
+      "shallow_repository": false,
+      "expected_commits": 17,
+      "scanned_commits": 17,
+      "raw_findings": 3,
+      "reviewed_findings": 3,
+      "unreviewed_findings": [],
+      "reviewed_gate_passed": true,
+      "rules_suppressed": false
+    }
+  },
+  "changes": {
+    "api": "Explicit descriptions for all eight documented errors; golden JSON, schemas, numeric codes, validation, auth, roles and streaming unchanged.",
+    "history": "--all --full-history --diff-merges=separate; same scanner/rules/review fingerprints; strict count equality retained; SHA/parent inventory and shallow rejection added.",
+    "source_matrix": "fail-fast: false; Python 3.12/3.13 and all gates preserved.",
+    "tests": "One phrase-mutation/exact-contract case and two real five-commit merge cases, using actual pinned Gitleaks."
+  },
+  "local_python": {
+    "3.12.9": {
+      "quality_exit": 0,
+      "tests": 117,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "a1814e7d3477f8e2e6dc43cc5ce30fa86f01dbb7d9fcce14ee4c136d43ed183d",
+      "quality_log_sha256": "164ae726087fc61b02147b184e82665a31cb541630968674e1541fcfc0cacfe4"
+    },
+    "3.13.2": {
+      "quality_exit": 0,
+      "tests": 117,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "aca4bba5f82738d3880830891ccb7ff44e7ee48af16c52a9c29c5794a3326030",
+      "quality_log_sha256": "e2b7736e74108ae309d78a3122725c9ba0504bb706180ac63af33e09030f4709"
+    }
+  },
+  "synthetic_merge_regressions": {
+    "repositories": 2,
+    "commits_each": 5,
+    "ordinary_scan_count": 4,
+    "complete_scan_count": 5,
+    "omitted_scan_count": 2,
+    "omitted_zero_findings_gate": "FAIL",
+    "clean_complete_gate": "PASS",
+    "secret_complete_gate": "FAIL",
+    "detected_introducing_commits": [
+      "transient side-branch commit",
+      "merge conflict-resolution commit"
+    ],
+    "raw_multiple_rule_and_parent_findings": "retained without suppression"
+  },
+  "actual_corrected_local_history": {
+    "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+    "raw_exit_code": 1,
+    "log_opts": "--all --full-history --diff-merges=separate",
+    "expected_commit_ids": [
+      "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+      "b576c769411f157a2574f2c9659fd01d69858505",
+      "4761d6a0e18277d8632927e35a9219ca61ede56e",
+      "9158a36a5aee7596c5ca5464bb750f773c4e8674",
+      "1fbca20fae2c048961340e4751232fefbfca8434",
+      "46744d5aed5a797701c0bea00705664f0f229a13",
+      "b2a60543df6a90735101b14bbfba70e6503d41bb",
+      "90f36479083edd55fa40381d7e5f911cb13e64d0",
+      "d986c4c4f4583e5edf75e50082784b42621eb0a1",
+      "08f184550c29cf4fe1a93d88928364223c75f374",
+      "2034331d3517934755849cb8219bcb2e0a7bf2f3",
+      "d2d859a8b59a5a396c62478a315f533d27007934",
+      "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+      "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+      "65ef9352871688d97f4f67e1de4b38927ac93511",
+      "0010e661b70a786619d81d79fcb57ce5bf750356",
+      "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+      "d8021bd9e88460511e0471308050d55c9bbe44f6"
+    ],
+    "commit_parent_graph": [
+      "bbe76d06cfb8707df0a4ecbba28da52fe14672b7 b576c769411f157a2574f2c9659fd01d69858505",
+      "b576c769411f157a2574f2c9659fd01d69858505 4761d6a0e18277d8632927e35a9219ca61ede56e",
+      "4761d6a0e18277d8632927e35a9219ca61ede56e 9158a36a5aee7596c5ca5464bb750f773c4e8674",
+      "9158a36a5aee7596c5ca5464bb750f773c4e8674 1fbca20fae2c048961340e4751232fefbfca8434",
+      "1fbca20fae2c048961340e4751232fefbfca8434 46744d5aed5a797701c0bea00705664f0f229a13",
+      "46744d5aed5a797701c0bea00705664f0f229a13 b2a60543df6a90735101b14bbfba70e6503d41bb",
+      "b2a60543df6a90735101b14bbfba70e6503d41bb 90f36479083edd55fa40381d7e5f911cb13e64d0",
+      "90f36479083edd55fa40381d7e5f911cb13e64d0 d986c4c4f4583e5edf75e50082784b42621eb0a1",
+      "d986c4c4f4583e5edf75e50082784b42621eb0a1 08f184550c29cf4fe1a93d88928364223c75f374",
+      "08f184550c29cf4fe1a93d88928364223c75f374 2034331d3517934755849cb8219bcb2e0a7bf2f3",
+      "2034331d3517934755849cb8219bcb2e0a7bf2f3 d2d859a8b59a5a396c62478a315f533d27007934",
+      "d2d859a8b59a5a396c62478a315f533d27007934 00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+      "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2 a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+      "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7 65ef9352871688d97f4f67e1de4b38927ac93511",
+      "65ef9352871688d97f4f67e1de4b38927ac93511 0010e661b70a786619d81d79fcb57ce5bf750356",
+      "0010e661b70a786619d81d79fcb57ce5bf750356 22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+      "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2 d8021bd9e88460511e0471308050d55c9bbe44f6",
+      "d8021bd9e88460511e0471308050d55c9bbe44f6"
+    ],
+    "shallow_repository": false,
+    "expected_commits": 18,
+    "scanned_commits": 18,
+    "raw_findings": 3,
+    "reviewed_findings": 3,
+    "unreviewed_findings": [],
+    "reviewed_gate_passed": true,
+    "rules_suppressed": false
+  },
+  "tracked_source_scan": {
+    "scope": "tracked_worktree",
+    "checked": 71,
+    "findings": [],
+    "limitation": "Pattern scan is evidence, not proof that arbitrary secrets cannot exist."
+  },
+  "all_blob_scan": {
+    "scope": "all_git_blobs",
+    "checked": 166,
+    "findings": [],
+    "limitation": "Pattern scan is evidence, not proof that arbitrary secrets cannot exist."
+  },
+  "tracked_gitleaks_findings": 0,
+  "unchanged_review_manifest_sha256": "9034acc9a745e1b498db1a5e173ed2c38da813419b6a37198f836d9bc2b4f204",
+  "images": {
+    "headless": {
+      "source_commit": "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+      "source_archive_sha256": "ec2270abd4eb132b794f78dfc48c46feaeb818089cb4fc69318e49eb82b83dee",
+      "runtime_python": "3.13.18",
+      "base_manifest": "python:3.13-slim-trixie@sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_locked_install_quality_package": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true
+      },
+      "digests": {
+        "oci_index_digest": "sha256:50c1d341ffce372d1cafa41f8b81c44dd456f3b816a49db30f4f7890a81d006f",
+        "platform_manifest_digest": "sha256:2d55d1168365a38508b09754941847450c7284e49bd320a291e1298fa8a4ec58",
+        "image_config_digest": "sha256:b4fb35735710116b797401dac15819c24cc0a7473179509733f3dfc70a8888c2"
+      },
+      "security_gate": "FAIL",
+      "failed_gates": [
+        "image-scanner"
+      ],
+      "scanner": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "scanner_exit_code": 1,
+      "failure_reason": "Vulnerability DB fetch from mirror.gcr.io/aquasec/trivy-db:2 failed: container DNS timeout. No scan JSON obtained.",
+      "scan_stdout_bytes": 0,
+      "scan_stderr_sha256": "ce06f0bb2b98ccf9958b411977c53d4678c713c8a7726939b9be4169c4e8c027",
+      "security_summary_sha256": "98d28a9249b65c87439e0f958116ab8b89b3f01a209bcfad01049db1606fd5d6",
+      "python_advisories": {
+        "python-headless": {
+          "dependencies": 17,
+          "findings": 0
+        },
+        "python-ui": {
+          "dependencies": 44,
+          "findings": 0
+        },
+        "python-development": {
+          "dependencies": 99,
+          "findings": 0
+        }
+      },
+      "published": false
+    },
+    "ui": {
+      "source_commit": "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+      "source_archive_sha256": "ec2270abd4eb132b794f78dfc48c46feaeb818089cb4fc69318e49eb82b83dee",
+      "runtime_python": "3.13.18",
+      "base_manifest": "python:3.13-slim-trixie@sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true,
+        "image_admin_ui_missing_secret_aborts": true,
+        "actual_image_chat_and_admin_ui_startup": true
+      },
+      "digests": {
+        "oci_index_digest": "sha256:c62cf0551edc2fa37aecbe0b6427fdb55591d9a32853f1aff5bb6c3c5cf87f41",
+        "platform_manifest_digest": "sha256:b94cb3ad6d89e02449b2b3c6497f5f052e14628378ec4eb60d88897cc5f547ff",
+        "image_config_digest": "sha256:19625d578f4fab60995b15d9ce874fcf74e4927e6e7b12215646fc0e00424d14"
+      },
+      "security_gate": "FAIL",
+      "failed_gates": [
+        "image-scanner"
+      ],
+      "scanner": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "scanner_exit_code": 1,
+      "failure_reason": "Vulnerability DB fetch from mirror.gcr.io/aquasec/trivy-db:2 failed: container DNS timeout. No scan JSON obtained.",
+      "scan_stdout_bytes": 0,
+      "scan_stderr_sha256": "14b3baaf6b2953284dbf908cbdf93e5432fe9e6b20fde4e50c7f5221e0fea0b7",
+      "security_summary_sha256": "2226d3cb423ac0f3b7f88a30e40044bf679a71393ed9542b0c15cddb00fdd697",
+      "python_advisories": {
+        "python-headless": {
+          "dependencies": 17,
+          "findings": 0
+        },
+        "python-ui": {
+          "dependencies": 44,
+          "findings": 0
+        },
+        "python-development": {
+          "dependencies": 99,
+          "findings": 0
+        }
+      },
+      "published": false
+    }
+  },
+  "known_prior_image_security": {
+    "status": "FAIL",
+    "os_findings": 164,
+    "high": 44,
+    "critical": 0,
+    "high_fixed_versions_reported": false,
+    "evidence": "remote-ci-4761d6a.json"
+  },
+  "acceptance": {
+    "PASS": 21,
+    "FAIL": 2,
+    "BLOCKED": 1,
+    "NOT_RUN": 0
+  },
+  "acceptance_limit": "GW-21/GW-22 retain last genuine remote FAIL pending new remote evidence; GW-20 BLOCKED. No new image OS results were obtained.",
+  "contract_digest": "db0748b2a327e8db57a8d9fa11ace1993caba87ad8eb757a15be998702b60933",
+  "draft_evidence_scan": {
+    "raw_findings": 1,
+    "rule": "generic-api-key",
+    "actual_value": "SHA-256 of public checked-in OpenAPI JSON, verified locally; not a credential",
+    "change": "Renamed checksum metadata field to contract_digest before commit; no rule/manifest change",
+    "raw_report_retained": true
+  }
+}

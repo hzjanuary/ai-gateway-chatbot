@@ -1,0 +1,59 @@
+{
+  "time_utc": "2026-10-28T13:58:31.415676+00:00",
+  "status": "BLOCKED_PREFLIGHT_NO_ELIGIBLE_PROVIDER",
+  "authorization_received": true,
+  "authorization": {
+    "generation_request_ceiling": 1,
+    "completion_token_ceiling": 8,
+    "total_token_ceiling_claimed": false,
+    "retry": false,
+    "fallback": false,
+    "web_enrichment": false,
+    "hidden_generation_calls": false,
+    "memory_summarization": false,
+    "generation_health_checks": false,
+    "paid_plan_upgrade_or_billing_enablement": false
+  },
+  "authorized_generation_requests_used": 0,
+  "remaining_authorized_generation_requests": 1,
+  "non_generative_local_version_probe_attempts": 1,
+  "provider": null,
+  "model": null,
+  "generation_http_status": null,
+  "provider_reported_usage": null,
+  "output": null,
+  "completion_status": "NOT_EXECUTED",
+  "request_accounting": {
+    "generation_post_attempts": 0,
+    "gateway_runtime_counters_observed": false,
+    "reason": "No configured/running gateway provider; no inference submitted."
+  },
+  "preflight": {
+    "gateway_configured_providers": [],
+    "default_gateway_config_directory_exists": false,
+    "repository_operator_config_files_present": false,
+    "ollama_binary_found": false,
+    "ollama_service_load_state": "not-found",
+    "ollama_service_active_state": "inactive",
+    "ollama_version_probe": {
+      "http_status": null,
+      "error_type": "ConnectError"
+    },
+    "cloudflare_correct_account_free_plan_hard_quota_confirmed": false,
+    "provider_runtime_8_output_token_enforcement_verified": false,
+    "adapter_static_mapping": "Ollama options.num_predict=request.max_tokens; no request executed.",
+    "no_models_downloaded_or_services_started": true
+  },
+  "provenance": {
+    "preflight_source_commit": "1fbca20fae2c048961340e4751232fefbfca8434",
+    "verified_offline_runtime_commit": "46744d5aed5a797701c0bea00705664f0f229a13",
+    "runtime_payload_matches_verified_commit": true,
+    "runtime": "Local Python non-generative preflight only",
+    "python_version": "3.12.9",
+    "image_used_for_live_generation": null,
+    "generation_backend_version": null
+  },
+  "raw_preflight_sha256": "a33bf46a693a4b5190ba8c4ef702daa1e0ab4e7358c4e280b8ae8d8cf23dcbcc",
+  "gw20": "BLOCKED",
+  "scope_statement": "No live inference, streaming or fallback verification obtained. No cloud generation attempted. Eight is an output-token ceiling, not a guaranteed total-input-plus-output budget."
+}
