@@ -5,6 +5,28 @@ Workers AI and Ollama text-generation endpoints. This is a single-process source
 preview, with bounded routing and truthful JSON/SSE errors. No provider, model,
 credential, paid call, web search or dashboard is enabled by installation.
 
+## Security Notice — Review Before Self-Hosting
+
+This is an **early open-source preview for development, experimentation and
+self-hosting**. The currently tested Docker images have unresolved Debian OS
+vulnerabilities, including **44 HIGH findings**. Docker image-security approval
+remains **FAIL**; source-only publication is a separate owner decision.
+
+Before deployment, operators must independently review security, provider data
+policies, credentials, dependency updates, network exposure and their container
+environment. There is **no unrestricted internet-facing production security
+approval or availability SLA**.
+
+Real Cloudflare Workers AI/Ollama inference has **not been live-verified under
+GW-20**, which remains **BLOCKED**. Offline loopback integration tests do not
+substitute for genuine model execution. Successful Python source jobs do not mean
+the entire CI workflow passed: image-security jobs retain their failed results.
+
+Read the [security findings](docs/release/security-findings.md),
+[verification report](docs/release/verification.md), [security policy](SECURITY.md)
+and [source-preview owner decision](docs/release/source-preview-decision.md)
+before installing. This release supplies source archives, not prebuilt images.
+
 **Release decisions and measured limitations:** [verification](docs/release/verification.md).
 Source readiness and image security approval are independent. No availability SLA.
 

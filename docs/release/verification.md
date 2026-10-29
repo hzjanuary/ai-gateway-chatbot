@@ -1,5 +1,27 @@
 # SPEC-001 verification — source PASS; workflows and image security FAIL
 
+## Owner source-preview release authorization — 2026-10-29
+
+The owner explicitly accepts an early **source-only v0.1.0 pre-release** despite
+the disclosed image OS findings. [The recorded decision](source-preview-decision.md)
+is separate from security signoff: **23 PASS / 0 FAIL / 1 BLOCKED** stays intact,
+GW-20 stays BLOCKED and Docker image-security approval stays FAIL. No inference,
+Docker image publication or deployment is authorized. [README](../../README.md)
+now presents the security warning before installation; [release notes](v0.1.0-notes.md)
+and the [maintenance backlog](maintenance-backlog.md) preserve these limitations.
+
+The formerly local-only 0dd8769 reporting commit was verified to change only six
+documentation/evidence files, with no runtime/test/scanner/lock/workflow change
+from remote-tested 4bde829. It is preserved in the final source candidate. The
+release workflow now authorizes normal push, genuine final-candidate CI, ordinary
+PR merge respecting all rules, and an unused v0.1.0 tag on the verified new main
+commit. Publication must stop for any unexpected functional, secret, integrity or
+licensing failure or a required failing check. No rules or gates may be weakened.
+
+The detailed results below are the measured 4bde829 snapshot, not invented new
+candidate results. New push/PR/main run identities and actual release state are
+recorded in the PR/release publication evidence after GitHub supplies them.
+
 Observed **2026-10-29**. Branch `feat/spec-001-oss-inference-gateway`.
 **23 PASS / 0 FAIL / 1 BLOCKED / 0 NOT_RUN** against the original GW definitions.
 This acceptance score does **not** mean the workflows or images pass: both real
@@ -13,7 +35,7 @@ This is not a merge into main. [Draft PR #2](https://github.com/hzjanuary/ai-gat
 remains open/unmerged. The three formerly unpushed commits b576c76, bbe76d0 and
 fa3dde6 are preserved and included in the normal, non-force feature push.
 
-The final result documentation is local-only after reviewing the authorized new
+At that earlier snapshot, result documentation was local-only after reviewing the authorized new
 runs, to honor the stop boundary without starting another CI cycle. It changes no
 runtime, scanner, tests, dependency or workflow inputs. The exact remotely tested
 candidate above must not be confused with a later local reporting HEAD. The public
@@ -209,7 +231,8 @@ Source functional/history/dependency verification at 4bde829 is **PASS** for a
 source-only candidate. Source-only v0.1.0 publication still needs owner/reviewer
 acceptance of the documented live-validation limitation, disclosure/release notes,
 review/synchronization of the final sanitized report, and separate authorization
-for merge/tag/release. No such publication is performed here. Docker security approval
+for merge/tag/release. The subsequent owner source-preview decision above supersedes
+that earlier stop/authorization status, without changing security findings. Docker security approval
 remains **FAIL** until actual supported OS remediation or separately approved
 security disposition, plus redistribution/license review; then rebuild/rescan.
 GW-20 remains **BLOCKED** until a separately authorized genuine provider smoke.

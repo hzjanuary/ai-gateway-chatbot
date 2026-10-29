@@ -12,9 +12,23 @@
   automatically, or source tests into an image approval automatically.
 - Source preview recommendation, Docker security approval and production/live acceptance
   need independent decisions. No production-ready claim without appropriate evidence.
-- Live request remains BLOCKED until separately authorized with provider/plan/privacy,
-  1–2 calls maximum, tiny output cap, no fallback/search, no raw key/content evidence.
-- Remote CI evidence remains BLOCKED until an authorized push. No local green run
-  can prove a remote GitHub Actions execution.
+- GW-20 remains BLOCKED for this source preview. No inference may be performed in
+  this release workflow; offline tests do not replace genuine model execution.
+- Read genuine push/PR checks on the final feature SHA. Python 3.12/3.13 source,
+  full history/secret/integrity and license checks must pass. Preserve known OS
+  failures honestly; do not claim that overall CI passed. A new unexpected
+  functional, secret, integrity or licensing failure stops publication.
+- Present the README security warning before installation and record the owner's
+  [source-only decision](source-preview-decision.md) separately from image approval.
+  Acceptance stays 23 PASS / 0 FAIL / 1 BLOCKED. Preserve raw scans and maintenance backlog.
+- Inspect required reviewers/rules/status checks before marking Draft PR #2 ready
+  and merging normally. Never bypass protection or reinterpret a required failed
+  image check. Do not squash/rebase/rewrite the preserved feature history or delete it.
+- After merge, verify main and unused v0.1.0 tag. Publish only a GitHub PRE-RELEASE
+  with source archives and explicit live/OS/license limitations; no Docker asset.
+- Read back main, README/SECURITY, tag target, release prerelease flag and source
+  archive contents/hashes. Preserve raw CI/artifact evidence and all local state.
+- Stop after this one source-only preview; do not begin a new implementation,
+  inference, deployment or publication campaign.
 - Owner must explicitly authorize push, public disclosure, tags, release or deployment.
 - Do not delete credentials/logs, rewrite historical Git or auto-change provider billing.

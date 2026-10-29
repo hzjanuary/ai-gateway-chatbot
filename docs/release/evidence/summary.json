@@ -4,7 +4,7 @@
   "pr_merge_commit": "47809f39eb357d4265d721052f2cb241df0805e8",
   "source_functional_verification": "PASS",
   "source_history_integrity": "PASS",
-  "source_publication_readiness": "PASS_TECHNICAL_SOURCE_ONLY_PENDING_OWNER_RELEASE_REVIEW",
+  "source_publication_readiness": "PASS_TECHNICAL_SOURCE_ONLY_OWNER_DECISION_RECORDED; final-candidate CI and normal GitHub merge/release prerequisites must still be verified",
   "docker_image_security": "FAIL_KNOWN_OS_FINDINGS",
   "live_provider": "BLOCKED; zero real inference requests",
   "remote_ci": "EXECUTED_FAIL_KNOWN_OS_ONLY; four source jobs PASS, four image jobs FAIL after successful build/smoke/scanning",
@@ -93,8 +93,8 @@
   "local_infrastructure_evidence": "trivy-restore-local.json",
   "artifacts_verified": 8,
   "generation_requests": 0,
-  "release_authorized": false,
-  "final_reporting_commit": "local-only after remote verification stop boundary; runtime/scanner/tests unchanged",
+  "release_authorized": true,
+  "final_reporting_commit": "0dd8769a96027b680ba133165505b8a6d74606ce preserved for normal feature publication in the owner-authorized release candidate; its recorded CI results refer to 4bde829",
   "historical_snapshot_note": "Everything inside historical_snapshot is retained previous evidence, not the current result or image provenance.",
   "historical_snapshot": {
     "verified_source_commit": "46744d5aed5a797701c0bea00705664f0f229a13",
@@ -228,5 +228,8 @@
     "correction_local_evidence": "ci-regressions-local-bbe76d0.json",
     "corrected_local_source_commit": "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
     "correction_status": "STOPPED_BEFORE_PUSH: unexpected Trivy DB DNS timeout"
-  }
+  },
+  "release_authorization_scope": "SOURCE_ONLY_v0.1.0_PRE_RELEASE; no image publication, deployment or inference",
+  "source_preview_owner_decision": "../source-preview-decision.md",
+  "maintenance_backlog": "../maintenance-backlog.md"
 }
