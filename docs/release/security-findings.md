@@ -1,5 +1,16 @@
 # Security findings and independent release decisions
 
+Final remote update 2026-10-29: feature 4bde829 and synthetic PR merge 47809f3
+each execute real headless/UI scans on GitHub's default bridge network using the
+same official GHCR schema-2 DB. All four scanners and SBOMs complete; aggregate
+gates/workflows FAIL solely for known OS findings. Exact CVE/package/version/
+severity/fix tuples and raw license matches remain identical to baseline. There
+are no new secret/Python-advisory/license findings. Eight artifact ZIPs are
+checksum-verified. [Remote evidence](evidence/remote-ci-4bde829.json) retains raw
+report hashes, DB metadata/digest, all CVE rows, scanner/image/source provenance
+and actual job conclusions. Source-only technical verification PASS does not
+approve Docker redistribution or a live deployment. Older snapshots follow.
+
 Latest 2026-10-29: official GHCR schema-2 DB download and both existing-image scans
 succeed with explicit local scanner host networking, without host configuration
 changes. DB updated 2026-10-29T01:22:22Z. Exact CVE/package/version/severity/fix rows

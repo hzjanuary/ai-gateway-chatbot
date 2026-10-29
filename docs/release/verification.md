@@ -1,448 +1,216 @@
-# SPEC-001 verification — DB restored; new remote verification pending
+# SPEC-001 verification — source PASS; workflows and image security FAIL
 
-## Current update: bounded infrastructure remediation, 2026-10-29
+Observed **2026-10-29**. Branch `feat/spec-001-oss-inference-gateway`.
+**23 PASS / 0 FAIL / 1 BLOCKED / 0 NOT_RUN** against the original GW definitions.
+This acceptance score does **not** mean the workflows or images pass: both real
+workflows conclude **FAIL**, solely because the unchanged OS vulnerability gate
+correctly rejects 44 HIGH findings. GW-20 remains BLOCKED; zero real inference.
 
-The owner authorized diagnosis, minimal scanner connectivity correction, controlled
-rescans and normal feature push/new CI. All three previously unpushed commits are
-preserved; the OpenAPI, complete merge-history and matrix corrections are unchanged.
+Tested feature commit: **`4bde8290262f3d6e1bf304dd8e51a8d57154f907`**.
+PR checkout: **`47809f39eb357d4265d721052f2cb241df0805e8`**, GitHub's synthetic
+merge of that head with unchanged main `d2d859a8b59a5a396c62478a315f533d27007934`.
+This is not a merge into main. [Draft PR #2](https://github.com/hzjanuary/ai-gateway-chatbot/pull/2)
+remains open/unmerged. The three formerly unpushed commits b576c76, bbe76d0 and
+fa3dde6 are preserved and included in the normal, non-force feature push.
 
-Diagnosis: host DNS and verified HTTPS work for both official registries; HTTPS
-401 is the normal registry authentication challenge. A bridge-network container
-times out at DNS for both names, before routing/TLS/registry authentication can
-complete. The same container with an explicit host network resolves both and
-completes verified HTTPS. Therefore **GHCR selection alone does not fix the local
-bridge DNS failure**. No host resolver, Docker daemon, firewall, VPN or credential
-configuration was modified. No provider endpoint was contacted.
+The final result documentation is local-only after reviewing the authorized new
+runs, to honor the stop boundary without starting another CI cycle. It changes no
+runtime, scanner, tests, dependency or workflow inputs. The exact remotely tested
+candidate above must not be confused with a later local reporting HEAD. The public
+PR description records the final outcomes. No merge, tag/release, image publication,
+deployment, paid billing, history rewrite or retained-data deletion occurred.
 
-Pinned Trivy 0.76.1 help confirms both official defaults and `--db-repository`.
-Scanner invocations now explicitly select `ghcr.io/aquasecurity/trivy-db:2` and
-accept opt-in `--scanner-network host` for this Linux-local workaround; default
-remains bridge, including CI. Both vuln/secret/license scan and SBOM use the same
-selection. DB metadata/digest are recorded and absent/expired/schema-mismatched DB
-evidence fails closed. No skip-update, stale DB, TLS bypass or suppression is used.
+## Confirmed corrections and infrastructure diagnosis
 
-Both existing actual images were rescanned without rebuilding application inputs.
-Their previous OCI index/platform/config digests are unchanged. Fresh schema-2 DB
-was downloaded from official GHCR, UpdatedAt `2026-10-29T01:22:22.544155871Z`,
-NextUpdate `2026-10-30T01:22:22.544155326Z`. Each scan completed with **164 OS
-findings: 0 CRITICAL / 44 HIGH / 58 MEDIUM / 61 LOW / 1 UNKNOWN**, zero image
-secrets and no Python vulnerabilities. Comparing exact CVE/package/version/severity/
-fixed-version tuples against the preserved baseline shows **zero changes** despite
-the newer DB. The security script still exits 1 solely for `image-security`.
+FastAPI's locked OpenAPI generator falls back to `http.client.responses`; Python
+3.13 changed phrases for 413/422. Eight explicit error descriptions now preserve
+the unchanged golden document on Python 3.12/3.13. HTTP codes, ErrorEnvelope,
+response schemas, validation/auth/roles/streaming and dependency lock are unchanged.
+The new phrase-mutation regression still requires exact full-document equality.
 
-Raw Trivy license matches are also unchanged: 684 headless / 1718 UI. These include
-the existing UI CRITICAL license-category match for WTFPL inside PyArrow's bundled
-LICENSE.txt; this is a license classification, not a CRITICAL CVE. It remains in raw
-evidence, with no suppression or image approval. Python distribution license/text
-inventories pass 17/44; SBOM generation succeeds for both images. OS redistribution
-and bundled license disposition remain separate image-release review work.
+Pinned Gitleaks ordinary `git log -p -U0 --all` omitted the patch of synthetic PR
+merge `ffab9b6edd364259a588aa1b94f4a9df348f396a`. Its exact 17-commit graph reproduced
+16 scanned, then 17 with `--all --full-history --diff-merges=separate`. Every merge
+is diffed against every parent; all reachable branch history and all scanner rules
+remain included. Strict nonzero/count equality and the three exact historical span
+reviews remain enforced; SHA/parent inventories and shallow-history rejection are
+recorded. There is no merge subtraction or first-parent traversal. Two temporary
+five-commit merge tests prove clean 5/5 coverage, detection at the transient side
+commit and merge resolution, ordinary 4/5 FAIL, and omitted 2/5 FAIL even with no
+findings. Raw duplicate rule/parent findings are retained. Synthetic credentials
+are generated only in temporary test repositories, not published as source.
 
-Revalidation: complete source quality suite on Python 3.12.9 PASS; full Python
-3.13.2 suite PASS; **117/117 tests each**, including unchanged golden schemas and
-actual pinned-scanner merge regressions. Lock/hash exports, Ruff, Black and strict
-MyPy pass. Python advisory scans remain zero across 17/44/99 packages. Existing
-headless/UI image smoke reruns pass 11/11 and 12/12 from exact runtime source
-`bbe76d06cfb8707df0a4ecbba28da52fe14672b7`; scanner-only changes do not relabel or
-rebuild those images. Source archive/license/private-path checks are repeated at
-the final candidate before normal push.
+The Trivy failure was **Docker bridge DNS reachability**, not an established TLS,
+proxy or registry credential defect. Host DNS/direct verified HTTPS succeeds for
+both mirror.gcr.io and ghcr.io; bridge containers time out resolving both; explicit
+host-network containers resolve both and receive the normal registry HTTP 401
+challenge. No private resolver/proxy/credential values are in sanitized evidence.
+No host DNS, Docker daemon, firewall or VPN settings were modified.
 
-[Sanitized local remediation evidence](evidence/trivy-restore-local.json) records
-connectivity categories, all CVE/package/fix rows, license classifications, DB and
-image identities and raw report hashes. Raw outputs remain ignored under
-`.local/verification/trivy-restore/`; older failed scans and raw baseline are intact.
-New remote outcomes are pending. Until genuine new results exist, acceptance stays
-21 PASS / 2 FAIL / 1 BLOCKED; GW-20 remains BLOCKED. Image approval stays FAIL.
+The pinned 0.76.1 CLI confirms official defaults and `--db-repository` support.
+Both scan/SBOM invocations explicitly select `ghcr.io/aquasecurity/trivy-db:2`.
+Opt-in `--scanner-network host` restores only the local scanner connection; default
+and CI remain bridge. **GHCR selection alone does not solve local bridge DNS.**
+Both official downloads complete with valid current DBs under these choices.
+Metadata/digest are retained; absent/expired/schema-mismatched DB evidence fails.
+No skip-update, empty/stale DB, TLS bypass, ignore-unfixed or suppression was used.
+Source matrix `fail-fast: false` preserves complete evidence without changing gates.
 
-Everything below records earlier snapshots and stop decisions, not new remote
-results or a present restriction on the newly authorized bounded remediation.
+## Actual new GitHub Actions outcomes
 
-**Current result, 2026-10-29: STOPPED on a new infrastructure failure.** Both
-new runtime images passed functional smoke (headless 11/11; UI 12/12), but both
-Trivy executions exited 1 before scanning because container DNS timed out while
-fetching `mirror.gcr.io/aquasec/trivy-db:2`. The security summaries retain FAIL
-(`image-scanner`); image-scan.json is empty, not a zero-finding report. There was
-no retry, DNS change, cached-DB substitution or gate relaxation. Already-started
-scans finished and all raw outputs remain retained locally.
+| Event / real run | Checkout | Python 3.12 source | Python 3.13 source | Headless image job | UI image job | Overall |
+| --- | --- | --- | --- | --- | --- | --- |
+| [Push 40808326213](https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40808326213) | exact feature HEAD 4bde829 | PASS | PASS | FAIL: known OS gate; build/smoke PASS | FAIL: known OS gate; build/smoke PASS | **FAIL** |
+| [PR 40808329433](https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40808329433) | synthetic merge 47809f3 | PASS | PASS | FAIL: known OS gate; build/smoke PASS | FAIL: known OS gate; build/smoke PASS | **FAIL** |
 
-The owner's condition says "If another unexpected failure appears, stop without
-merge or release." Accordingly the corrected commit
-`bbe76d06cfb8707df0a4ecbba28da52fe14672b7` has **not been pushed**; no new GitHub
-Actions run, job outcome or artifact is claimed. Remote feature HEAD remains
-`4761d6a0e18277d8632927e35a9219ca61ede56e`, Draft PR #2 stays open/unmerged.
-Both source quality suites pass 117/117 locally. Actual history after the fix
-commit is 18/18, raw three reviewed findings, zero unreviewed. Current tracked
-file scan, all-blob/private-path scan and tracked snapshot Gitleaks pass;
-MIT/Streamlit license checks pass. No .env, provider/admin token, session, log or
-private raw evidence is staged. Generated synthetic canaries stay in temporary
-repositories and are never included in source archives.
+All eight jobs completed; **0 CANCELLED / 0 SKIPPED**. Actual source runtimes are
+Python **3.12.15** and **3.13.17**. Every source job passes **117/117 tests**,
+lock/hash exports, Ruff, Black, strict MyPy, source/private/history scans, wheel/
+sdist build and Python advisory gates. Gitleaks covers **20/20** pushed commits
+and **21/21** PR commits, three raw/reviewed historical findings, zero unreviewed.
+The inventories in [remote evidence](evidence/remote-ci-4bde829.json) list every
+examined SHA and parent, including the new PR merge. No coverage check was relaxed.
 
-New images are built from the exact clean committed archive at bbe76d0, SHA-256
-`ec2270abd4eb132b794f78dfc48c46feaeb818089cb4fc69318e49eb82b83dee`.
-Base pin is unchanged; runtime is Python 3.13.18. Their actual OCI index/platform/
-config digests, every examined old/new commit identity and parent edge, scan
-failure hashes, source/JUnit provenance and local audit results are in
-[sanitized local correction evidence](evidence/ci-regressions-local-bbe76d0.json).
-Raw reports remain under `.local/verification/ci-regressions/`, including the
-original remote logs, reproduction failures, quality suites, clean image smoke,
-and both failed scans. These are local builds, with no image publication.
+Every image job passes its clean committed archive install, full 117-test source
+suite, package/build and actual runtime smoke. Headless has 11 named smoke checks;
+UI has 12, including authenticated optional UI startup. Provider output comes only
+from isolated HTTP loopback/internal-network fixtures; no live provider is claimed.
+All image security subcommands complete, SBOMs succeed, artifacts upload even on
+failure. Security summary failures are exactly `["image-security"]` in all four.
 
-Python advisory gates: zero findings across 17/44/99 locked packages in each
-security run. **The prior 164 OS findings / 44 HIGH / 0 CRITICAL remain FAIL and
-are not erased or replaced by the scanner error.** No fresh OS/secret scan result
-can be asserted for the new images. Source correctness and history integrity
-pass locally; source-only release readiness still requires genuine new remote
-verification and disposition of this scanner infrastructure failure. Docker
-approval remains independently FAIL. Zero provider inference was executed.
+Eight artifact ZIPs were downloaded and individually SHA-256 verified against the
+GitHub artifact digests. Source tar contents/hashes and image manifest/config chains
+were verified; no .env, provider/admin credentials, sessions, logs or private raw
+local evidence appears in source archives. LICENSE/NOTICE and the exact Streamlit
+supplement hash pass. Raw reports and all severities remain preserved, not replaced.
 
-Acceptance remains **21 PASS / 2 FAIL / 1 BLOCKED** against the last genuine
-remote evidence: GW-21/GW-22 have local corrections but no new remote result;
-GW-20 remains BLOCKED. All other criteria retain their documented evidence.
+## Local verification and provenance
 
-Update 2026-10-29: the owner authorized correction of the two remote regressions,
-normal push to the existing branch/PR and new real CI. Local reporting commit
-`b576c769411f157a2574f2c9659fd01d69858505` is preserved as an ancestor. No reset,
-rebase, history rewrite or inference is part of this correction. The historical
-results below remain intact; they are not results for the corrected candidate.
+After the minimal scanner change, `./scripts/quality.sh` passes on Python 3.12.9;
+full isolated Python 3.13.2 pytest passes. Both have **117/117** (114 original plus
+three new cases), zero failures/errors/skips. The earlier full 3.13 quality result
+is retained. Test files: security 45, transport 44, streams 17, enrichment/UI 6,
+packaging 3, real Git history 2. These are 117 distinct cases, not a sum of reruns.
 
-Both failures were reproduced before edits. Python 3.13.2 failed the original
-schema equality test. On the exact 17-commit PR graph, pinned Gitleaks 8.30.1
-scanned 16 commits with `--all`, and 17 with
-`--all --full-history --diff-merges=separate`. Missing identity:
-`ffab9b6edd364259a588aa1b94f4a9df348f396a`, parents
-`d2d859a8b59a5a396c62478a315f533d27007934` and
-`4761d6a0e18277d8632927e35a9219ca61ede56e`.
+Controlled security invocations (exit **1**, only known image-security failure):
 
-FastAPI's locked OpenAPI generator otherwise falls back to
-`http.client.responses`. All eight documented error responses now specify the
-existing contract descriptions explicitly. The OpenAPI golden JSON, schemas,
-HTTP codes, validation/auth/roles/streaming and dependency lock are unchanged.
-One new test alters the stdlib phrases and still requires exact golden equality.
+```sh
+.venv/bin/python scripts/security_gates.py --image inference-gateway:spec001-bbe76d0 --scanner-network host --output .local/verification/trivy-restore/headless-security
+.venv/bin/python scripts/security_gates.py --image inference-gateway:spec001-ui-bbe76d0 --scanner-network host --output .local/verification/trivy-restore/ui-security
+```
 
-Gitleaks now requests separate diffs against **every merge parent**, while
-retaining all reachable history (`--all --full-history`), all rules and the exact
-three historical reviews. It records every expected SHA/parent edge and rejects
-shallow history. Its original count equality/nonzero checks remain mandatory;
-commits producing no scanner fragments can still cause a conservative FAIL.
-There is no subtraction for merges or first-parent traversal. Regression tests
-use two real temporary five-commit merge repositories: a clean one and one with
-generated, nonfunctional canaries in transient branch content and merge conflict
-resolution. The corrected scanner covers 5/5 and detects both introducing SHAs;
-ordinary merge handling covers only 4/5 and fails. Deliberately omitted history
-covers 2/5 and fails even with zero findings. Multiple raw rule/parent findings
-are retained. Synthetic repositories/canaries are never published.
+Those existing images were not rebuilt for a scanner endpoint change. Their exact
+OCI index/platform/config digests remain unchanged, with runtime source
+`bbe76d06cfb8707df0a4ecbba28da52fe14672b7` and Python 3.13.18. Both actual image
+smokes rerun successfully from that exact archived source (11/12 checks). Runtime,
+Dockerfile and locked build inputs are unchanged between bbe76d0 and 4bde829.
+The new remote images are separately built/labeled from their actual checkout;
+local identities are not relabeled as the new remote source commit.
 
-Python 3.12.9 and 3.13.2 each pass the complete source quality suite and all
-**117 tests** (114 original plus three regression cases). Ruff, Black, MyPy,
-locked dependency/hash exports, source/history scans and package builds pass.
-Local history before the correction commit: 17/17 scanned, three raw/reviewed
-findings, zero new; after that commit: 18/18.
-The source Python matrix now has `fail-fast: false` solely to collect both job
-outcomes. All quality, dependency, secret, artifact, license, image and OS gates
-remain enabled. New remote results and corrected image provenance are pending;
-GW-20 stays BLOCKED and prior OS image FAIL evidence is preserved.
+Pre-push source archive at 4bde829: SHA-256
+`77ab1966642b4a819bdcbea5f50f29479407862d60e7dbe20892b87c10f56a6c`.
+PR merge archive: `5214ece30c2af808c7697312da0d41d1f5030bd7bcce5b792d0c461682fb4484`.
+Both remote variants verify their event's identical source archive. Clean archive,
+tracked-file Gitleaks, all-Git-blob/private-path checks and license checks pass.
 
-Observed **2026-10-28**, branch `feat/spec-001-oss-inference-gateway`.
-**21 PASS / 1 BLOCKED / 2 FAIL / 0 NOT_RUN** in the acceptance matrix after remote CI.
-The earlier 22-PASS offline snapshot remains preserved in its raw evidence. This is an
-engineering score, not production approval: the independent **Docker image security
-gate is FAIL** (44 HIGH OS findings). The owner has now authorized normal push of
-this feature branch, a PR to main and genuine remote Actions verification. No
-release/tag, image publication, merge or deployment is authorized. No real provider generation or external search was executed.
+| Event / variant | Root image manifest digest | Image config digest |
+| --- | --- | --- |
+| Push headless | `sha256:e7c69ef9c554e261d4efdf7cbf4600797bb07c64ffd87d8319c1aa18fac5f8ff` | `sha256:9d8d706db6f3a8e7e7ed14a40ea6f8a42330c973f759cddb9b0f86ce897e2072` |
+| Push UI | `sha256:83b7b32982c87026b7f9d5a08d10f965934727fd3a13c0576178cb7d043ec90a` | `sha256:ec91315818d427d7be697e2e0444960087f475168afc930bead3c048d1a6b72b` |
+| PR headless | `sha256:b775f7bb42796208f36c0bde885a4b942f2fc85ed91a347ff13666b3c05e987b` | `sha256:aacf4e9b57041d34fce04c08ef0e997e01257b0f0a5871be9f3b9c5e87b2fc65` |
+| PR UI | `sha256:b34720ec17022be77d2c692e8e578d17435851017127c639c697f72c81406929` | `sha256:df6123dd78be8e548211b6d8f22dcd7220b0476eb9723631b46d4eaf602b2848` |
 
-Verified implementation/source commit **R**:
-`46744d5aed5a797701c0bea00705664f0f229a13`.
-Baseline: `d2d859a8b59a5a396c62478a315f533d27007934`.
-Later documentation/evidence commits do not change that verified runtime payload;
-images deliberately retain R as OCI revision. Do not relabel them as a later HEAD.
-
-Committed source archive (both image builds):
-`source-46744d5aed5a797701c0bea00705664f0f229a13.tar`, SHA-256
-`210c8578461542b12b9f71c1fdfefe34484f00d272699cd18eca4e8d4fdc5d13`.
-The archive was extracted into a new temporary directory, installed from the lock,
-tested and packaged; no workspace credentials/logs, .git, .venv or seeded state.
-Raw source/image archives remain local, not published.
-
-| Variant | Local image | OCI index digest | Platform manifest digest | Image config digest |
-| --- | --- | --- | --- | --- |
-| Headless | `inference-gateway:spec001-46744d5` | `sha256:0167c5222313949bbd66e2b4e993116d74d039f95f673c5890f11352cf2209dc` | `sha256:f015520040be66f1ef8ac076d48852426d88ad1a47403daa2619f6240dd04e43` | `sha256:ed7e7191828e1c3002059f655d6e7ee33fe61cbc0b7054836f9d05a61bf7e8de` |
-| Optional UI | `inference-gateway:spec001-ui-46744d5` | `sha256:020ba8a61c58c38074ef046dc8902f2a2fe95cc9035e6cb30c914a23c5c6d4b1` | `sha256:eee583d31ef3ddf7ef79b6bf6578a7d2292f3fd389f8a22231802ddf370189fa` | `sha256:e1825102068e68219a456734aa1dce59a3b83bfd23fc732f616e5dbae4f72e67` |
-
-Both use Linux amd64 `python:3.13-slim-trixie` base manifest
+Remote saved-image roots are single-platform manifests; the helper's historical
+`oci_index_digest` field equals that platform manifest in these artifacts. The
+table uses its actual meaning. No registry push, signing or bit-identical rebuild
+claim is made. All use pinned linux/amd64 Python base
 `sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490`.
-Docker 29 reports the OCI index as image ID; config and platform manifest were
-independently extracted/hash-checked from the saved image. These are local build
-identities, not evidence of registry publication or signing.
 
-## Exact command records
+## Security and DB evidence — independent FAIL retained
 
-Run at R with a non-root operator and Docker access. Only loopback/internal HTTP
-fixtures generate test output. No host ports are published by release smoke.
+Trivy **0.76.1**, immutable scanner
+`aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c`.
+Official DB repository: `ghcr.io/aquasecurity/trivy-db:2`, schema **2**,
+UpdatedAt **2026-10-29T01:22:22.544155871Z**,
+NextUpdate **2026-10-30T01:22:22.544155326Z**. DB file SHA-256
+`ad47d4d7f64fb08225e3d0c9f59118e724ecf82a14d5502fff71c742d6cb24b4`.
+Per-scan download times and metadata are in the evidence. Local and all four remote
+scans use valid current DBs; scanner completes exit 0, aggregate gate exits 1.
 
-**Q — complete workspace quality** (exit 0):
+Every scan: **164 OS findings = 0 CRITICAL / 44 HIGH / 58 MEDIUM / 61 LOW /
+1 UNKNOWN**; zero image secrets and zero Python-package vulnerabilities. Exact
+CVE/package/installed/severity/fixed-version tuples match the preserved baseline;
+newer DB and separate image build identities introduce no findings delta. HIGH
+entries cover CVE-2025-69720, CVE-2026-16742, CVE-2026-54369, CVE-2026-76642,
+CVE-2026-78408, CVE-2026-78409, CVE-2026-78410 and CVE-2026-9538. Their scanned
+stable fixed-version fields remain absent/null. Full rows and available vendor fixes
+are retained in [security findings](security-findings.md) and machine/raw evidence.
+No finding or severity was suppressed, downgraded or erased.
 
-```sh
-./scripts/quality.sh > .local/verification/quality-accepted.stdout.txt 2> .local/verification/quality-accepted.stderr.txt
-```
-
-Q executes uv lock/hash-export checks, Ruff, Black, strict MyPy, `uv run --locked
---extra ui pytest -q --junitxml=.local/verification/pytest.xml`, tracked source/all
-Git blob scans, immutable Gitleaks with full coverage verification, and
-`uv run --locked python -m build --no-isolation` using locked Hatchling.
-
-**H — clean source + actual headless image** (exit 0):
-
-```sh
-.venv/bin/python scripts/release_smoke.py --image inference-gateway:spec001-46744d5 --build --quality --output .local/verification/accepted-headless
-```
-
-**U — actual optional UI image** (exit 0):
-
-```sh
-.venv/bin/python scripts/release_smoke.py --image inference-gateway:spec001-ui-46744d5 --build --ui --output .local/verification/accepted-ui
-```
-
-**SH / SU — full security gates** (both exit **1**, only image-security failed):
-
-```sh
-.venv/bin/python scripts/security_gates.py --image inference-gateway:spec001-46744d5 --output .local/verification/accepted-headless-security
-.venv/bin/python scripts/security_gates.py --image inference-gateway:spec001-ui-46744d5 --output .local/verification/accepted-ui-security
-```
-
-SH/SU run Python advisory scans of headless/UI/development+build locks, source and
-history scans, coverage-verified Gitleaks, actual image OS/Python/secret/license
-scan, CycloneDX SBOM, package/license texts, source-package inventory and provenance.
-All raw stdout/stderr, scanner metadata and failed findings are retained. The
-script gathers all reports before returning failure; it never suppresses OS issues.
-
-Baseline evidence command: `python3 scripts/baseline_audit.py` — nine historical
-static defects confirmed, no prototype import/credential or provider execution.
-
-## Measured test counts
-
-Q and H each passed the same **114 distinct pytest cases**, zero failures/errors:
-Python 3.12.9 locally and in the clean archive. Actual images run Python 3.13.
-Do not add the two runs together as 228 distinct tests.
-
-| Suite alias | Test file | Cases |
-| --- | --- | ---: |
-| S | tests/test_security.py | 44 |
-| T | tests/test_transport.py | 44 |
-| F | tests/test_streams.py | 17 |
-| UIt | tests/test_enrichment_ui.py | 6 |
-| P | tests/test_packaging.py | 3 |
-
-H passed **11 named archive/image checks**; U passed **12**, including actual chat
-and admin UI startup in a read-only container. These are separate runtime assertions,
-not additional pytest cases. One upstream Starlette HTTPX deprecation warning was
-observed; it did not fail a test or weaken any gate. Ruff, Black, strict MyPy and
-wheel/sdist builds pass. No remote CI result is claimed.
+Python audits: zero advisories for **17 headless / 44 UI / 99 dev-build** packages.
+Actual Python license/text inventory checks pass 17/44 distributions; SBOMs contain
+105/132 components. Raw Trivy license matches remain exactly baseline: 684/1718,
+including the known UI CRITICAL license-category WTFPL match inside PyArrow's
+bundled LICENSE.txt. This is not a CRITICAL CVE; it remains unsuppressed for image
+redistribution review. Neither license inventory success nor functional CI grants
+Docker image approval. All vulnerability/secret/license scanners remain enabled.
 
 ## GW-01…GW-24 acceptance matrix
 
-Offline evidence refers to source R and local image digests above. Remote findings
-refer to pushed HEAD `4761d6a0e18277d8632927e35a9219ca61ede56e` and the distinct
-PR merge ref recorded below; no local success overrides a failed remote gate. Suite counts are full-file
-coverage counts from JUnit; named tests identify the relevant evidence within them.
-Commands Q/H/U/SH/SU are the exact invocations above.
+Current statuses use the new exact push/PR evidence; detailed original offline
+proof remains in retained historical reports. All 117 source cases revalidate the
+supported offline behaviors. GW-21 measures complete CI execution/provenance under
+its original definition, not a successful OS gate or overall green workflow.
 
-| ID | Status | Commands, measured counts and authoritative evidence |
+| ID | Status | Current evidence and limits |
 | --- | --- | --- |
-| GW-01 | PASS | H: fresh extracted committed archive, locked install, 114 tests, wheel/sdist build; both images built from that archive, no user config. |
-| GW-02 | PASS | Q/H, S=44: explicit private/idempotent init, missing/placeholder/handwritten weak hash denied, file owner/mode/symlink checks; H image init. |
-| GW-03 | PASS | Q, UIt=6: missing/wrong admin secret denied, valid admin API validated; U: missing secret abort and actual chat/admin startup. |
-| GW-04 | PASS | Q, S=44: endpoint role matrix, admin cannot infer and inference cannot read/mutate admin endpoints; legacy alias covered. |
-| GW-05 | PASS | Q, S=44: all admin route families protected, public minimal health/schema/readiness, no raw validation echo, no log-file deletion/reader. |
-| GW-06 | PASS | Q, P=3: loopback ports, optional profiles, no source mounts, non-root/read-only/cap-drop; H/U actual Compose config validates all profiles. |
-| GW-07 | PASS | Q/H, T=44 and F=17: real loopback HTTP servers exercise Cloudflare REST/SSE and Ollama JSON/NDJSON, actual payloads and auth; external DNS denied. |
-| GW-08 | PASS | Q/H, T=44: deterministic two-node round robin, strategy changes, actual provider ID/model; explicit consented Cloudflare→Ollama fallback in JSON and SSE. |
-| GW-09 | PASS | Q/H, T=44: 401/403/400/402/404/422/429, billing/policy/model/schema errors never fallback; exact upstream request counts. |
-| GW-10 | PASS | Q/H, T=44: explicit 500/502/503/504 and attempt-timeout fallback, max three distinct attempts, reservation/shared deadline; policy change needs operator target plus caller consent. |
-| GW-11 | PASS | Q/H, T=44: exhausted node stays exhausted, no duplicate/reset inside request, admin reset preserves spent call/token reservations. |
-| GW-12 | PASS | Q/H, F=17: byte-split UTF-8, multiline SSE, LF/CRLF/CR+BOM, NDJSON, malformed/truncated streams, pre-output status and post-output error/no end, real socket disconnect before/after output. |
-| GW-13 | PASS | Q/H, T=44: nonstream failure is non-2xx, malformed/error responses cannot become success, provider/model never unknown; actual image JSON and SSE. |
-| GW-14 | PASS | Q/H, S=44/T=44/F=17: HTTP/prompt/output limits, attempt/token/call budgets, separate gateway/node concurrency, deadline and cancellation release. |
-| GW-15 | PASS | Q/H, S=44: caller endpoint/header injection rejected, fixed Cloudflare origin, explicit IP-only Ollama private trust zone, metadata/link-local/redirect-style URL rejection. |
-| GW-16 | PASS | Q/H, UIt=6: enrichment globally/per-request opt-in, one bounded local mock search, actual returned URL/time preserved, untrusted data stays in user context. No external web search performed. |
-| GW-17 | PASS | Q/H, S=44/UIt=6: canaries excluded from errors/logs/metrics/UI; H/U actual image logs lack synthetic prompt/completion/tokens; SH/SU image secrets=0. |
-| GW-18 | PASS | Q/H, F=17: bounded cooldown/Retry-After and one half-open probe; H/U real restart resets counters truthfully; ephemeral single-instance limits documented. |
-| GW-19 | PASS | H/U: actual image init/doctor/provider list/test-metadata prove zero generation; CLI request/stream/metrics/reset exercise isolated real HTTP Ollama-format fixture. No real Ollama model or remote generation claimed. |
-| GW-20 | BLOCKED | **0 live calls**. One bounded 8-output-token request is now authorized, but non-generative preflight found no configured real provider or running local Ollama; Cloudflare Free plan/hard quota unconfirmed. Stopped before inference. See [sanitized preflight](evidence/live-smoke-preflight.json) and [one-call plan](live-smoke-plan.md). |
-| GW-21 | FAIL | Last genuine push 40703768224 / PR 40703883376 failed. Corrections now pass 117 tests on local Python 3.12/3.13 and 18/18 actual history; exact old PR graph passes 17/17. New image-scanner DNS failure stopped work before push, so no new remote PASS exists. OS image approval remains FAIL. [Local correction](evidence/ci-regressions-local-bbe76d0.json), [prior remote](evidence/remote-ci-4761d6a.json). |
-| GW-22 | FAIL | Explicit descriptions now preserve the unchanged golden contract on both local Python versions, including a phrase-mutation regression. Last remote schema result is still FAIL; retain that acceptance state until genuine new remote evidence is obtained. |
-| GW-23 | PASS | H/U: clean committed archive, locked install/build, actual non-root image CLI, network-none missing-config health/not-ready, isolated registered HTTP provider, restart, no seeded artifacts, optional UI startup. |
-| GW-24 | PASS | Independent decisions recorded below: source offline preview PASS; image security FAIL; live acceptance and remote CI BLOCKED. No fake green release or production/SLA claim. |
+| GW-01 | PASS | Four clean committed archive installs/builds, 117 tests each, package builds and no operator state. |
+| GW-02 | PASS | Security tests plus actual image private init: explicit/idempotent setup, file permissions, missing/weak/placeholder tokens denied. |
+| GW-03 | PASS | Admin/UI authentication tests and actual optional UI startup; no server token prefill. |
+| GW-04 | PASS | Full inference/admin role endpoint matrix and legacy alias tests. |
+| GW-05 | PASS | Protected admin families, minimal public health/readiness/schema, safe validation errors; no retained-log deletion API. |
+| GW-06 | PASS | Compose loopback, optional profiles, non-root/read-only/cap-drop and actual image checks. |
+| GW-07 | PASS | 44 transport cases plus streams: real loopback HTTP Cloudflare/Ollama formats, no external provider calls. |
+| GW-08 | PASS | Routing strategy, provider/model truthfulness and explicitly consented policy fallback tests. |
+| GW-09 | PASS | Auth/quota/billing/model/schema/policy errors never fallback; exact upstream counts asserted. |
+| GW-10 | PASS | Bounded distinct attempts/deadlines/reservations, permitted failures and operator/caller policy consent tests. |
+| GW-11 | PASS | Exhaustion/reset invariants, no duplicate/reset during a request. |
+| GW-12 | PASS | 17 stream cases: fragmented UTF-8/SSE/NDJSON, malformed/truncated frames, disconnect cancellation and no post-output switch. |
+| GW-13 | PASS | Nonstream error statuses, valid JSON/SSE, real provider identification fields in offline transport fixtures. |
+| GW-14 | PASS | Body/prompt/output/concurrency/call/token/deadline limits and cancellation release tests. |
+| GW-15 | PASS | Fixed Cloudflare origin, explicit IP-only approved Ollama trust zone, injection/metadata/redirect rejection. |
+| GW-16 | PASS | Six enrichment/UI cases include opt-in bounded mock search and untrusted context; no external search. |
+| GW-17 | PASS | Canary/privacy tests, actual image logs without synthetic prompts/tokens, zero image secrets. |
+| GW-18 | PASS | Cooldown/half-open/accounting tests and truthful ephemeral restart behavior. |
+| GW-19 | PASS | Actual image init/doctor/provider metadata/CLI tests; Ollama-format HTTP fixture, no real generation. |
+| GW-20 | BLOCKED | Zero live requests. Prior authorized smoke stopped at non-generative preflight with no eligible configured real provider. No inference authorized in this task. |
+| GW-21 | PASS | Both genuine event workflows execute source/ops/secret/history/archive/license/dependency/image/OS/SBOM scans with exact provenance and verified artifacts. Raw OS FAIL and overall workflow FAIL are preserved. |
+| GW-22 | PASS | Required interface/privacy/cost/security/license docs exist; exact OpenAPI/settings schema tests pass on both remote Python versions, golden JSON unchanged. |
+| GW-23 | PASS | Four actual clean-source image builds and runtime/CLI/health/restart/UI smoke passes; no seeded operator/session data. |
+| GW-24 | PASS | Source functional/history/dependency readiness separated from OS/license/image approval and live acceptance; no fake green claim. |
 
-## Security, licenses and release decisions
+## Retained evidence and remaining release work
 
-Python advisory counts: **0 / 17** headless, **0 / 44** UI, **0 / 99** all locked
-runtime/UI/dev/build packages. Both images: **164 OS findings, 44 HIGH, 0 CRITICAL,
-0 Python-package vulnerabilities, 0 secrets**. HIGH entries represent eight CVEs;
-raw reports retain all severities. Debian stable versions remain affected as
-verified against the primary trackers; see [security findings](security-findings.md).
-No advisory gate was lowered and no ignore-unfixed was used.
+Authoritative new [remote evidence](evidence/remote-ci-4bde829.json) contains job
+conclusions/steps, each SHA/parent graph, eight artifact digests, DB/image/source
+identities, full common CVE rows and raw report hashes. [Local remediation evidence](evidence/trivy-restore-local.json)
+records bounded connectivity checks and existing-image scans. Full ZIPs/logs/scans
+are retained in ignored `.local/verification/remote-ci-4bde829/` and
+`.local/verification/trivy-restore/`. No temporary signed artifact URL or private
+network/credential configuration is included in committed evidence.
 
-Actual-image Python licenses: **17 headless / 44 UI** distributions have recognized
-license evidence and actual text. Streamlit's missing wheel license is supplemented
-from its exact official release tag with SHA-256 verification. See
-[license inventory](third-party-licenses.md). CycloneDX: **105 headless / 132 UI**
-components. OS package/source versions and licenses remain available for owner
-redistribution review before image publication.
+Earlier [remote failures](evidence/remote-ci-4761d6a.json), [local corrections and
+DNS failures](evidence/ci-regressions-local-bbe76d0.json), [zero-call live preflight](evidence/live-smoke-preflight.json),
+R=`46744d5aed5a797701c0bea00705664f0f229a13` archives/images/raw hashes, and all
+original failed scans remain preserved. The previous verification text is also
+retained locally and in Git history. New successes do not rewrite old FAIL records.
 
-Gitleaks: **13/13 commits scanned, raw exit 1 / three findings**, all reviewed against
-immutable historical span hashes (two curl placeholders and one retired short
-prototype default). No rule/file/commit suppression, no history rewrite. Reviewed
-secret gate passes with zero unreviewed findings. Current source/private-path
-pattern scans: zero findings; raw results and limitations retained.
-
-Current source publication readiness: **FAIL pending contract/CI coverage review**.
-The source branch is public for review, not approved for release. Earlier offline
-Python 3.12 gates passed, but remote failures supersede readiness claims. Docker
-image security approval: **FAIL**. Production/live provider acceptance: **BLOCKED**.
-Remote CI: **EXECUTED, FAIL**. Public release/deployment remains
-**NOT AUTHORIZED** for release artifacts, image publication, tags, merging and deployment.
-Feature-branch push/PR and Actions verification are now authorized. The active plan
-stays open for the actual remote results and live-provider availability.
-
-## Evidence and reproducibility limits
-
-[Machine summary and raw-report hashes](evidence/summary.json) records immutable
-source/archive/image identity. Raw reports are local under `.local/verification/`:
-`quality-accepted.*`, `accepted-headless/`, `accepted-ui/`,
-`accepted-headless-security/`, `accepted-ui-security/`. They include source/image
-archives, JUnit, full advisory/OS/secret/license results, actual license texts,
-SBOMs, DB metadata, build output and failed pre-fix attempts in earlier folders.
-No credentials or operator logs were deleted or published.
-
-Reproducibility proven: clean source install/build/test/image runtime from exact
-pinned source/dependency/base inputs. **Bit-for-bit identical rebuilds are not
-claimed**: build timestamps/attestations and advisory database updates may differ.
-No signatures, registry publication, live availability or remote CI success implied.
-
-Next owner actions: review the source preview and private disclosure channel;
-make an eligible real provider available privately, then resume the already authorized
-one-request smoke after preflight; inspect the now-authorized remote CI evidence; wait for a reviewed stable base fixing the OS
-findings and rebuild/rescan both images before Docker security approval. Never
-work around quota errors by account rotation or repeated circuit reset.
-
-## Authorized live-smoke preflight update
-
-At `1fbca20fae2c048961340e4751232fefbfca8434`, the owner authorized one real request,
-maximum eight output tokens, no retries/fallback/research/hidden calls/billing change.
-The environment had no registered provider or gateway configuration. Local Ollama
-was absent/inactive and its non-generative version endpoint refused connection.
-No qualifying Cloudflare account/Free plan/hard quota was confirmed. Therefore
-**0 generation requests**, no generation HTTP status/output/usage, completion
-**NOT_EXECUTED**. Provider-side enforcement could not be verified, so the request
-was not sent. The allowance remains unused. No eight-total-token guarantee is made.
-
-[Preflight evidence](evidence/live-smoke-preflight.json) preserves sanitized counts,
-conditions and commit/Python provenance. This was a native Python preflight, not
-an execution of either release image against a live model. GW-20 remains BLOCKED;
-This preflight still provides no live PASS; subsequent remote CI findings below
-supersede the earlier acceptance/readiness score.
-
-## Feature-branch publication and remote CI authorization
-
-Owner authorization permits a normal non-force push of only
-`feat/spec-001-oss-inference-gateway` to origin, opening a PR targeting main, and
-executing/inspecting genuine Actions checks on the exact pushed commit. It does
-not permit merge, release/tag, registry image publication, deployment, history
-rewrite, weakened gates or additional inference.
-
-Pre-push audited HEAD: `9158a36a5aee7596c5ca5464bb750f773c4e8674` (clean worktree).
-Origin is the intended hzjanuary/ai-gateway-chatbot repository; main remains the
-observed baseline and no matching remote feature branch/PR existed at preflight.
-Tracked-file Gitleaks, all-history Gitleaks review, private-path checks, committed
-source archive and license checks are rerun before push. Raw reports remain
-local under `.local/verification/remote-ci-prepush/`; no operator state or private
-evidence is staged or uploaded. Remote run URLs/outcomes will be added only after
-GitHub supplies actual run/job records. Known OS findings retain raw reports and
-FAIL status. Any unexpected new functional/security/secret/integrity defect stops
-this run without changing gates or silently repairing it.
-
-## Genuine remote Actions results — STOP condition reached
-
-Authorized normal, non-force push published only feature branch
-`feat/spec-001-oss-inference-gateway` at
-`4761d6a0e18277d8632927e35a9219ca61ede56e`. Main remains
-`d2d859a8b59a5a396c62478a315f533d27007934`.
-[Draft PR #2](https://github.com/hzjanuary/ai-gateway-chatbot/pull/2) targets main
-and remains unmerged. No tags, registry images, deployments or inference were added.
-
-Pre-push checks at the original reviewed HEAD and final pushed HEAD confirmed
-zero current tracked secrets/private paths, clean worktree, archive exclusion of
-operator state/private evidence and valid license hashes/texts. Final source tar
-SHA-256: `119d569b703d4c07f62e13e453068a0622244fab93e50509f3ce17a3a3a05b31`.
-Gitleaks history at pushed HEAD: 16/16 commits, raw three historical reviewed
-findings, zero new findings. No .env, real provider/admin token, session, logs or
-private raw evidence was pushed; only intentionally sanitized verification records.
-
-| Workflow | Checkout tested | Overall outcome | Actual source test evidence | Other gates |
-| --- | --- | --- | --- | --- |
-| [Push 40703768224](https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703768224) | Exact pushed HEAD `4761d6a0e18277d8632927e35a9219ca61ede56e` | FAIL | Python 3.12 JUnit 114 PASS, quality/advisory steps succeeded but job concluded CANCELLED by matrix fail-fast; Python 3.13 JUnit 113 PASS / 1 FAIL and job FAIL | Both clean image smoke/build checks PASS; OS image gates FAIL; artifact upload succeeded |
-| [PR 40703883376](https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40703883376) | GitHub synthetic merge ref `ffab9b6edd364259a588aa1b94f4a9df348f396a`, **not** direct HEAD | FAIL | Python 3.12 JUnit 114 PASS, job FAIL at scan coverage; Python 3.13 JUnit 113 PASS / 1 FAIL retained although job concluded CANCELLED | Both clean image smoke/build checks PASS; scan coverage and OS image gates FAIL; artifact upload succeeded |
-
-The PR merge ref is an ephemeral test commit created by GitHub, not a merge into
-main. Both run records identify the PR head, but only the push run directly tests
-the exact pushed checkout. The distinction is retained in every image/source record.
-
-**Unexpected defect 1:**
-`tests/test_security.py::test_openapi_and_settings_schema_match_checked_in_contract`
-fails on Python 3.13. Generated HTTP descriptions are `Content Too Large` (413)
-and `Unprocessable Content` (422), while the committed schema says `Request Entity
-Too Large` / `Unprocessable Entity`. The logs prove schema wording drift, not a
-different HTTP numeric status. The test remains enabled and failed; no normalization,
-regeneration, test relaxation or runtime change was made.
-
-**Unexpected defect 2:** PR Gitleaks coverage expected 17 commits but reported 16,
-including the additional synthetic merge ref. Raw findings remain the same three
-reviewed historical cases, zero unreviewed secrets. Coverage verification correctly
-fails; it was not bypassed or relabeled as successful. Push history coverage 16/16
-passes. The PR image gate reports `gitleaks-unreviewed` as its aggregate failure
-label even though the actual cause is coverage, not a new secret.
-
-The owner's explicit condition requires stop on a new functional/security/secret/
-integrity defect. Accordingly **no code/workflow/gate changes, reruns, or further
-pushes are performed**. The final report is committed **locally only** after the
-stop, and PR metadata is updated with the failures. It is not claimed that this
-local reporting commit was remotely tested. All already-started runs were allowed
-to finish so raw OS scans and artifacts could be preserved.
-
-### Remote image and scan provenance
-
-| Event / image | Source checkout | Root image manifest digest | Image config digest |
-| --- | --- | --- | --- |
-| Push / headless | `4761d6a0e18277d8632927e35a9219ca61ede56e` | `sha256:933371e8121aedeb9391965a6ae1fe3fa6a08d08c733ab0575a5cca90e16efc2` | `sha256:362b25ecd4becdc1a18f9a1fc56b1e218b8e23b54a61e130a14deed094557bd9` |
-| Push / UI | `4761d6a0e18277d8632927e35a9219ca61ede56e` | `sha256:f0aac22a0479f553f5433f067fd4d51b947ab9556000cc580fa9aff8be89a727` | `sha256:95401cee5bf4655c2d4f05e213cf7ac103862ca502f7fa894d61ea28c0112836` |
-| PR / headless | `ffab9b6edd364259a588aa1b94f4a9df348f396a` | `sha256:bf241382e80917f2c4d2905103bf6c58a0da7abb53c1a9149376c3ba928d6a55` | `sha256:56ea25c4e6cb90cbc1a754d726d35d2c7c39eb821c9e91f05cfb4226c0470d14` |
-| PR / UI | `ffab9b6edd364259a588aa1b94f4a9df348f396a` | `sha256:a518e97663fd52b17e41625a58106ee5902bdd2c8a911841e9cb50f650fda6c9` | `sha256:31d7dbde84d65289a100b286ff6ec989fb66dfc7b6eb46d7aed4b64d1e7cc8da` |
-
-The remote saved-image root is a single platform manifest, unlike local Docker 29
-index-based images. The raw helper field is named oci_index_digest; in these remote
-artifacts it equals the platform manifest digest. The table uses the actual manifest
-meaning rather than asserting an index or registry publication. PR source archive
-SHA-256: `e7ecf087bd7aeae194aca33ee9522c656bc95d3debe29d2f4c09481dea64277f`.
-
-All four remote images retain **164 OS findings / 44 HIGH / 0 CRITICAL** and
-**0 image secrets**. All HIGH fixed-version fields are absent/null in the scanned
-Debian trixie data. Exact package/CVE/version rows, all severities and scanner
-metadata are preserved in raw image-scan.json, with hashes in the sanitized
-[remote evidence](evidence/remote-ci-4761d6a.json).
-
-The eight HIGH CVEs are CVE-2025-69720, CVE-2026-16742, CVE-2026-54369,
-CVE-2026-76642, CVE-2026-78408, CVE-2026-78409, CVE-2026-78410 and
-CVE-2026-9538. [Security findings](security-findings.md) records primary Debian
-tracker links and fixed-version availability; no severity was downgraded.
-
-Each image security report also contains zero Python advisories for 17 headless,
-44 UI and 99 dev/build dependencies; actual-image license inventories are 17/44
-and image secrets are zero. PR security reports additionally fail coverage. These
-subgate successes do not make either workflow, source publication or image approval
-green. Eight remote artifact ZIPs were downloaded and SHA-256 matched to GitHub's
-reported artifact digests. Full ZIPs/logs/scans remain in ignored local directory
-`.local/verification/remote-ci-4761d6a/`; sanitized metadata only is in source.
-
-Remaining BLOCKED criterion: **GW-20** (no eligible live provider, zero new inference).
-**GW-21 and GW-22 are FAIL**, requiring owner review of the newly discovered defects
-before changes or reruns. Image approval independently remains FAIL due to OS
-findings. Main, release/tag, Docker publication, deployment and history remain untouched.
+Source functional/history/dependency verification at 4bde829 is **PASS** for a
+source-only candidate. Source-only v0.1.0 publication still needs owner/reviewer
+acceptance of the documented live-validation limitation, disclosure/release notes,
+review/synchronization of the final sanitized report, and separate authorization
+for merge/tag/release. No such publication is performed here. Docker security approval
+remains **FAIL** until actual supported OS remediation or separately approved
+security disposition, plus redistribution/license review; then rebuild/rescan.
+GW-20 remains **BLOCKED** until a separately authorized genuine provider smoke.
+The authorized remote verification is finished; work stops at this boundary.

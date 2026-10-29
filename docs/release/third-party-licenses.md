@@ -1,5 +1,13 @@
 # Actual-image Python license inventory
 
+2026-10-29 revalidation: local existing images and four new remote image builds
+retain the same 17/44 distribution text inventories and exact raw Trivy license
+matches as the baseline. Raw Trivy counts are 684 headless / 1718 UI, including
+the existing UI CRITICAL license-category WTFPL match in PyArrow's bundled
+LICENSE.txt. These classifications remain unsuppressed; distribution metadata
+success is not blanket approval of bundled/OS license obligations. See
+[new remote evidence](evidence/remote-ci-4bde829.json). No image is published.
+
 Image source: `46744d5aed5a797701c0bea00705664f0f229a13`. Inventory was executed inside each release image with networking disabled. Headless has 17 distributions; optional UI has 44. Full license texts and raw metadata are preserved under `.local/verification/accepted-{headless,ui}-security/image-licenses.json`, with hashes in [evidence summary](evidence/summary.json). OS packages and corresponding source-package versions are retained in `os-packages.json` and the image CycloneDX SBOM; OS redistribution obligations still require review before image publication.
 
 | Package | Version | Metadata license | Actual image text |

@@ -1,5 +1,20 @@
 # SPEC-001 active implementation plan
 
+**Authorized remote verification finished — stop boundary, 2026-10-29.**
+Normally pushed 4bde8290262f3d6e1bf304dd8e51a8d57154f907 with all three earlier
+local commits preserved. Push run 40808326213 and PR run 40808329433 complete
+FAIL solely on known OS findings; all four source jobs PASS 117/117, history
+20/20 push and 21/21 PR, no new secret. All four actual image build/smoke checks,
+fresh official GHCR DB scans and SBOMs complete. OS/license rows exactly match
+baseline; raw FAIL retained. All eight artifact ZIP hashes verified. Current
+acceptance 23 PASS / 1 BLOCKED (GW-20); source-only technical readiness PASS,
+image approval FAIL. Final documentation is local-only after collecting results;
+PR body reports outcomes. No further push/CI cycle, inference, merge, release/tag,
+deployment, image publication or system configuration change. Remaining work is
+owner release review and the separately constrained image/live acceptance work.
+
+The following entries are retained historical planning/stop snapshots.
+
 Latest authorization/update 2026-10-29: both official registries work on host and
 host-network containers; Docker bridge DNS fails for both. No system configuration
 changed. Explicit official GHCR DB plus opt-in per-scanner host networking restores

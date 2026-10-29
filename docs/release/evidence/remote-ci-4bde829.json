@@ -1,0 +1,2811 @@
+{
+  "observed_date": "2026-10-29",
+  "pushed_source_commit": "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+  "pr_merge_commit": "47809f39eb357d4265d721052f2cb241df0805e8",
+  "base_main_commit": "d2d859a8b59a5a396c62478a315f533d27007934",
+  "branch": "feat/spec-001-oss-inference-gateway",
+  "pull_request_url": "https://github.com/hzjanuary/ai-gateway-chatbot/pull/2",
+  "source_functional_status": "PASS",
+  "source_history_status": "PASS",
+  "python_advisory_status": "PASS",
+  "docker_image_security": "FAIL_KNOWN_OS_FINDINGS",
+  "live_provider": "BLOCKED",
+  "generation_requests": 0,
+  "acceptance": {
+    "PASS": 23,
+    "FAIL": 0,
+    "BLOCKED": 1,
+    "NOT_RUN": 0
+  },
+  "acceptance_rationale": {
+    "GW-21": "PASS: original definition requires CI to run backend/ops/secret/artifact/license/image/dependency/OS scans with provenance. All ran and raw OS FAIL is preserved; this is not overall workflow/image approval.",
+    "GW-22": "PASS: supported interfaces/documentation/privacy/license artifacts preserved; exact OpenAPI and settings contracts pass on both remote Python versions."
+  },
+  "workflows": [
+    {
+      "id": 40808326213,
+      "event": "push",
+      "head_sha": "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40808326213",
+      "run_attempt": 1,
+      "checkout_commit": "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+      "jobs": [
+        {
+          "id": 123232461879,
+          "name": "source (3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 40808326213,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.12'",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        },
+        {
+          "id": 123232462168,
+          "name": "image (ui)",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 40808326213,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 6
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            }
+          ]
+        },
+        {
+          "id": 123232462170,
+          "name": "image (headless)",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 40808326213,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 6
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            }
+          ]
+        },
+        {
+          "id": 123232462241,
+          "name": "source (3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 40808326213,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.13'",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "python_matrix": "3.12",
+          "actual_python": "3.12.15",
+          "junit": {
+            "tests": 117,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "history": {
+            "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+            "raw_exit_code": 1,
+            "log_opts": "--all --full-history --diff-merges=separate",
+            "expected_commit_ids": [
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "b576c769411f157a2574f2c9659fd01d69858505",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "1fbca20fae2c048961340e4751232fefbfca8434",
+              "46744d5aed5a797701c0bea00705664f0f229a13",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "08f184550c29cf4fe1a93d88928364223c75f374",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "d2d859a8b59a5a396c62478a315f533d27007934",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "65ef9352871688d97f4f67e1de4b38927ac93511",
+              "0010e661b70a786619d81d79fcb57ce5bf750356",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "commit_parent_graph": [
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907 fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7 b576c769411f157a2574f2c9659fd01d69858505",
+              "b576c769411f157a2574f2c9659fd01d69858505 4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e 9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674 1fbca20fae2c048961340e4751232fefbfca8434",
+              "1fbca20fae2c048961340e4751232fefbfca8434 46744d5aed5a797701c0bea00705664f0f229a13",
+              "46744d5aed5a797701c0bea00705664f0f229a13 b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb 90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0 d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1 08f184550c29cf4fe1a93d88928364223c75f374",
+              "08f184550c29cf4fe1a93d88928364223c75f374 2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3 d2d859a8b59a5a396c62478a315f533d27007934",
+              "d2d859a8b59a5a396c62478a315f533d27007934 00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2 a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7 65ef9352871688d97f4f67e1de4b38927ac93511",
+              "65ef9352871688d97f4f67e1de4b38927ac93511 0010e661b70a786619d81d79fcb57ce5bf750356",
+              "0010e661b70a786619d81d79fcb57ce5bf750356 22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2 d8021bd9e88460511e0471308050d55c9bbe44f6",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "shallow_repository": false,
+            "expected_commits": 20,
+            "scanned_commits": 20,
+            "raw_findings": 3,
+            "reviewed_findings": 3,
+            "unreviewed_findings": [],
+            "reviewed_gate_passed": true,
+            "rules_suppressed": false
+          },
+          "python_advisories": {
+            "python-headless": {
+              "dependencies": 17,
+              "findings": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "findings": 0
+            }
+          },
+          "junit_digest": "d8276bc93f4e10f88f9dab4b445573ca4d6c13e59ca66ae0660b0775afce05f0"
+        },
+        {
+          "python_matrix": "3.13",
+          "actual_python": "3.13.17",
+          "junit": {
+            "tests": 117,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "history": {
+            "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+            "raw_exit_code": 1,
+            "log_opts": "--all --full-history --diff-merges=separate",
+            "expected_commit_ids": [
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "b576c769411f157a2574f2c9659fd01d69858505",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "1fbca20fae2c048961340e4751232fefbfca8434",
+              "46744d5aed5a797701c0bea00705664f0f229a13",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "08f184550c29cf4fe1a93d88928364223c75f374",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "d2d859a8b59a5a396c62478a315f533d27007934",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "65ef9352871688d97f4f67e1de4b38927ac93511",
+              "0010e661b70a786619d81d79fcb57ce5bf750356",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "commit_parent_graph": [
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907 fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7 b576c769411f157a2574f2c9659fd01d69858505",
+              "b576c769411f157a2574f2c9659fd01d69858505 4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e 9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674 1fbca20fae2c048961340e4751232fefbfca8434",
+              "1fbca20fae2c048961340e4751232fefbfca8434 46744d5aed5a797701c0bea00705664f0f229a13",
+              "46744d5aed5a797701c0bea00705664f0f229a13 b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb 90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0 d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1 08f184550c29cf4fe1a93d88928364223c75f374",
+              "08f184550c29cf4fe1a93d88928364223c75f374 2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3 d2d859a8b59a5a396c62478a315f533d27007934",
+              "d2d859a8b59a5a396c62478a315f533d27007934 00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2 a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7 65ef9352871688d97f4f67e1de4b38927ac93511",
+              "65ef9352871688d97f4f67e1de4b38927ac93511 0010e661b70a786619d81d79fcb57ce5bf750356",
+              "0010e661b70a786619d81d79fcb57ce5bf750356 22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2 d8021bd9e88460511e0471308050d55c9bbe44f6",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "shallow_repository": false,
+            "expected_commits": 20,
+            "scanned_commits": 20,
+            "raw_findings": 3,
+            "reviewed_findings": 3,
+            "unreviewed_findings": [],
+            "reviewed_gate_passed": true,
+            "rules_suppressed": false
+          },
+          "python_advisories": {
+            "python-headless": {
+              "dependencies": 17,
+              "findings": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "findings": 0
+            }
+          },
+          "junit_digest": "18ded67c2f0084e6ef1e685c235d7a4b8df87517fcde5a8667b79ba491571352"
+        }
+      ]
+    },
+    {
+      "id": 40808329433,
+      "event": "pull_request",
+      "head_sha": "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/hzjanuary/ai-gateway-chatbot/actions/runs/40808329433",
+      "run_attempt": 1,
+      "checkout_commit": "47809f39eb357d4265d721052f2cb241df0805e8",
+      "jobs": [
+        {
+          "id": 123232472334,
+          "name": "source (3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 40808329433,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.13'",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        },
+        {
+          "id": 123232472601,
+          "name": "source (3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 40808329433,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run uv sync --locked --extra ui --python '3.12'",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run mkdir -p .local/verification",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run ./scripts/quality.sh",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Python advisory gates (all severities)",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        },
+        {
+          "id": 123232472613,
+          "name": "image (headless)",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 40808329433,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 6
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            }
+          ]
+        },
+        {
+          "id": 123232472622,
+          "name": "image (ui)",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 40808329433,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run uv sync --locked --extra ui",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Clean committed archive and actual image runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Image vulnerabilities, secrets, licenses, SBOM and provenance",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 6
+            },
+            {
+              "name": "Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            }
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "python_matrix": "3.12",
+          "actual_python": "3.12.15",
+          "junit": {
+            "tests": 117,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "history": {
+            "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+            "raw_exit_code": 1,
+            "log_opts": "--all --full-history --diff-merges=separate",
+            "expected_commit_ids": [
+              "47809f39eb357d4265d721052f2cb241df0805e8",
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "b576c769411f157a2574f2c9659fd01d69858505",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "1fbca20fae2c048961340e4751232fefbfca8434",
+              "46744d5aed5a797701c0bea00705664f0f229a13",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "08f184550c29cf4fe1a93d88928364223c75f374",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "d2d859a8b59a5a396c62478a315f533d27007934",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "65ef9352871688d97f4f67e1de4b38927ac93511",
+              "0010e661b70a786619d81d79fcb57ce5bf750356",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "commit_parent_graph": [
+              "47809f39eb357d4265d721052f2cb241df0805e8 d2d859a8b59a5a396c62478a315f533d27007934 4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907 fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7 b576c769411f157a2574f2c9659fd01d69858505",
+              "b576c769411f157a2574f2c9659fd01d69858505 4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e 9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674 1fbca20fae2c048961340e4751232fefbfca8434",
+              "1fbca20fae2c048961340e4751232fefbfca8434 46744d5aed5a797701c0bea00705664f0f229a13",
+              "46744d5aed5a797701c0bea00705664f0f229a13 b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb 90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0 d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1 08f184550c29cf4fe1a93d88928364223c75f374",
+              "08f184550c29cf4fe1a93d88928364223c75f374 2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3 d2d859a8b59a5a396c62478a315f533d27007934",
+              "d2d859a8b59a5a396c62478a315f533d27007934 00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2 a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7 65ef9352871688d97f4f67e1de4b38927ac93511",
+              "65ef9352871688d97f4f67e1de4b38927ac93511 0010e661b70a786619d81d79fcb57ce5bf750356",
+              "0010e661b70a786619d81d79fcb57ce5bf750356 22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2 d8021bd9e88460511e0471308050d55c9bbe44f6",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "shallow_repository": false,
+            "expected_commits": 21,
+            "scanned_commits": 21,
+            "raw_findings": 3,
+            "reviewed_findings": 3,
+            "unreviewed_findings": [],
+            "reviewed_gate_passed": true,
+            "rules_suppressed": false
+          },
+          "python_advisories": {
+            "python-headless": {
+              "dependencies": 17,
+              "findings": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "findings": 0
+            }
+          },
+          "junit_digest": "8e9f8530a99cab9abc3457714caa3569e3a8a34dd11de10515475947fdb2e412"
+        },
+        {
+          "python_matrix": "3.13",
+          "actual_python": "3.13.17",
+          "junit": {
+            "tests": 117,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "history": {
+            "scanner": "zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+            "raw_exit_code": 1,
+            "log_opts": "--all --full-history --diff-merges=separate",
+            "expected_commit_ids": [
+              "47809f39eb357d4265d721052f2cb241df0805e8",
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "b576c769411f157a2574f2c9659fd01d69858505",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "1fbca20fae2c048961340e4751232fefbfca8434",
+              "46744d5aed5a797701c0bea00705664f0f229a13",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "08f184550c29cf4fe1a93d88928364223c75f374",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "d2d859a8b59a5a396c62478a315f533d27007934",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "65ef9352871688d97f4f67e1de4b38927ac93511",
+              "0010e661b70a786619d81d79fcb57ce5bf750356",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "commit_parent_graph": [
+              "47809f39eb357d4265d721052f2cb241df0805e8 d2d859a8b59a5a396c62478a315f533d27007934 4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+              "4bde8290262f3d6e1bf304dd8e51a8d57154f907 fa3dde6d55793a4512ba9b3d2fd056c8301343bc",
+              "fa3dde6d55793a4512ba9b3d2fd056c8301343bc bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+              "bbe76d06cfb8707df0a4ecbba28da52fe14672b7 b576c769411f157a2574f2c9659fd01d69858505",
+              "b576c769411f157a2574f2c9659fd01d69858505 4761d6a0e18277d8632927e35a9219ca61ede56e",
+              "4761d6a0e18277d8632927e35a9219ca61ede56e 9158a36a5aee7596c5ca5464bb750f773c4e8674",
+              "9158a36a5aee7596c5ca5464bb750f773c4e8674 1fbca20fae2c048961340e4751232fefbfca8434",
+              "1fbca20fae2c048961340e4751232fefbfca8434 46744d5aed5a797701c0bea00705664f0f229a13",
+              "46744d5aed5a797701c0bea00705664f0f229a13 b2a60543df6a90735101b14bbfba70e6503d41bb",
+              "b2a60543df6a90735101b14bbfba70e6503d41bb 90f36479083edd55fa40381d7e5f911cb13e64d0",
+              "90f36479083edd55fa40381d7e5f911cb13e64d0 d986c4c4f4583e5edf75e50082784b42621eb0a1",
+              "d986c4c4f4583e5edf75e50082784b42621eb0a1 08f184550c29cf4fe1a93d88928364223c75f374",
+              "08f184550c29cf4fe1a93d88928364223c75f374 2034331d3517934755849cb8219bcb2e0a7bf2f3",
+              "2034331d3517934755849cb8219bcb2e0a7bf2f3 d2d859a8b59a5a396c62478a315f533d27007934",
+              "d2d859a8b59a5a396c62478a315f533d27007934 00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2",
+              "00eb3a02ccb6d97b9afe804ae5fa98c5b527d7d2 a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7",
+              "a5bd9a76495b5ccb37f71f34ef22a6567f9dd0a7 65ef9352871688d97f4f67e1de4b38927ac93511",
+              "65ef9352871688d97f4f67e1de4b38927ac93511 0010e661b70a786619d81d79fcb57ce5bf750356",
+              "0010e661b70a786619d81d79fcb57ce5bf750356 22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2",
+              "22b5d71cdc40814beb7f7fdad01e2834d0b8e9c2 d8021bd9e88460511e0471308050d55c9bbe44f6",
+              "d8021bd9e88460511e0471308050d55c9bbe44f6"
+            ],
+            "shallow_repository": false,
+            "expected_commits": 21,
+            "scanned_commits": 21,
+            "raw_findings": 3,
+            "reviewed_findings": 3,
+            "unreviewed_findings": [],
+            "reviewed_gate_passed": true,
+            "rules_suppressed": false
+          },
+          "python_advisories": {
+            "python-headless": {
+              "dependencies": 17,
+              "findings": 0
+            },
+            "python-ui": {
+              "dependencies": 44,
+              "findings": 0
+            }
+          },
+          "junit_digest": "af39525f8f35c8f6f3b7140ee5249211917108161efa93d33d8913e782d50797"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "event": "push",
+      "run_id": 40808326213,
+      "artifact_id": 12869580945,
+      "name": "image-evidence-headless",
+      "digest": "sha256:058e9f3b7fe8ee1f918b740a6c7f00362b5ded39787f80f2e7ba090e7447996a",
+      "checksum_verified": true,
+      "size_in_bytes": 447745,
+      "created_at": "2026-10-29T02:48:26Z"
+    },
+    {
+      "event": "push",
+      "run_id": 40808326213,
+      "artifact_id": 12869361934,
+      "name": "source-evidence-3.13",
+      "digest": "sha256:5e516233f854dfb7fa29de8848ba9daa36372b017039c2101b5e7c277d8640c0",
+      "checksum_verified": true,
+      "size_in_bytes": 5718,
+      "created_at": "2026-10-29T02:47:49Z"
+    },
+    {
+      "event": "push",
+      "run_id": 40808326213,
+      "artifact_id": 12868862846,
+      "name": "source-evidence-3.12",
+      "digest": "sha256:522e29aefaab1977eccc07916fe926f29df7c6c2b3079422f1921b3b88070f10",
+      "checksum_verified": true,
+      "size_in_bytes": 5730,
+      "created_at": "2026-10-29T02:47:43Z"
+    },
+    {
+      "event": "push",
+      "run_id": 40808326213,
+      "artifact_id": 12868859019,
+      "name": "image-evidence-ui",
+      "digest": "sha256:3340587aeba7131e33f45b154afbf76c51429d4cd4d2d06f4027d5b29145a65d",
+      "checksum_verified": true,
+      "size_in_bytes": 542035,
+      "created_at": "2026-10-29T02:49:07Z"
+    },
+    {
+      "event": "pull_request",
+      "run_id": 40808329433,
+      "artifact_id": 12869830040,
+      "name": "image-evidence-headless",
+      "digest": "sha256:67ab73a13b45c4a7e13c3b178934fe7ea4e9ff93cfd0e717a3d90d429c843a31",
+      "checksum_verified": true,
+      "size_in_bytes": 447752,
+      "created_at": "2026-10-29T02:48:29Z"
+    },
+    {
+      "event": "pull_request",
+      "run_id": 40808329433,
+      "artifact_id": 12869461038,
+      "name": "source-evidence-3.13",
+      "digest": "sha256:d15893d6734f72e6e11ba9b0974fa4953c954dc9e40edd40cdfefa46da4c4a3e",
+      "checksum_verified": true,
+      "size_in_bytes": 5720,
+      "created_at": "2026-10-29T02:47:37Z"
+    },
+    {
+      "event": "pull_request",
+      "run_id": 40808329433,
+      "artifact_id": 12869241645,
+      "name": "source-evidence-3.12",
+      "digest": "sha256:371829164c1ca538115f352783bc974d552f591cf836e15d0b409c4273eaaa91",
+      "checksum_verified": true,
+      "size_in_bytes": 5758,
+      "created_at": "2026-10-29T02:47:53Z"
+    },
+    {
+      "event": "pull_request",
+      "run_id": 40808329433,
+      "artifact_id": 12868854138,
+      "name": "image-evidence-ui",
+      "digest": "sha256:d1805b70825c8f4a33551a81079b48e33af3a8cb65c9628edab9131ff114299d",
+      "checksum_verified": true,
+      "size_in_bytes": 542083,
+      "created_at": "2026-10-29T02:49:37Z"
+    }
+  ],
+  "images": [
+    {
+      "event": "push",
+      "variant": "headless",
+      "source_commit": "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+      "source_archive_digest": "77ab1966642b4a819bdcbea5f50f29479407862d60e7dbe20892b87c10f56a6c",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_locked_install_quality_package": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true
+      },
+      "clean_archive_junit": {
+        "tests": 117,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "base_manifest": "python:3.13-slim-trixie@sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490",
+      "root_manifest_digest": "sha256:e7c69ef9c554e261d4efdf7cbf4600797bb07c64ffd87d8319c1aa18fac5f8ff",
+      "platform_manifest_digest": "sha256:e7c69ef9c554e261d4efdf7cbf4600797bb07c64ffd87d8319c1aa18fac5f8ff",
+      "image_config_digest": "sha256:9d8d706db6f3a8e7e7ed14a40ea6f8a42330c973f759cddb9b0f86ce897e2072",
+      "scanner": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "db_repository": "ghcr.io/aquasecurity/trivy-db:2",
+      "scanner_network": "bridge",
+      "db_metadata": {
+        "Version": 2,
+        "NextUpdate": "2026-10-30T01:22:22.544155326Z",
+        "UpdatedAt": "2026-10-29T01:22:22.544155871Z",
+        "DownloadedAt": "2026-10-29T02:48:09.336966004Z"
+      },
+      "db_digest": "ad47d4d7f64fb08225e3d0c9f59118e724ecf82a14d5502fff71c742d6cb24b4",
+      "scan_exit_code": 0,
+      "gate_status": "FAIL",
+      "failed_gates": [
+        "image-security"
+      ],
+      "severity_counts": {
+        "CRITICAL": 0,
+        "HIGH": 44,
+        "MEDIUM": 58,
+        "LOW": 61,
+        "UNKNOWN": 1
+      },
+      "secrets": 0,
+      "baseline_delta": {
+        "added": 0,
+        "removed": 0,
+        "severity_or_fixed_version_changes": 0
+      },
+      "raw_license_count": 684,
+      "raw_license_severity_counts": {
+        "HIGH": 322,
+        "UNKNOWN": 179,
+        "LOW": 179,
+        "MEDIUM": 4
+      },
+      "critical_license_matches": [],
+      "license_baseline_delta": {
+        "added": 0,
+        "removed": 0
+      },
+      "python_license_inventory_count": 17,
+      "python_advisories": {
+        "python-headless": {
+          "dependencies": 17,
+          "findings": 0
+        },
+        "python-ui": {
+          "dependencies": 44,
+          "findings": 0
+        },
+        "python-development": {
+          "dependencies": 99,
+          "findings": 0
+        }
+      },
+      "sbom_status": "PASS",
+      "sbom_components": 105,
+      "raw_report_digests": {
+        "image-scan.json": "d7fd8049f64dde5036b6c6bb1790bc9f37bae59c06fb8d3abfb792d0ff2f7ac3",
+        "image-scan.stderr.txt": "2100cc865f78316ffd996dc21ab7c68f3ac4722b833074183585c020490d7192",
+        "image-sbom.json": "3d02e1bed5d68d3eed5f04d08740b40de6a2543f0d418e0e1fa19ac5c2559d60",
+        "image-licenses.json": "d7574207b57f154aef05b3b1c28936624ecd55ce15cc52b0404d9400b8aca683",
+        "trivy-db-metadata.json": "c238ec3538907ca596856ddd384f56a9e16b37175c4d5addb1f48d44699f88db",
+        "security-summary.json": "486e1124107a899a19b44f370d494c8ce0d5e037efdb484a22f5c4eeb2be0cd9",
+        "release-smoke.json": "fb313c8994edb05cfa5bfe5a762ed38e0ab99e83611f31bff4ce653fd9b07bba",
+        "clean-pytest.xml": "b0b792462537149c988ef4396701ce52f97889a1362f66d71c1d281ba152b88f"
+      }
+    },
+    {
+      "event": "push",
+      "variant": "ui",
+      "source_commit": "4bde8290262f3d6e1bf304dd8e51a8d57154f907",
+      "source_archive_digest": "77ab1966642b4a819bdcbea5f50f29479407862d60e7dbe20892b87c10f56a6c",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_locked_install_quality_package": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true,
+        "image_admin_ui_missing_secret_aborts": true,
+        "actual_image_chat_and_admin_ui_startup": true
+      },
+      "clean_archive_junit": {
+        "tests": 117,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "base_manifest": "python:3.13-slim-trixie@sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490",
+      "root_manifest_digest": "sha256:83b7b32982c87026b7f9d5a08d10f965934727fd3a13c0576178cb7d043ec90a",
+      "platform_manifest_digest": "sha256:83b7b32982c87026b7f9d5a08d10f965934727fd3a13c0576178cb7d043ec90a",
+      "image_config_digest": "sha256:ec91315818d427d7be697e2e0444960087f475168afc930bead3c048d1a6b72b",
+      "scanner": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "db_repository": "ghcr.io/aquasecurity/trivy-db:2",
+      "scanner_network": "bridge",
+      "db_metadata": {
+        "Version": 2,
+        "NextUpdate": "2026-10-30T01:22:22.544155326Z",
+        "UpdatedAt": "2026-10-29T01:22:22.544155871Z",
+        "DownloadedAt": "2026-10-29T02:48:24.601411318Z"
+      },
+      "db_digest": "ad47d4d7f64fb08225e3d0c9f59118e724ecf82a14d5502fff71c742d6cb24b4",
+      "scan_exit_code": 0,
+      "gate_status": "FAIL",
+      "failed_gates": [
+        "image-security"
+      ],
+      "severity_counts": {
+        "CRITICAL": 0,
+        "HIGH": 44,
+        "MEDIUM": 58,
+        "LOW": 61,
+        "UNKNOWN": 1
+      },
+      "secrets": 0,
+      "baseline_delta": {
+        "added": 0,
+        "removed": 0,
+        "severity_or_fixed_version_changes": 0
+      },
+      "raw_license_count": 1718,
+      "raw_license_severity_counts": {
+        "HIGH": 324,
+        "UNKNOWN": 212,
+        "LOW": 1177,
+        "MEDIUM": 4,
+        "CRITICAL": 1
+      },
+      "critical_license_matches": [
+        {
+          "Name": "WTFPL",
+          "PkgName": "",
+          "FilePath": "opt/packages/pyarrow-26.0.0.dist-info/licenses/LICENSE.txt",
+          "Category": "forbidden",
+          "Confidence": 1
+        }
+      ],
+      "license_baseline_delta": {
+        "added": 0,
+        "removed": 0
+      },
+      "python_license_inventory_count": 44,
+      "python_advisories": {
+        "python-headless": {
+          "dependencies": 17,
+          "findings": 0
+        },
+        "python-ui": {
+          "dependencies": 44,
+          "findings": 0
+        },
+        "python-development": {
+          "dependencies": 99,
+          "findings": 0
+        }
+      },
+      "sbom_status": "PASS",
+      "sbom_components": 132,
+      "raw_report_digests": {
+        "image-scan.json": "547982b7e461cc94821a76fac1be8a95d92dd7bb69f6a1e30679aff329df7be6",
+        "image-scan.stderr.txt": "4eff639b63e6a280f53c5fef7b969e4f746e255964a4bad8c4979a6d9066c547",
+        "image-sbom.json": "6a10a6617d6bd3ac13469c5aeaacaeb848b787da22ad16d581ccccde3dc99d67",
+        "image-licenses.json": "5c61897be5f7403f6e242574dbde9577c4a3ba75f17b25a1426580bd358e923a",
+        "trivy-db-metadata.json": "e837df6afe86af06b889214a6aa2adb9e154191ab427f0862c90bdb2fbbee670",
+        "security-summary.json": "9c484d4f297f7ea65ac851263f9f2d888ea6ab59bf9c187fc76a8055f53f665e",
+        "release-smoke.json": "ed80b62c1f5a78cc4bd3d2fe3fb5fb9fef52c650022e1103be95728bcfb3f79b",
+        "clean-pytest.xml": "4d7015fdf68ff8c82038deaa0641ea10c6085874c695cdcd5546412705ff3703"
+      }
+    },
+    {
+      "event": "pull_request",
+      "variant": "headless",
+      "source_commit": "47809f39eb357d4265d721052f2cb241df0805e8",
+      "source_archive_digest": "5214ece30c2af808c7697312da0d41d1f5030bd7bcce5b792d0c461682fb4484",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_locked_install_quality_package": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true
+      },
+      "clean_archive_junit": {
+        "tests": 117,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "base_manifest": "python:3.13-slim-trixie@sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490",
+      "root_manifest_digest": "sha256:b775f7bb42796208f36c0bde885a4b942f2fc85ed91a347ff13666b3c05e987b",
+      "platform_manifest_digest": "sha256:b775f7bb42796208f36c0bde885a4b942f2fc85ed91a347ff13666b3c05e987b",
+      "image_config_digest": "sha256:aacf4e9b57041d34fce04c08ef0e997e01257b0f0a5871be9f3b9c5e87b2fc65",
+      "scanner": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "db_repository": "ghcr.io/aquasecurity/trivy-db:2",
+      "scanner_network": "bridge",
+      "db_metadata": {
+        "Version": 2,
+        "NextUpdate": "2026-10-30T01:22:22.544155326Z",
+        "UpdatedAt": "2026-10-29T01:22:22.544155871Z",
+        "DownloadedAt": "2026-10-29T02:48:12.615439782Z"
+      },
+      "db_digest": "ad47d4d7f64fb08225e3d0c9f59118e724ecf82a14d5502fff71c742d6cb24b4",
+      "scan_exit_code": 0,
+      "gate_status": "FAIL",
+      "failed_gates": [
+        "image-security"
+      ],
+      "severity_counts": {
+        "CRITICAL": 0,
+        "HIGH": 44,
+        "MEDIUM": 58,
+        "LOW": 61,
+        "UNKNOWN": 1
+      },
+      "secrets": 0,
+      "baseline_delta": {
+        "added": 0,
+        "removed": 0,
+        "severity_or_fixed_version_changes": 0
+      },
+      "raw_license_count": 684,
+      "raw_license_severity_counts": {
+        "HIGH": 322,
+        "UNKNOWN": 179,
+        "LOW": 179,
+        "MEDIUM": 4
+      },
+      "critical_license_matches": [],
+      "license_baseline_delta": {
+        "added": 0,
+        "removed": 0
+      },
+      "python_license_inventory_count": 17,
+      "python_advisories": {
+        "python-headless": {
+          "dependencies": 17,
+          "findings": 0
+        },
+        "python-ui": {
+          "dependencies": 44,
+          "findings": 0
+        },
+        "python-development": {
+          "dependencies": 99,
+          "findings": 0
+        }
+      },
+      "sbom_status": "PASS",
+      "sbom_components": 105,
+      "raw_report_digests": {
+        "image-scan.json": "44540f5f891f32168bb3bcf638a9b2d9c02188d5a432f3b1f6fd59736f14ef5a",
+        "image-scan.stderr.txt": "ab5469ddea31d65cf45079bd43bb49f3742df152d45c9e30f4b8009b4a0ba14d",
+        "image-sbom.json": "4386c7053905379ad98122bb379faf2e054af827993c341dcdb48c3c46961e09",
+        "image-licenses.json": "d7574207b57f154aef05b3b1c28936624ecd55ce15cc52b0404d9400b8aca683",
+        "trivy-db-metadata.json": "8f2e3633d676fbccad6cebe907288512857a2afddd9bab668dc182b753d42392",
+        "security-summary.json": "5536eaf56b760f13a7c28c524b38804fa108fa806dee4c81570ada783bf1ce69",
+        "release-smoke.json": "20b02d037f2f918e58b853b6c224bb3b9b4aa43593dc236c6cf1829b6158d814",
+        "clean-pytest.xml": "22da0ace091779f23238c47a9483bc3463ed258774f00cd79817089b94579103"
+      }
+    },
+    {
+      "event": "pull_request",
+      "variant": "ui",
+      "source_commit": "47809f39eb357d4265d721052f2cb241df0805e8",
+      "source_archive_digest": "5214ece30c2af808c7697312da0d41d1f5030bd7bcce5b792d0c461682fb4484",
+      "smoke_status": "PASS",
+      "smoke_checks": {
+        "source_archive_no_operator_state": true,
+        "clean_locked_install_quality_package": true,
+        "clean_archive_image_build": true,
+        "image_cli_private_init": true,
+        "default_image_alive_not_ready_network_none": true,
+        "image_cli_metadata_zero_generation": true,
+        "actual_image_offline_json_and_sse": true,
+        "restart_ephemeral_accounting_truthful": true,
+        "actual_image_logs_no_sensitive_content": true,
+        "image_has_no_test_or_operator_artifacts": true,
+        "compose_all_profiles_loopback": true,
+        "image_admin_ui_missing_secret_aborts": true,
+        "actual_image_chat_and_admin_ui_startup": true
+      },
+      "clean_archive_junit": {
+        "tests": 117,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "base_manifest": "python:3.13-slim-trixie@sha256:aaf08c5490d52cd92bc27142a5215b1e47355a5eaf9adfad2a0fbc022d0b5490",
+      "root_manifest_digest": "sha256:b34720ec17022be77d2c692e8e578d17435851017127c639c697f72c81406929",
+      "platform_manifest_digest": "sha256:b34720ec17022be77d2c692e8e578d17435851017127c639c697f72c81406929",
+      "image_config_digest": "sha256:df6123dd78be8e548211b6d8f22dcd7220b0476eb9723631b46d4eaf602b2848",
+      "scanner": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "db_repository": "ghcr.io/aquasecurity/trivy-db:2",
+      "scanner_network": "bridge",
+      "db_metadata": {
+        "Version": 2,
+        "NextUpdate": "2026-10-30T01:22:22.544155326Z",
+        "UpdatedAt": "2026-10-29T01:22:22.544155871Z",
+        "DownloadedAt": "2026-10-29T02:48:55.959086433Z"
+      },
+      "db_digest": "ad47d4d7f64fb08225e3d0c9f59118e724ecf82a14d5502fff71c742d6cb24b4",
+      "scan_exit_code": 0,
+      "gate_status": "FAIL",
+      "failed_gates": [
+        "image-security"
+      ],
+      "severity_counts": {
+        "CRITICAL": 0,
+        "HIGH": 44,
+        "MEDIUM": 58,
+        "LOW": 61,
+        "UNKNOWN": 1
+      },
+      "secrets": 0,
+      "baseline_delta": {
+        "added": 0,
+        "removed": 0,
+        "severity_or_fixed_version_changes": 0
+      },
+      "raw_license_count": 1718,
+      "raw_license_severity_counts": {
+        "HIGH": 324,
+        "UNKNOWN": 212,
+        "LOW": 1177,
+        "MEDIUM": 4,
+        "CRITICAL": 1
+      },
+      "critical_license_matches": [
+        {
+          "Name": "WTFPL",
+          "PkgName": "",
+          "FilePath": "opt/packages/pyarrow-26.0.0.dist-info/licenses/LICENSE.txt",
+          "Category": "forbidden",
+          "Confidence": 1
+        }
+      ],
+      "license_baseline_delta": {
+        "added": 0,
+        "removed": 0
+      },
+      "python_license_inventory_count": 44,
+      "python_advisories": {
+        "python-headless": {
+          "dependencies": 17,
+          "findings": 0
+        },
+        "python-ui": {
+          "dependencies": 44,
+          "findings": 0
+        },
+        "python-development": {
+          "dependencies": 99,
+          "findings": 0
+        }
+      },
+      "sbom_status": "PASS",
+      "sbom_components": 132,
+      "raw_report_digests": {
+        "image-scan.json": "b546dc88c7bc6996ceacbf38d8f844c1673f0bb8a8de84be896c784d7eed7a58",
+        "image-scan.stderr.txt": "1053d454c1d4d670603925dd0c43176bb014f5805d44145bbdf9d0cd655234fa",
+        "image-sbom.json": "217f7f2a85f739f6cb4c1a885cf95f62cd8c3b84eafafeefa7e810553913ed63",
+        "image-licenses.json": "5c61897be5f7403f6e242574dbde9577c4a3ba75f17b25a1426580bd358e923a",
+        "trivy-db-metadata.json": "474117e1a046e05cf8766b6bd6818359d0ffa7c01ee28b5021a9e48cfe65bbc6",
+        "security-summary.json": "60b4b1ab0818acef91e61866c41d0806395cd12d20c224c5ac260925352518d7",
+        "release-smoke.json": "413ae9ba785ee6c079134ee7aee3b37529d13f26b43bf5b6c6409b81caca1366",
+        "clean-pytest.xml": "46bf7baadbf9b86cd47d48a6f91307febfdbdda8db60931c6ad86c8fa3cbbf54"
+      }
+    }
+  ],
+  "known_os_findings": [
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2005-2541",
+      "package": "tar",
+      "installed": "1.35+dfsg-3.1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2007-5686",
+      "package": "login.defs",
+      "installed": "1:4.17.4-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2007-5686",
+      "package": "passwd",
+      "installed": "1:4.17.4-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2010-4756",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2010-4756",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2011-3374",
+      "package": "apt",
+      "installed": "3.0.3",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2011-3374",
+      "package": "libapt-pkg7.0",
+      "installed": "3.0.3",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2011-4116",
+      "package": "perl-base",
+      "installed": "5.40.1-6+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2013-4392",
+      "package": "libsystemd0",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2013-4392",
+      "package": "libudev1",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2017-18018",
+      "package": "coreutils",
+      "installed": "9.7-3",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2018-20796",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2018-20796",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010022",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010022",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010023",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010023",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010024",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010024",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010025",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-1010025",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-9192",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2019-9192",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2021-45346",
+      "package": "libsqlite3-0",
+      "installed": "3.46.1-7+deb13u2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "bsdutils",
+      "installed": "1:2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "libblkid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "liblastlog2-2",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "libmount1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "libsmartcols1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "libuuid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "login",
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "mount",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2022-0563",
+      "package": "util-linux",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2023-31437",
+      "package": "libsystemd0",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2023-31437",
+      "package": "libudev1",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2023-31438",
+      "package": "libsystemd0",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2023-31438",
+      "package": "libudev1",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2023-31439",
+      "package": "libsystemd0",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2023-31439",
+      "package": "libudev1",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2024-56433",
+      "package": "login.defs",
+      "installed": "1:4.17.4-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2024-56433",
+      "package": "passwd",
+      "installed": "1:4.17.4-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-5278",
+      "package": "coreutils",
+      "installed": "9.7-3",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-6141",
+      "package": "libncursesw6",
+      "installed": "6.5+20250216-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-6141",
+      "package": "libtinfo6",
+      "installed": "6.5+20250216-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-6141",
+      "package": "ncurses-base",
+      "installed": "6.5+20250216-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-6141",
+      "package": "ncurses-bin",
+      "installed": "6.5+20250216-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-69720",
+      "package": "libncursesw6",
+      "installed": "6.5+20250216-2",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-69720",
+      "package": "libtinfo6",
+      "installed": "6.5+20250216-2",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-69720",
+      "package": "ncurses-base",
+      "installed": "6.5+20250216-2",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-69720",
+      "package": "ncurses-bin",
+      "installed": "6.5+20250216-2",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2025-70873",
+      "package": "libsqlite3-0",
+      "installed": "3.46.1-7+deb13u2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-102010",
+      "package": "gcc-14-base",
+      "installed": "14.2.0-19",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-102010",
+      "package": "libgcc-s1",
+      "installed": "14.2.0-19",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-102010",
+      "package": "libstdc++6",
+      "installed": "14.2.0-19",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-102473",
+      "package": "dash",
+      "installed": "0.5.12-12",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-102474",
+      "package": "dash",
+      "installed": "0.5.12-12",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-15059",
+      "package": "libsystemd0",
+      "installed": "257.13-1~deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-15059",
+      "package": "libudev1",
+      "installed": "257.13-1~deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-15534",
+      "package": "perl-base",
+      "installed": "5.40.1-6+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-16742",
+      "package": "libsystemd0",
+      "installed": "257.13-1~deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-16742",
+      "package": "libudev1",
+      "installed": "257.13-1~deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-18374",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-18374",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-18477",
+      "package": "tar",
+      "installed": "1.35+dfsg-3.1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-18508",
+      "package": "tar",
+      "installed": "1.35+dfsg-3.1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-19499",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-19499",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-19542",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-19542",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-27171",
+      "package": "zlib1g",
+      "installed": "1:1.3.dfsg+really1.3.1-1+b1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "bsdutils",
+      "installed": "1:2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "libblkid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "liblastlog2-2",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "libmount1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "libsmartcols1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "libuuid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "login",
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "mount",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-3184",
+      "package": "util-linux",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-40228",
+      "package": "libsystemd0",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-40228",
+      "package": "libudev1",
+      "installed": "257.13-1~deb13u1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-42250",
+      "package": "libbz2-1.0",
+      "installed": "1.0.8-6",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-50812",
+      "package": "libsqlite3-0",
+      "installed": "3.46.1-7+deb13u2",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-50813",
+      "package": "libsqlite3-0",
+      "installed": "3.46.1-7+deb13u2",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-53910",
+      "package": "diffutils",
+      "installed": "1:3.10-4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-5435",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-5435",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-54369",
+      "package": "libacl1",
+      "installed": "2.3.2-2+b1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-54370",
+      "package": "libacl1",
+      "installed": "2.3.2-2+b1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-54371",
+      "package": "libattr1",
+      "installed": "1:2.5.2-3",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-54411",
+      "package": "libpam-modules",
+      "installed": "1.7.0-5",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-54411",
+      "package": "libpam-modules-bin",
+      "installed": "1.7.0-5",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-54411",
+      "package": "libpam-runtime",
+      "installed": "1.7.0-5",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-54411",
+      "package": "libpam0g",
+      "installed": "1.7.0-5",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-56391",
+      "package": "coreutils",
+      "installed": "9.7-3",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-56392",
+      "package": "coreutils",
+      "installed": "9.7-3",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-5704",
+      "package": "tar",
+      "installed": "1.35+dfsg-3.1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-6238",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-6238",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-6368",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-6368",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-6791",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-6791",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "bsdutils",
+      "installed": "1:2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "libblkid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "liblastlog2-2",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "libmount1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "libsmartcols1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "libuuid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "login",
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "mount",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-76642",
+      "package": "util-linux",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-77117",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-77117",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "bsdutils",
+      "installed": "1:2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "libblkid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "liblastlog2-2",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "libmount1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "libsmartcols1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "libuuid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "login",
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "mount",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78408",
+      "package": "util-linux",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "bsdutils",
+      "installed": "1:2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "libblkid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "liblastlog2-2",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "libmount1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "libsmartcols1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "libuuid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "login",
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "mount",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78409",
+      "package": "util-linux",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "bsdutils",
+      "installed": "1:2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "libblkid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "liblastlog2-2",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "libmount1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "libsmartcols1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "libuuid1",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "login",
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "mount",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-78410",
+      "package": "util-linux",
+      "installed": "2.41.5-0+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-80489",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-80489",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-82560",
+      "package": "perl-base",
+      "installed": "5.40.1-6+deb13u1",
+      "severity": "UNKNOWN",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-85091",
+      "package": "zlib1g",
+      "installed": "1:1.3.dfsg+really1.3.1-1+b1",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-8674",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-8674",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-86805",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-86805",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-89092",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-89092",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-9538",
+      "package": "perl-base",
+      "installed": "5.40.1-6+deb13u1",
+      "severity": "HIGH",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-95619",
+      "package": "gcc-14-base",
+      "installed": "14.2.0-19",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-95619",
+      "package": "libgcc-s1",
+      "installed": "14.2.0-19",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-95619",
+      "package": "libstdc++6",
+      "installed": "14.2.0-19",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-95818",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-95818",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "MEDIUM",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-97399",
+      "package": "libc-bin",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "CVE-2026-97399",
+      "package": "libc6",
+      "installed": "2.41-12+deb13u4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "TEMP-0290435-0B57B5",
+      "package": "tar",
+      "installed": "1.35+dfsg-3.1",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "TEMP-0517018-A83CE6",
+      "package": "sysvinit-utils",
+      "installed": "3.14-4",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "TEMP-0628843-DBAD28",
+      "package": "login.defs",
+      "installed": "1:4.17.4-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "TEMP-0628843-DBAD28",
+      "package": "passwd",
+      "installed": "1:4.17.4-2",
+      "severity": "LOW",
+      "fixed": null
+    },
+    {
+      "class": "os-pkgs",
+      "cve": "TEMP-0841856-B18BAF",
+      "package": "bash",
+      "installed": "5.2.37-2+b10",
+      "severity": "LOW",
+      "fixed": null
+    }
+  ],
+  "raw_storage": "ignored local remote-ci-4bde829 directory; ZIPs, full logs, raw scans and source archives retained; no images published"
+}
