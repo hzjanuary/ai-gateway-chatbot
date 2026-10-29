@@ -1,5 +1,13 @@
 # SPEC-001 active implementation plan
 
+**Current stop, 2026-10-29:** local correction bbe76d06 passes 117 tests on both
+Python versions and 18/18 actual-history coverage. Both rebuilt images pass
+functional smoke. Both new Trivy scans fail before scanning because container
+DNS cannot resolve the DB mirror. Preserve raw FAIL and all previous OS findings;
+do not retry/change DNS/substitute DB or push after the unexpected failure.
+Remote remains 4761d6a, no new run/artifact. GW-21/GW-22 await remote proof;
+GW-20 remains BLOCKED. See verification.md and sanitized correction evidence.
+
 2026-10-29: owner authorized two narrow CI corrections and genuine push/PR
 verification. Preserve b576c76 and all prior raw evidence. Explicit OpenAPI error
 descriptions preserve the golden contract across Python versions; separate

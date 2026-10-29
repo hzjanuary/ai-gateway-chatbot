@@ -4,7 +4,7 @@
   "source_preview_offline_gates": "PASS",
   "docker_image_security": "FAIL",
   "live_provider": "BLOCKED: one bounded request authorized; no eligible configured real provider found during preflight",
-  "remote_ci": "EXECUTED_FAIL: OpenAPI Python 3.13 contract drift and PR Gitleaks coverage mismatch",
+  "remote_ci": "NO_NEW_RUN: prior remote FAIL remains; corrected local suites PASS, stopped before push after new image-scanner DNS failure",
   "acceptance": {
     "PASS": 21,
     "BLOCKED": 1,
@@ -126,5 +126,8 @@
     "evidence": "live-smoke-preflight.json"
   },
   "source_publication_readiness": "FAIL_PENDING_NEW_DEFECT_REVIEW",
-  "remote_ci_evidence": "remote-ci-4761d6a.json"
+  "remote_ci_evidence": "remote-ci-4761d6a.json",
+  "correction_local_evidence": "ci-regressions-local-bbe76d0.json",
+  "corrected_local_source_commit": "bbe76d06cfb8707df0a4ecbba28da52fe14672b7",
+  "correction_status": "STOPPED_BEFORE_PUSH: unexpected Trivy DB DNS timeout"
 }

@@ -1,5 +1,14 @@
 # Security findings and independent release decisions
 
+2026-10-29 correction update: local source bbe76d06 passes both Python quality
+suites (117 tests each) and both new image smoke runs. New image scans each exit
+1 with `image-scanner`: container DNS times out fetching the Trivy DB mirror.
+No new vulnerability/secret scan JSON was produced. The prior raw 164 OS findings
+and 44 HIGH remain preserved FAIL, not superseded by an empty report. No scanner
+retry/configuration change or suppression was performed; stopped before feature
+push and new remote CI. Python advisory scans still report zero for 17/44/99
+packages. See [sanitized correction evidence](evidence/ci-regressions-local-bbe76d0.json).
+
 Verified runtime source: `46744d5aed5a797701c0bea00705664f0f229a13`.
 Observed 2026-10-28. All full reports remain in `.local/verification` and their
 SHA-256 values are recorded in [evidence summary](evidence/summary.json).

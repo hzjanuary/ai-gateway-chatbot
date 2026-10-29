@@ -1,4 +1,46 @@
-# SPEC-001 verification — bounded CI corrections under verification
+# SPEC-001 verification — local corrections PASS; stopped before push
+
+**Current result, 2026-10-29: STOPPED on a new infrastructure failure.** Both
+new runtime images passed functional smoke (headless 11/11; UI 12/12), but both
+Trivy executions exited 1 before scanning because container DNS timed out while
+fetching `mirror.gcr.io/aquasec/trivy-db:2`. The security summaries retain FAIL
+(`image-scanner`); image-scan.json is empty, not a zero-finding report. There was
+no retry, DNS change, cached-DB substitution or gate relaxation. Already-started
+scans finished and all raw outputs remain retained locally.
+
+The owner's condition says "If another unexpected failure appears, stop without
+merge or release." Accordingly the corrected commit
+`bbe76d06cfb8707df0a4ecbba28da52fe14672b7` has **not been pushed**; no new GitHub
+Actions run, job outcome or artifact is claimed. Remote feature HEAD remains
+`4761d6a0e18277d8632927e35a9219ca61ede56e`, Draft PR #2 stays open/unmerged.
+Both source quality suites pass 117/117 locally. Actual history after the fix
+commit is 18/18, raw three reviewed findings, zero unreviewed. Current tracked
+file scan, all-blob/private-path scan and tracked snapshot Gitleaks pass;
+MIT/Streamlit license checks pass. No .env, provider/admin token, session, log or
+private raw evidence is staged. Generated synthetic canaries stay in temporary
+repositories and are never included in source archives.
+
+New images are built from the exact clean committed archive at bbe76d0, SHA-256
+`ec2270abd4eb132b794f78dfc48c46feaeb818089cb4fc69318e49eb82b83dee`.
+Base pin is unchanged; runtime is Python 3.13.18. Their actual OCI index/platform/
+config digests, every examined old/new commit identity and parent edge, scan
+failure hashes, source/JUnit provenance and local audit results are in
+[sanitized local correction evidence](evidence/ci-regressions-local-bbe76d0.json).
+Raw reports remain under `.local/verification/ci-regressions/`, including the
+original remote logs, reproduction failures, quality suites, clean image smoke,
+and both failed scans. These are local builds, with no image publication.
+
+Python advisory gates: zero findings across 17/44/99 locked packages in each
+security run. **The prior 164 OS findings / 44 HIGH / 0 CRITICAL remain FAIL and
+are not erased or replaced by the scanner error.** No fresh OS/secret scan result
+can be asserted for the new images. Source correctness and history integrity
+pass locally; source-only release readiness still requires genuine new remote
+verification and disposition of this scanner infrastructure failure. Docker
+approval remains independently FAIL. Zero provider inference was executed.
+
+Acceptance remains **21 PASS / 2 FAIL / 1 BLOCKED** against the last genuine
+remote evidence: GW-21/GW-22 have local corrections but no new remote result;
+GW-20 remains BLOCKED. All other criteria retain their documented evidence.
 
 Update 2026-10-29: the owner authorized correction of the two remote regressions,
 normal push to the existing branch/PR and new real CI. Local reporting commit
@@ -36,7 +78,8 @@ are retained. Synthetic repositories/canaries are never published.
 Python 3.12.9 and 3.13.2 each pass the complete source quality suite and all
 **117 tests** (114 original plus three regression cases). Ruff, Black, MyPy,
 locked dependency/hash exports, source/history scans and package builds pass.
-Local actual history: 17/17 scanned, three raw/reviewed findings, zero new.
+Local history before the correction commit: 17/17 scanned, three raw/reviewed
+findings, zero new; after that commit: 18/18.
 The source Python matrix now has `fail-fast: false` solely to collect both job
 outcomes. All quality, dependency, secret, artifact, license, image and OS gates
 remain enabled. New remote results and corrected image provenance are pending;
@@ -168,8 +211,8 @@ Commands Q/H/U/SH/SU are the exact invocations above.
 | GW-18 | PASS | Q/H, F=17: bounded cooldown/Retry-After and one half-open probe; H/U real restart resets counters truthfully; ephemeral single-instance limits documented. |
 | GW-19 | PASS | H/U: actual image init/doctor/provider list/test-metadata prove zero generation; CLI request/stream/metrics/reset exercise isolated real HTTP Ollama-format fixture. No real Ollama model or remote generation claimed. |
 | GW-20 | BLOCKED | **0 live calls**. One bounded 8-output-token request is now authorized, but non-generative preflight found no configured real provider or running local Ollama; Cloudflare Free plan/hard quota unconfirmed. Stopped before inference. See [sanitized preflight](evidence/live-smoke-preflight.json) and [one-call plan](live-smoke-plan.md). |
-| GW-21 | FAIL | Genuine push run 40703768224 and PR run 40703883376 completed on the authorized branch. Python 3.13 OpenAPI contract test failed (113/114 PASS), PR scan coverage failed (17 expected / 16 scanned), and OS image gates retain FAIL. No rerun or gate change. [Remote evidence](evidence/remote-ci-4761d6a.json). |
-| GW-22 | FAIL | Required documentation/license/privacy/security artifacts exist, but remote Python 3.13 generates different OpenAPI HTTP 413/422 descriptions from the committed contract. The exact schema gate is not green. Local Python 3.12 snapshot remains historical evidence only. |
+| GW-21 | FAIL | Last genuine push 40703768224 / PR 40703883376 failed. Corrections now pass 117 tests on local Python 3.12/3.13 and 18/18 actual history; exact old PR graph passes 17/17. New image-scanner DNS failure stopped work before push, so no new remote PASS exists. OS image approval remains FAIL. [Local correction](evidence/ci-regressions-local-bbe76d0.json), [prior remote](evidence/remote-ci-4761d6a.json). |
+| GW-22 | FAIL | Explicit descriptions now preserve the unchanged golden contract on both local Python versions, including a phrase-mutation regression. Last remote schema result is still FAIL; retain that acceptance state until genuine new remote evidence is obtained. |
 | GW-23 | PASS | H/U: clean committed archive, locked install/build, actual non-root image CLI, network-none missing-config health/not-ready, isolated registered HTTP provider, restart, no seeded artifacts, optional UI startup. |
 | GW-24 | PASS | Independent decisions recorded below: source offline preview PASS; image security FAIL; live acceptance and remote CI BLOCKED. No fake green release or production/SLA claim. |
 
